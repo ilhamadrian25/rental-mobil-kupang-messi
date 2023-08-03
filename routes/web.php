@@ -10,7 +10,7 @@ use App\Http\Controllers\Auth\LoginController as AuthLogin;
 // use App\Http\Controllers\Auth\VerificationController;
 
 // Admin Controller
-// use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 
 
 
@@ -32,4 +32,9 @@ Route::get('/', function () {
 Route::get('/login', [AuthLogin::class, 'index'])->name('login');
 Route::post('/login', [AuthLogin::class, 'store'])->name('login.store');
 
+
+// Admin
+Route::prefix('admin')->middleware('auth')->group(function() {
+    Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('admin.dashboard');
+});
 

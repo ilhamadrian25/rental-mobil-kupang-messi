@@ -110,12 +110,12 @@
                         <!-- /Logo -->
 
                         <form id="loginForm" class="mb-3" action="index.html" method="POST">
-                            @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="text" class="form-control" name="email" id="email"
                                     name="email-username" placeholder="Enter your email" autofocus />
                             </div>
+                            @csrf
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">
                                     <label class="form-label" for="password">Password</label>
