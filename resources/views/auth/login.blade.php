@@ -170,6 +170,8 @@
                         icon: 'success',
                         title: 'Sukses...',
                         text: response.message,
+                    }).then(function() {
+                        window.location.reload();
                     });
                 },
                 error: function(response) {

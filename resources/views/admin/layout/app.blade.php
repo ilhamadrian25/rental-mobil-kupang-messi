@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
     <!-- Page CSS -->
+    @stack('style')
 
     <!-- Helpers -->
     <script src="{{ asset('admin/assets/vendor/js/helpers.js') }}"></script>
@@ -145,6 +146,12 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="menu-item @if (request()->segment(2) === 'contact') active @endif">
+                        <a href="{{ route('admin.contact') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic">Kontak</div>
+                        </a>
                     </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -540,6 +547,8 @@
 
     <!-- Page JS -->
     <script src="{{ asset('admin/assets/js/dashboards-analytics.js') }}"></script>
+
+    @stack('script')
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

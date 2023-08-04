@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\LoginController as AuthLogin;
 
 // Admin Controller
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
+use App\Http\Controllers\Admin\ContactController as AdminContact;
 
 
 
@@ -38,5 +39,8 @@ Route::get('/logout', [AuthLogin::class, 'destroy'])->name('logout');
 // Admin
 Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('admin.dashboard');
+
+    // Contact
+    Route::get('/contact', [AdminContact::class, 'index'])->name('admin.contact');
 });
 
