@@ -42,5 +42,6 @@ Route::prefix('admin')->middleware('auth')->group(function() {
 
     // Contact
     Route::get('/contact', [AdminContact::class, 'index'])->name('admin.contact');
+    Route::delete('/contact', [AdminContact::class, 'destroy'])->name('admin.contact.destroy');
 });
 

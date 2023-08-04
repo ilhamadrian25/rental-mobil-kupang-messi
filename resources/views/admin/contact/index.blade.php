@@ -38,7 +38,8 @@
                                     <td>{{ $item->telp }}</td>
                                     <td>{{ $item->description }}</td>
                                     <td>{{ $item->created_at }}</td>
-                                    <td><button type="submit" class="btn btn-danger">HAPUS</button></td>
+                                    <td><button type="submit" class="btn btn-danger delete-contact"
+                                            data-id="{{ $item->id }}">HAPUS</button></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -59,6 +60,47 @@
     <script>
         $(document).ready(function() {
             new DataTable('#listContact');
+
+            $('.delete-contact').on('click', function(e) {
+                e.preventDefault();
+                const id = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Apakah anda yakin ingin mengahapus data ini?',
+                    showDenyButton: true,
+                    confirmButtonText: 'Hapus',
+                    denyButtonText: 'Jangan hapus',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('admin.contact.destroy') }}",
+                            method: "DELETE",
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                                id: id,
+                            },
+                            success: function(response) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil',
+                                    text: response.message,
+                                }).then(function() {
+                                    location.reload();
+                                });
+                            },
+                            error: function(data) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: 'Data gagal dihapus',
+                                })
+                            }
+                        });
+                    } else if (result.isDenied) {
+                        Swal.fire('Data tidak dihapus', '', 'info')
+                    }
+                })
+            });
         });
     </script>
 @endpush

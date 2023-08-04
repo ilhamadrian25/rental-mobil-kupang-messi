@@ -16,4 +16,24 @@ class ContactController extends Controller
 
         return view('admin.contact.index', $data);
     }
+
+    public function destroy(Request $request)
+    {
+
+        $id = $request->id;
+
+        $data = ContactModel::find($id);
+
+        if (!$data) {
+            response()->json([
+                'message' => 'Data tidak ditemukan'
+            ], 404);
+        }
+
+        $data->delete();
+        
+        return response()->json([
+          'message' => 'Data berhasil dihapus'
+        ], 200);
+    }
 }
