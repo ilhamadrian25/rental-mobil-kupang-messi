@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\ContactController as Contact;
 // Admin Controller
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\ContactController as AdminContact;
+use App\Http\Controllers\Admin\SettingsController as AdminSettings;
 
 
 
@@ -48,5 +49,8 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     // Contact
     Route::get('/contact', [AdminContact::class, 'index'])->name('admin.contact');
     Route::delete('/contact', [AdminContact::class, 'destroy'])->name('admin.contact.destroy');
+
+    // Settings
+    Route::get('/settings', [AdminSettings::class, 'index'])->name('admin.settings');
 });
 

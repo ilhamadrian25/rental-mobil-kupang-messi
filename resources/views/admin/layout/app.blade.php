@@ -383,19 +383,11 @@
                         </a>
                     </li>
                     <!-- Misc -->
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-                    <li class="menu-item">
-                        <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                            target="_blank" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-support"></i>
-                            <div data-i18n="Support">Support</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                            target="_blank" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-file"></i>
-                            <div data-i18n="Documentation">Documentation</div>
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>
+                    <li class="menu-item @if (request()->segment(2) === 'settings') active @endif">
+                        <a href="{{ route('admin.settings') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bxs-cog"></i>
+                            <div data-i18n="Support">Pengaturan Umum</div>
                         </a>
                     </li>
                 </ul>
