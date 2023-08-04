@@ -40,4 +40,11 @@ class LoginController extends Controller
             );
         }
     }
+
+    public function destroy()
+    {
+        Auth::guard('web')->logout();
+
+        return redirect()->route('login');
+    }
 }

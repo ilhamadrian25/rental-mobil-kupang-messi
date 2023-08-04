@@ -29,8 +29,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Authentication
 Route::get('/login', [AuthLogin::class, 'index'])->name('login');
 Route::post('/login', [AuthLogin::class, 'store'])->name('login.store');
+Route::get('/logout', [AuthLogin::class, 'destroy'])->name('logout');
 
 
 // Admin
