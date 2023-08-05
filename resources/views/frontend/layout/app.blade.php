@@ -41,13 +41,16 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">Beranda</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                    <li class="nav-item @if (!request()->segment(1)) active @endif"><a href="{{ route('home') }}"
+                            class="nav-link">Beranda</a></li>
+                    <li class="nav-item @if (request()->segment(1) === 'about') active @endif"><a href="{{ route('about') }}"
+                            class="nav-link">Tentang</a></li>
                     <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
                     <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
                     <li class="nav-item"><a href="car.html" class="nav-link">Cars</a></li>
                     <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item active"><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li class="nav-item @if (request()->segment(1) === 'contact') active @endif"><a href="contact.html"
+                            class="nav-link">Kontak</a></li>
                 </ul>
             </div>
         </div>
