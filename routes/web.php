@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\HomeController as Home;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\ContactController as AdminContact;
 use App\Http\Controllers\Admin\SettingsController as AdminSettings;
+use App\Http\Controllers\Admin\SocialMediaController as AdminSocialMedia;
 
 
 
@@ -56,5 +57,6 @@ Route::prefix('admin')->middleware('auth')->group(function() {
 
     // Settings
     Route::get('/settings', [AdminSettings::class, 'index'])->name('admin.settings');
+    Route::put('/settings', [AdminSocialMedia::class, 'update'])->name('admin.social.update');
 });
 
