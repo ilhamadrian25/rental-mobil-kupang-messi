@@ -69,9 +69,12 @@
                         <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
                             there live the blind texts.</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                            <li class="ftco-animate"><a href="{{ $social[0]->url }}"><span
+                                        class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="{{ $social[1]->url }}"><span
+                                        class="icon-youtube"></span></a></li>
+                            <li class="ftco-animate"><a href="{{ $social[2]->url }}"><span
+                                        class="icon-instagram"></span></a></li>
                         </ul>
                     </div>
                 </div>
