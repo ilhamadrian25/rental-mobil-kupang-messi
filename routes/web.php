@@ -4,9 +4,15 @@ use Illuminate\Support\Facades\Route;
 
 // Auth Controller
 use App\Http\Controllers\Auth\LoginController as AuthLogin;
+
+
+// Frontend Controller
 use App\Http\Controllers\Frontend\ContactController as Contact;
 use App\Http\Controllers\Frontend\AboutController as About;
 use App\Http\Controllers\Frontend\HomeController as Home;
+use App\Http\Controllers\Frontend\ServicesController as Services;
+use App\Http\Controllers\Frontend\PriceController as Price;
+use App\Http\Controllers\Frontend\ArticleController as Article;
 // use App\Http\Controllers\Auth\RegisterController;
 // use App\Http\Controllers\Auth\ForgotPasswordController;
 // use App\Http\Controllers\Auth\ResetPasswordController;
@@ -42,9 +48,18 @@ Route::get('/', [Home::class, 'index'])->name('home');
 // About
 Route::get('/about', [About::class, 'index'])->name('about');
 
+// Services
+Route::get('/services', [Services::class, 'index'])->name('services');
+
+// Price
+Route::get('/price', [Price::class, 'index'])->name('price');
+
 // Contacts
 Route::get('/contact', [Contact::class, 'index'])->name('contact.index');
 Route::post('/contact', [Contact::class,'store'])->name('contact.store');
+
+// Article
+Route::get('/article', [Article::class, 'index'])->name('article');
 
 
 // Admin

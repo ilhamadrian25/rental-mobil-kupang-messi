@@ -44,7 +44,6 @@
                                                 data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></a>
                                             <ul class="dropdown-menu dropdown-menu-end m-0">
                                                 <li><a type="button" class="dropdown-item">Details</a></li>
-                                                <li><a href="javascript:;" class="dropdown-item">Archive</a></li>
                                                 <div class="dropdown-divider"></div>
                                                 <li><a type="button"
                                                         class="dropdown-item text-danger delete-contact">Delete</a></li>
