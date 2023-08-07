@@ -30,7 +30,7 @@
                                 <div class="icon mr-3">
                                     <span class="icon-map-o"></span>
                                 </div>
-                                <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+                                <p><span>Alamat:</span> {{ $address->address }}</p>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -38,7 +38,7 @@
                                 <div class="icon mr-3">
                                     <span class="icon-mobile-phone"></span>
                                 </div>
-                                <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+                                <p><span>Telepon:</span> <a href="tel://1234567920">{{ $address->telp }}</a></p>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -46,7 +46,7 @@
                                 <div class="icon mr-3">
                                     <span class="icon-envelope-o"></span>
                                 </div>
-                                <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+                                <p><span>Email:</span> <a href="mailto:info@yoursite.com">{{ $address->email }}</a></p>
                             </div>
                         </div>
                     </div>
@@ -67,11 +67,10 @@
                             <input type="text" name="subject" class="form-control" placeholder="Subjek">
                         </div>
                         <div class="form-group">
-                            <textarea name="message" id="" cols="30" rows="7" class="form-control" placeholder="Pesan"></textarea>
+                            <textarea name="description" id="" cols="30" rows="7" class="form-control" placeholder="Pesan"></textarea>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary py-3 px-5">Kirim Pesan</button>
-                            <button type="submit">a</button>
                         </div>
                     </form>
 
@@ -103,13 +102,17 @@
                         Swal.fire({
                             icon: 'success',
                             title: response.message,
-                        })
+                        }).then(function() {
+                            var form = document.getElementById("ContactForm");
+                            form.reset();
+                        });
                     },
                     error: function(response) {
+                        console.log(response);
                         Swal.fire({
                             icon: 'error',
-                            title: 'Something went wrong',
-                        })
+                            title: response.responseJSON.message,
+                        });
                     }
                 });
             });
