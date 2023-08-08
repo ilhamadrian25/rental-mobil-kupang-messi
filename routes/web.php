@@ -21,6 +21,7 @@ use App\Http\Controllers\Frontend\ArticleController as Article;
 // Admin Controller
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\ContactController as AdminContact;
+use App\Http\Controllers\Admin\ClientController as AdminClient;
 use App\Http\Controllers\Admin\SettingsController as AdminSettings;
 use App\Http\Controllers\Admin\SocialMediaController as AdminSocialMedia;
 
@@ -69,6 +70,11 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     // Contact
     Route::get('/contact', [AdminContact::class, 'index'])->name('admin.contact');
     Route::delete('/contact', [AdminContact::class, 'destroy'])->name('admin.contact.destroy');
+
+    // Client
+    Route::get('/client', [AdminClient::class, 'index'])->name('admin.client');
+    Route::post('/client', [AdminClient::class, 'store'])->name('admin.client.store');
+    Route::delete('/client', [AdminClient::class, 'destroy'])->name('admin.client.destroy');
 
     // Settings
     Route::get('/settings', [AdminSettings::class, 'index'])->name('admin.settings');
