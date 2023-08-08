@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\ContactController as AdminContact;
 use App\Http\Controllers\Admin\ClientController as AdminClient;
 use App\Http\Controllers\Admin\SettingsController as AdminSettings;
 use App\Http\Controllers\Admin\SocialMediaController as AdminSocialMedia;
+use App\Http\Controllers\Admin\CategoryController as AdminCategory;
 
 
 
@@ -61,6 +62,7 @@ Route::post('/contact', [Contact::class,'store'])->name('contact.store');
 
 // Article
 Route::get('/article', [Article::class, 'index'])->name('article');
+Route::get('/article/{slug}', [Article::class, 'show'])->name('article.show');
 
 
 // Admin
@@ -75,6 +77,11 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('/client', [AdminClient::class, 'index'])->name('admin.client');
     Route::post('/client', [AdminClient::class, 'store'])->name('admin.client.store');
     Route::delete('/client', [AdminClient::class, 'destroy'])->name('admin.client.destroy');
+
+    // Category
+    Route::get('/category', [AdminCategory::class, 'index'])->name('admin.category');
+    Route::post('/category', [AdminCategory::class,'store'])->name('admin.category.store');
+    Route::delete('/category', [AdminCategory::class, 'destroy'])->name('admin.category.destroy');
 
     // Settings
     Route::get('/settings', [AdminSettings::class, 'index'])->name('admin.settings');

@@ -176,7 +176,7 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="auth-forgot-password-basic.html" class="menu-link">
+                                <a href="{{ route('admin.category') }}" class="menu-link">
                                     <div data-i18n="Basic">Semua kategori</div>
                                 </a>
                             </li>

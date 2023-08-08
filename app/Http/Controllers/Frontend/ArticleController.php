@@ -17,4 +17,13 @@ class ArticleController extends Controller
         ];
         return view('frontend.articles.index', $data);
     }
+
+    public function show()
+    {
+        $data = [
+            'social' => SocialMediaModel::all(),
+            'address' => AddressModel::first(),
+        ];
+        return view('frontend.articles.show', $data);
+    }
 }
