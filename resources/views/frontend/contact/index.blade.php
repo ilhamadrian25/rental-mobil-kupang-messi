@@ -99,19 +99,28 @@
                     data: $(this).serialize(),
                     dataType: 'json',
                     success: function(response) {
+                        console.log(response);
                         Swal.fire({
                             icon: 'success',
-                            title: response.message,
+                            title: 'Sukses!',
+                            text: response.message,
                         }).then(function() {
                             var form = document.getElementById("ContactForm");
                             form.reset();
                         });
                     },
                     error: function(response) {
-                        console.log(response);
+                        let errorMessages = response.responseJSON.message;
+                        let errorMessage = "";
+
+                        for (let field in errorMessages) {
+
+                            errorMessage += `${errorMessages[field][0]}\n`;
+                        }
+
                         Swal.fire({
                             icon: 'error',
-                            title: response.responseJSON.message,
+                            title: errorMessage,
                         });
                     }
                 });

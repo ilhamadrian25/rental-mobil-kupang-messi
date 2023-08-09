@@ -22,18 +22,35 @@ class ContactController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:255',
-            'email' => 'required',
-            'telp' => 'required',
-            'subject' => 'required',
-            'description' => 'required',
-        ]);
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required|max:50',
+                'email' => 'required',
+                'telp' => 'required|max:50',
+                'subject' => 'required|max:50',
+                'description' => 'required|max:2000',
+            ],
+            [
+                'name.required' => 'Nama tidak boleh kosong',
+                'name.max' => 'Nama terlalu panjang',
+                'email.required' => 'Email tidak boleh kosong',
+                'telp.required' => 'No Telp tidak boleh kosong',
+                'telp.max' => 'No Telp terlalu panjang',
+                'subject.required' => 'Subjek tidak boleh kosong',
+                'subject.max' => 'Subjek terlalu panjang',
+                'description.required' => 'Pesan tidak boleh kosong',
+                'description.max' => 'Pesan terlalu panjang',
+            ],
+        );
 
         if ($validator->fails()) {
-            return response()->json([
-                'message' => $validator->errors(),
-            ]);
+            return response()->json(
+                [
+                    'message' => $validator->errors(),
+                ],
+                400,
+            );
         }
 
         $contact = new ContactModel();
@@ -46,8 +63,11 @@ class ContactController extends Controller
 
         $contact->save();
 
-        return response()->json([
-            'message' => 'Pesan berhasil dikirim',
-        ]);
+        return response()->json(
+            [
+                'message' => 'Pesan berhasil dikirim',
+            ],
+            200,
+        );
     }
 }
