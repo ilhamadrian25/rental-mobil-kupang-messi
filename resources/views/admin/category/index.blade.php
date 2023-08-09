@@ -16,43 +16,38 @@
 
         <div class="container-xxl flex-grow-1 container-p-y">
             <button type="button"class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addClient">Tambah
-                Klien</button>
+                Kategori</button>
             <div class="row py-5">
                 <div class="col-12 table-responsive">
-                    <table id="listContact" class="table table-striped" style="width:100%">
+                    <table id="listCategory" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Nama</th>
-                                <th>Gambar</th>
-                                <th>Pesan</th>
-                                <th>Pelanggan</th>
+                                <th>Slug</th>
                                 <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach ($client as $index => $item)
+                            @foreach ($category as $index => $item)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td><img src="{{ asset('images') . '/' . $item->image }}" width="100" height="100"
-                                            alt="Profile" class="img-fluid" srcset=""></td>
-                                    <td>{{ $item->message }}</td>
-                                    <td>{{ $item->position }}</td>
+                                    <td>{{ $item->slug }}</td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>
                                         <div class="d-inline-block"><a href="javascript:;"
                                                 class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
                                                 data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></a>
                                             <ul class="dropdown-menu dropdown-menu-end m-0">
-                                                <li><a type="button" class="dropdown-item text-danger delete-client"
+                                                <li><a type="button" class="dropdown-item text-danger delete-category"
                                                         data-id="{{ $item->id }}">Delete</a></li>
                                             </ul>
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach --}}
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -65,11 +60,11 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Klien</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Kategori</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
-                <form id="formClient">
+                <form id="formCategory">
 
                     <div class="modal-body">
                         @csrf
@@ -79,21 +74,12 @@
                                 aria-describedby="defaultFormControlHelp" />
                         </div>
                         <div class="mb-3">
-                            <label for="imageInput" class="form-label">Pilih Gambar</label>
-                            <input type="file" class="form-control" name="image" id="image" accept="image/*">
-                        </div>
-                        <div class="mb-3 text-center">
-                            <img src="https://provengraphics.com/wp-content/uploads/2018/02/300x300.png" id="imagePreview"
-                                class="img-fluid" alt="Preview">
-                        </div>
-                        <div class="mb-3">
-                            <label for="pesan" class="form-label">Pesan</label>
-                            <textarea name="message" class="form-control" id="pesan" rows="3"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="position" class="form-label">Pelanggan</label>
-                            <input type="text" name="position" class="form-control" id="position"
-                                placeholder="Pelanggan" aria-describedby="defaultFormControlHelp" />
+                            <label for="name" class="form-label">Slug (jika kosong akan digenerate otomatis)</label>
+                            <input type="text" name="slug" class="form-control" id="slug" placeholder="Slug"
+                                aria-describedby="defaultFormControlHelp" />
+                            <br>
+                            <input type="text" class="form-control" id="slugOutput"
+                                aria-describedby="defaultFormControlHelp" disabled />
                         </div>
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>
@@ -110,38 +96,33 @@
     <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
 
     {{-- Custom Script --}}
+    <script></script>
+
     <script>
         $(document).ready(function() {
-            new DataTable('#listContact');
+            function generateSlug(title) {
+                return title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+            }
 
-            const imageInput = document.getElementById('image');
-            const imagePreview = document.getElementById('imagePreview');
+            const titleInput = document.getElementById('slug');
+            const slugInput = document.getElementById('slugOutput');
 
-            imageInput.addEventListener('change', function() {
-                const file = imageInput.files[0];
-                if (file) {
-                    const reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        imagePreview.src = e.target.result;
-                    };
-
-                    reader.readAsDataURL(file);
-                }
+            titleInput.addEventListener('input', function() {
+                const title = titleInput.value;
+                const generatedSlug = generateSlug(title);
+                slugInput.value = generatedSlug;
             });
 
 
-            $('#formClient').on('submit', function(e) {
+            new DataTable('#listCategory');
+
+            $('#formCategory').on('submit', function(e) {
                 e.preventDefault();
 
-                const formData = new FormData($('#formClient')[0]);
-
                 $.ajax({
-                    url: "{{ route('admin.client.store') }}",
+                    url: "{{ route('admin.category.store') }}",
                     method: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
+                    data: $(this).serialize(),
                     beforeSend: function() {
                         Swal.fire({
                             title: 'Menunggu',
@@ -161,33 +142,19 @@
                         });
                     },
                     error: function(response) {
-                        console.log(response.responseJSON.message);
-                        if (response.messageJSON && response.messageJSON.message[0]) {
-                            const errors = response.messageJSON.message;
-                            // ...
-                        } else {
-                            console.error(
-                                "Response messageJSON or message property is missing.");
-                        }
-                        for (const field in errors) {
-                            if (errors.hasOwnProperty(field)) {
-                                const errorMessage = errors[field][0];
-
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Gagal',
-                                    text: errorMessage,
-                                });
-                            }
-                        }
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: response.message,
+                        });
                     }
                 })
             })
 
-            $(document).on('click', '.delete-client', function(e) {
+            $(document).on('click', '.delete-category', function(e) {
                 e.preventDefault();
                 const id = $(this).data('id');
-                const row = $(this).closest('tr'); // Menyimpan referensi baris yang akan dihapus
+                const row = $(this).closest('tr');
 
                 Swal.fire({
                     title: 'Apakah anda yakin?',
@@ -199,7 +166,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.client.destroy') }}",
+                            url: "{{ route('admin.category.destroy') }}",
                             method: "DELETE",
                             data: {
                                 "_token": "{{ csrf_token() }}",
@@ -212,14 +179,14 @@
                                     text: response.message,
                                 }).then(function() {
                                     row
-                                        .remove(); // Menghapus baris dari tampilan
+                                        .remove();
                                 });
                             },
-                            error: function(data) {
+                            error: function(response, xhr) {
                                 Swal.fire({
-                                    icon: 'error',
+                                    icon: xhr,
                                     title: 'Gagal',
-                                    text: 'Data gagal dihapus',
+                                    text: response.responseJSON.message,
                                 });
                             }
                         });

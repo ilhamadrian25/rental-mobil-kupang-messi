@@ -14,11 +14,17 @@ return new class extends Migration
         Schema::create('article', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('category');
+            $table->unsignedBigInteger('category_id');
             $table->string('title');
-            $table->string('slug');
-            $table->string('description');
+            $table->string('thumbnail');
+            $table->string('slug')->unique();
+            $table->text('content');
+            $table->text('summary');
+            $table->text('keywords');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('category');
         });
     }
 
@@ -27,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('article');
     }
 };

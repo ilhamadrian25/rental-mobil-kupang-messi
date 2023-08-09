@@ -159,7 +159,7 @@
                             <div data-i18n="Basic">Klien</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item active">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
                             <div data-i18n="article">Artikel</div>
@@ -175,7 +175,7 @@
                                     <div data-i18n="Basic">Buat artikel</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
+                            <li class="menu-item active">
                                 <a href="{{ route('admin.category') }}" class="menu-link">
                                     <div data-i18n="Basic">Semua kategori</div>
                                 </a>
