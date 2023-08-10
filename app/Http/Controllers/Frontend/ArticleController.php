@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AddressModel;
 use App\Models\SocialMediaModel;
+use App\Models\CategoryModel;
 
 class ArticleController extends Controller
 {
@@ -23,6 +24,9 @@ class ArticleController extends Controller
         $data = [
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
+            'category' => CategoryModel::withCount('article')
+                ->limit(8)
+                ->get(),
         ];
         return view('frontend.articles.show', $data);
     }

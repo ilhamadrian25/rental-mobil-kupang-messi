@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\HomeController as Home;
 use App\Http\Controllers\Frontend\ServicesController as Services;
 use App\Http\Controllers\Frontend\PriceController as Price;
 use App\Http\Controllers\Frontend\ArticleController as Article;
+use App\Http\Controllers\Frontend\CarController as Car;
 // use App\Http\Controllers\Auth\RegisterController;
 // use App\Http\Controllers\Auth\ForgotPasswordController;
 // use App\Http\Controllers\Auth\ResetPasswordController;
@@ -53,14 +54,17 @@ Route::get('/about', [About::class, 'index'])->name('about');
 // Services
 Route::get('/services', [Services::class, 'index'])->name('services');
 
-// Price
+// Prices
 Route::get('/price', [Price::class, 'index'])->name('price');
 
 // Contacts
 Route::get('/contact', [Contact::class, 'index'])->name('contact.index');
 Route::post('/contact', [Contact::class,'store'])->name('contact.store');
 
-// Article
+// Cars
+Route::get('/cars', [Car::class, 'index'])->name('cars');
+
+// Articles
 Route::get('/article', [Article::class, 'index'])->name('article');
 Route::get('/article/{slug}', [Article::class, 'show'])->name('article.show');
 

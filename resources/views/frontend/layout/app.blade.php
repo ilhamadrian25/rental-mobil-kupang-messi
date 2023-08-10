@@ -43,13 +43,14 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item @if (!request()->segment(1)) active @endif"><a href="{{ route('home') }}"
                             class="nav-link">Beranda</a></li>
+                    <li class="nav-item @if (request()->segment(1) === 'cars') active @endif"><a href="{{ route('cars') }}"
+                            class="nav-link">Mobil</a></li>
                     <li class="nav-item @if (request()->segment(1) === 'about') active @endif"><a href="{{ route('about') }}"
                             class="nav-link">Tentang</a></li>
-                    <li class="nav-item @if (request()->segment(1) === 'service') active @endif"><a
+                    <li class="nav-item @if (request()->segment(1) === 'services') active @endif"><a
                             href="{{ route('services') }}" class="nav-link">Layanan</a></li>
                     <li class="nav-item @if (request()->segment(1) === 'price') active @endif"><a href="{{ route('price') }}"
                             class="nav-link">Harga</a></li>
-                    <li class="nav-item"><a href="car.html" class="nav-link">Mobil</a></li>
                     <li class="nav-item @if (request()->segment(1) === 'article') active @endif"><a
                             href="{{ route('article') }}" class="nav-link">Artikel</a></li>
                     <li class="nav-item @if (request()->segment(1) === 'contact') active @endif"><a href="contact"

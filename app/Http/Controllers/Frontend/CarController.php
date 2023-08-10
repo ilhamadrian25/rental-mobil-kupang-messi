@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\CategoryModel;
 use App\Models\AddressModel;
 use App\Models\SocialMediaModel;
 
-class ServicesController extends Controller
+class CarController extends Controller
 {
     public function index()
     {
@@ -17,6 +16,6 @@ class ServicesController extends Controller
             'address' => AddressModel::first(),
         ];
 
-        return view('frontend.services.index', $data);
+        return view('frontend.cars.index', $data);
     }
 }
