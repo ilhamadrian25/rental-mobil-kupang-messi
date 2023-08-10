@@ -21,6 +21,8 @@ use App\Http\Controllers\Frontend\CarController as Car;
 
 // Admin Controller
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
+use App\Http\Controllers\Admin\CarController as AdminCar;
+use App\Http\Controllers\Admin\CategoryCarsController as AdminCategoryCars;
 use App\Http\Controllers\Admin\ContactController as AdminContact;
 use App\Http\Controllers\Admin\ClientController as AdminClient;
 use App\Http\Controllers\Admin\SettingsController as AdminSettings;
@@ -72,6 +74,13 @@ Route::get('/article/{slug}', [Article::class, 'show'])->name('article.show');
 // Admin
 Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('admin.dashboard');
+
+    // Cars
+    Route::get('/cars', [AdminCar::class, 'index'])->name('admin.cars');
+
+    // Categories
+    Route::get('/category-cars', [AdminCategoryCars::class, 'index'])->name('admin.category');
+    Route::post('/category-cars', [AdminCategoryCars::class, 'store'])->name('admin.category_cars.store');
 
     // Contact
     Route::get('/contact', [AdminContact::class, 'index'])->name('admin.contact');

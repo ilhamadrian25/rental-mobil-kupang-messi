@@ -15,8 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('category_cars_id');
             $table->string('name');
+            $table->string('slug')->unique();
             $table->string('image')->unique();
             $table->timestamps();
+
+
+            $table->foreign('category_cars_id')->references('id')->on('category_cars');
         });
     }
 
