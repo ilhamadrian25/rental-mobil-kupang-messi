@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\AddressModel;
 use App\Models\SocialMediaModel;
 use App\Models\CategoryModel;
+use App\Models\ArticleModel;
 
 class ArticleController extends Controller
 {
@@ -15,7 +16,9 @@ class ArticleController extends Controller
         $data = [
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
+            'article' => ArticleModel::paginate(6),
         ];
+
         return view('frontend.articles.index', $data);
     }
 

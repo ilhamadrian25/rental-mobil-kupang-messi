@@ -106,8 +106,8 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-                    <span class="subheading">What we offer</span>
-                    <h2 class="mb-2">Feeatured Vehicles</h2>
+                    <span class="subheading">Apa yang kita tawarkan</span>
+                    <h2 class="mb-2">Kendaraan Unggulan</h2>
                 </div>
             </div>
             <div class="row">
@@ -182,6 +182,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="text-center mt-2">
+                        <a href="{{ route('cars') }}" type="button" class="btn btn-primary">Lihat Semua mobil</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -205,7 +208,7 @@
                             the word "and" and the Little Blind Text should turn around and return to its own, safe country.
                             A small river named Duden flows by their place and supplies it with the necessary regelialia. It
                             is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                        <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
+                        <p><a href="{{ route('about') }}" class="btn btn-primary py-3 px-4">Lihat lebih lengkap</a></p>
                     </div>
                 </div>
             </div>
@@ -363,59 +366,26 @@
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7 heading-section text-center ftco-animate">
-                    <span class="subheading">Blog</span>
-                    <h2>Recent Blog</h2>
+                    <span class="subheading">Artikel</span>
+                    <h2>Artikel terbaru</h2>
                 </div>
             </div>
             <div class="row d-flex">
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry justify-content-end">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
-                        </a>
-                        <div class="text pt-4">
-                            <div class="meta mb-3">
-                                <div><a href="#">Oct. 29, 2019</a></div>
-                                <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                @foreach ($article as $item)
+                    <div class="col-md-4 d-flex ftco-animate">
+                        <div class="blog-entry justify-content-end">
+                            <a href="{{ route('article.show') }}" class="block-20"
+                                style="background-image: url('{{ asset('assets/images/image_1.jpg') }}');">
+                            </a>
+                            <div class="text pt-4">
+                                <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business
+                                        Growth</a>
+                                </h3>
+                                <p><a href="#" class="btn btn-primary">Read more</a></p>
                             </div>
-                            <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a>
-                            </h3>
-                            <p><a href="#" class="btn btn-primary">Read more</a></p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry justify-content-end">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
-                        </a>
-                        <div class="text pt-4">
-                            <div class="meta mb-3">
-                                <div><a href="#">Oct. 29, 2019</a></div>
-                                <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                            </div>
-                            <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a>
-                            </h3>
-                            <p><a href="#" class="btn btn-primary">Read more</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
-                        </a>
-                        <div class="text pt-4">
-                            <div class="meta mb-3">
-                                <div><a href="#">Oct. 29, 2019</a></div>
-                                <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                            </div>
-                            <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a>
-                            </h3>
-                            <p><a href="#" class="btn btn-primary">Read more</a></p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
