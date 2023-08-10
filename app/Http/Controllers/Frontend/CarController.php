@@ -20,4 +20,15 @@ class CarController extends Controller
 
         return view('frontend.cars.index', $data);
     }
+
+    public function show($slug)
+    {
+        $data = [
+            'social' => SocialMediaModel::all(),
+            'address' => AddressModel::first(),
+            // 'cars' => CarModel::all(),
+        ];
+
+        return view('frontend.cars.show', $data);
+    }
 }

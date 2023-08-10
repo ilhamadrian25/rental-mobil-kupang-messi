@@ -22,7 +22,7 @@
                 @foreach ($article as $item)
                     <div class="col-md-12 text-center d-flex ftco-animate">
                         <div class="blog-entry justify-content-end mb-md-5">
-                            <a href="blog-single.html" class="block-20 img"
+                            <a href="{{ route('article.show', $item->slug) }}" class="block-20 img"
                                 style="background-image: url('{{ asset('assets/images/image_1.jpg') }}');">
                             </a>
                             <div class="text px-md-5 pt-4">
@@ -30,8 +30,8 @@
                                 </h3>
                                 <p>{!! Str::limit($item->content, 200) !!}
                                 </p>
-                                <p><a href="blog-single.html" class="btn btn-primary">Continue <span
-                                            class="icon-long-arrow-right"></span></a></p>
+                                <p><a href="{{ route('article.show', $item->slug) }}" class="btn btn-primary">Lihat
+                                        selengkapnya<span class="icon-long-arrow-right"></span></a></p>
                             </div>
                         </div>
                     </div>

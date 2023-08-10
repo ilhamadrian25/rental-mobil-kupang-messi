@@ -36,6 +36,7 @@ class ArticleController extends Controller
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
             'article' => $show,
+            'articles' => ArticleModel::limit(4)->get(),
             'category' => CategoryModel::withCount('article')
                 ->limit(8)
                 ->get(),

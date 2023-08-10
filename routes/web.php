@@ -63,6 +63,8 @@ Route::post('/contact', [Contact::class,'store'])->name('contact.store');
 
 // Cars
 Route::get('/cars', [Car::class, 'index'])->name('cars');
+Route::get('/car/{slug}', [Car::class, 'show'])->name('cars.show');
+
 
 // Articles
 Route::get('/article', [Article::class, 'index'])->name('article');
