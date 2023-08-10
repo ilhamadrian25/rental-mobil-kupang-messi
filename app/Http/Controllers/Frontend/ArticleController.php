@@ -22,15 +22,25 @@ class ArticleController extends Controller
         return view('frontend.articles.index', $data);
     }
 
-    public function show()
+    public function show($slug)
     {
+        $article = new ArticleModel();
+
+        $show = $article->where('slug', $slug)->first();
+
+        if (!$show) {
+            abort(404);
+        }
+
         $data = [
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
+            'article' => $show,
             'category' => CategoryModel::withCount('article')
                 ->limit(8)
                 ->get(),
         ];
+
         return view('frontend.articles.show', $data);
     }
 }

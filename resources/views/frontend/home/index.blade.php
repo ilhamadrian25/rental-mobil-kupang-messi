@@ -374,14 +374,15 @@
                 @foreach ($article as $item)
                     <div class="col-md-4 d-flex ftco-animate">
                         <div class="blog-entry justify-content-end">
-                            <a href="{{ route('article.show') }}" class="block-20"
+                            <a href="{{ route('article.show', $item->slug) }}" class="block-20"
                                 style="background-image: url('{{ asset('assets/images/image_1.jpg') }}');">
                             </a>
                             <div class="text pt-4">
-                                <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business
-                                        Growth</a>
+                                <h3 class="heading mt-2"><a
+                                        href="{{ route('article.show', $item->slug) }}">{{ $item->title }}</a>
                                 </h3>
-                                <p><a href="#" class="btn btn-primary">Read more</a></p>
+                                <p><a href="{{ route('article.show', $item->slug) }}" class="btn btn-primary">Baca
+                                        selengkapnya</a></p>
                             </div>
                         </div>
                     </div>
