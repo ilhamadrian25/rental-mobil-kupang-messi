@@ -65,11 +65,9 @@ Route::post('/contact', [Contact::class,'store'])->name('contact.store');
 Route::get('/cars', [Car::class, 'index'])->name('cars');
 Route::get('/car/{slug}', [Car::class, 'show'])->name('cars.show');
 
-
 // Articles
 Route::get('/article', [Article::class, 'index'])->name('article');
 Route::get('/article/{slug}', [Article::class, 'show'])->name('article.show');
-
 
 // Admin
 Route::prefix('admin')->middleware('auth')->group(function() {
