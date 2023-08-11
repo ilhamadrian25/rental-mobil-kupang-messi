@@ -145,9 +145,9 @@
                     },
                     error: function(response) {
                         Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil',
-                            text: response.message,
+                            icon: 'error',
+                            title: 'Gagal',
+                            html: response.responseJSON.message,
                         });
                     }
                 })

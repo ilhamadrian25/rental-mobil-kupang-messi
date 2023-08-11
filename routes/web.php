@@ -79,7 +79,7 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('/cars', [AdminCar::class, 'index'])->name('admin.cars');
 
     // Categories
-    Route::get('/category-cars', [AdminCategoryCars::class, 'index'])->name('admin.category');
+    Route::get('/category-cars', [AdminCategoryCars::class, 'index'])->name('admin.category_cars');
     Route::post('/category-cars', [AdminCategoryCars::class, 'store'])->name('admin.category_cars.store');
 
     // Contact

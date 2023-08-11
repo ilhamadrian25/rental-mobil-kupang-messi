@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\CategoryModel;
+use App\Models\CategoryCarsModel;
 use App\Models\ArticleModel;
 use Validator;
 
@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $data = [
-            'category' => CategoryModel::all(),
+            'category' => CategoryCarsModel::all(),
         ];
 
         return view('admin.category.index', $data);
@@ -35,7 +35,7 @@ class CategoryController extends Controller
             );
         }
 
-        $category = new CategoryModel();
+        $category = new CategoryCarsModel();
 
         $category->name = $request->name;
         $category->slug = strtolower(trim(preg_replace('/[^a-zA-Z0-9-]+/', '-', $request->slug), '-'));
@@ -61,11 +61,15 @@ class CategoryController extends Controller
         );
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
-        $category = CategoryModel::find(request('id'));
+        $category = CategoryCarsModel::where('id', $request->id)->first();
 
-        $article = ArticleModel::where('category_id', $category->id)->get();
+        // return response()->json([
+        //     'messgae' => $category,
+        // ]);
+
+        $article = ArticleModel::where('category_id', $request->id)->first();
 
         if ($article) {
             return response()->json(
