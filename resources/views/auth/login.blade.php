@@ -175,11 +175,16 @@
                     });
                 },
                 error: function(response) {
-                    console.log(response.responseJSON);
+                    // console.log(response.responseJSON.message);
+                    // var message = '';
+
+                    // $.each(response.responseJSON.message, function(key, value) {
+                    //     message += '<li>' + value + '</li>';
+                    // });
                     Swal.fire({
                         icon: 'error',
                         title: 'Error...',
-                        text: response.responseJSON.message[0],
+                        text: response.responseJSON.message,
                     });
                 }
             })

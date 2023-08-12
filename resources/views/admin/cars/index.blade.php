@@ -24,8 +24,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nama</th>
-                                <th>Slug</th>
-                                <th>Slug</th>
+                                <th>Gambar</th>
+                                <th>Harga</th>
+                                <th>Kategori</th>
                                 <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
@@ -34,9 +35,13 @@
                             @foreach ($car as $index => $item)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->slug }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td style="text-transform: capitalize;">{{ $item->name }}</td>
+                                    <td><img src="{{ asset('images') . '/' . $item->image }}" width="100" height="70"
+                                            alt="" srcset="">
+                                    </td>
+                                    <td>{{ 'Rp ' . number_format($item->price, 0, ',', '.') }}</td>
+                                    <td style="text-transform: capitalize;">{{ $item->category->name }}</td>
+                                    <td>{{ date('d F Y', strtotime($item->created_at)) }}</td>
                                     <td>
                                         <div class="d-inline-block"><a href="javascript:;"
                                                 class="btn btn-sm btn-icon dropdown-toggle hide-arrow"

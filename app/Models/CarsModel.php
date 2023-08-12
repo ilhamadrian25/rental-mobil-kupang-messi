@@ -15,8 +15,8 @@ class CarsModel extends Model
 
     protected $hidden = ['created_at', 'updated_at'];
 
-    public function category_cars()
+    public function category()
     {
-        return $this->belongsTo(CategoryCarsModel::class, 'id');
+        return $this->belongsTo(CategoryCarsModel::class, 'category_cars_id');
     }
 }

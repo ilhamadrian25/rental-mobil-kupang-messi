@@ -33,11 +33,11 @@
                             @foreach ($contact as $index => $item)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td style="text-transform: capitalize;">{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->telp }}</td>
                                     <td>{{ $item->description }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ date('d F Y', strtotime($item->created_at)) }}</td>
                                     <td>
                                         <div class="d-inline-block"><a style="cursor: pointer"
                                                 class="btn btn-sm btn-icon dropdown-toggle hide-arrow"

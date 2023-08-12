@@ -34,10 +34,10 @@
                             @foreach ($category as $index => $item)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td style="text-transform: capitalize;">{{ $item->name }}</td>
                                     <td>{{ $item->slug }}</td>
                                     <td>{{ $item->cars_count }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ date('d F Y', strtotime($item->created_at)) }}</td>
                                     <td>
                                         <div class="d-inline-block"><a href="javascript:;"
                                                 class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
@@ -144,10 +144,17 @@
                         });
                     },
                     error: function(response) {
+
+                        var text = '';
+                        $.each(response.responseJSON.message, function(key, value) {
+                            text += '<li>' + value + '</li>';
+                            console.log(key);
+                        });
+
                         Swal.fire({
                             icon: 'error',
                             title: 'Gagal',
-                            html: response.responseJSON.message,
+                            html: text,
                         });
                     }
                 })

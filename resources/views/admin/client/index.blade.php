@@ -161,25 +161,16 @@
                         });
                     },
                     error: function(response) {
-                        console.log(response.responseJSON.message);
-                        if (response.messageJSON && response.messageJSON.message[0]) {
-                            const errors = response.messageJSON.message;
-                            // ...
-                        } else {
-                            console.error(
-                                "Response messageJSON or message property is missing.");
-                        }
-                        for (const field in errors) {
-                            if (errors.hasOwnProperty(field)) {
-                                const errorMessage = errors[field][0];
-
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Gagal',
-                                    text: errorMessage,
-                                });
-                            }
-                        }
+                        var message = '';
+                        var obj = response.responseJSON.message;
+                        $.each(obj, function(key, value) {
+                            message += '<li>' + value + '</li>';
+                        });
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            html: message,
+                        });
                     }
                 })
             })

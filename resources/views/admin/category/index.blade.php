@@ -96,8 +96,6 @@
     <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
 
     {{-- Custom Script --}}
-    <script></script>
-
     <script>
         $(document).ready(function() {
             function generateSlug(title) {
