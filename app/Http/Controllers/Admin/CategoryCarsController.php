@@ -43,12 +43,19 @@ class CategoryCarsController extends Controller
                 400,
             );
         }
-
         $category = new CategoryCarsModel();
+        $category->slug = strtolower(trim(preg_replace('/[^a-zA-Z0-9-]+/', '-', $request->slug ?: $request->name), '-'));
+
+        if (CategoryCarsModel::where('slug', strtolower(trim(preg_replace('/[^a-zA-Z0-9-]+/', '-', $request->slug ?: $request->name), '-')))) {
+            return response()->json(
+                [
+                    'message' => 'Slug telah digunakan',
+                ],
+                400,
+            );
+        }
 
         $category->name = $request->name;
-
-        $category->slug = strtolower(trim(preg_replace('/[^a-zA-Z0-9-]+/', '-', $request->slug ?: $request->name), '-'));
 
         $category->save();
 

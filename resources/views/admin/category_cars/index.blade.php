@@ -128,15 +128,6 @@
                     url: "{{ route('admin.category_cars.store') }}",
                     method: "POST",
                     data: $(this).serialize(),
-                    beforeSend: function() {
-                        Swal.fire({
-                            title: 'Menunggu',
-                            html: 'Memproses Data',
-                            onBeforeOpen: () => {
-                                Swal.showLoading()
-                            }
-                        })
-                    },
                     success: function(response) {
                         Swal.fire({
                             icon: 'success',
@@ -147,18 +138,24 @@
                         });
                     },
                     error: function(response) {
-
                         var text = '';
-                        $.each(response.responseJSON.message, function(key, value) {
-                            text += '<li>' + value + '</li>';
-                            console.log(key);
-                        });
+                        if (typeof response.responseJSON.message === 'object') {
+                            $.each(response.responseJSON.message, function(key, value) {
+                                text += '<li>' + value + '</li>';
+                            });
 
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Gagal',
-                            html: text,
-                        });
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal',
+                                html: '<ul>' + text + '</ul>',
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal',
+                                html: response.responseJSON.message,
+                            });
+                        }
                     }
                 })
             })

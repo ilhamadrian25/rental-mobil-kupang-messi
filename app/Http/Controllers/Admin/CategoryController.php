@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\CategoryCarsModel;
+use App\Models\CategoryModel;
 use App\Models\ArticleModel;
 use Validator;
 
@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $data = [
-            'category' => CategoryCarsModel::all(),
+            'category' => CategoryModel::all(),
         ];
 
         return view('admin.category.index', $data);

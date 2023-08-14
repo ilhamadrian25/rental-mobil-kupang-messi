@@ -22,6 +22,7 @@ use App\Http\Controllers\Frontend\CarController as Car;
 // Admin Controller
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\CarController as AdminCar;
+use App\Http\Controllers\Admin\ArticleController as AdminArticle;
 use App\Http\Controllers\Admin\CategoryCarsController as AdminCategoryCars;
 use App\Http\Controllers\Admin\ContactController as AdminContact;
 use App\Http\Controllers\Admin\ClientController as AdminClient;
@@ -96,6 +97,9 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('/client', [AdminClient::class, 'index'])->name('admin.client');
     Route::post('/client', [AdminClient::class, 'store'])->name('admin.client.store');
     Route::delete('/client', [AdminClient::class, 'destroy'])->name('admin.client.destroy');
+
+    // Article
+    Route::get('/article', [AdminArticle::class, 'index'])->name('admin.article');
 
     // Category
     Route::get('/category', [AdminCategory::class, 'index'])->name('admin.category');

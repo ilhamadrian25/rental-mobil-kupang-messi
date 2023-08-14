@@ -122,12 +122,12 @@
                     </li>
 
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Mobil</span>
+                        <span class="menu-header-text">master Data</span>
                     </li>
                     <li
                         class="menu-item  @if (request()->segment(2) === 'category-cars' || request()->segment(2) === 'cars') active @endif  @if (request()->segment(2) === 'category-cars' || request()->segment(2) === 'cars') open @endif">
                         <a href="" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                            <i class="menu-icon tf-icons bi bi-car-front-fill"></i>
                             <div data-i18n="Cars">Mobil</div>
                         </a>
                         <ul class="menu-sub">
@@ -148,21 +148,9 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="menu-item @if (request()->segment(2) === 'contact') active @endif">
-                        <a href="{{ route('admin.contact') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-collection"></i>
-                            <div data-i18n="Basic">Kontak</div>
-                        </a>
-                    </li>
-                    <li class="menu-item @if (request()->segment(2) === 'client') active @endif">
-                        <a href="{{ route('admin.client') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-collection"></i>
-                            <div data-i18n="Basic">Klien</div>
-                        </a>
-                    </li>
-                    <li class="menu-item active">
+                    <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                            <i class="menu-icon tf-icons bi bi-newspaper"></i>
                             <div data-i18n="article">Artikel</div>
                         </a>
                         <ul class="menu-sub">
@@ -181,12 +169,19 @@
                                     <div data-i18n="Basic">Semua kategori</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="auth-forgot-password-basic.html" class="menu-link">
-                                    <div data-i18n="Basic">Buat kategori</div>
-                                </a>
-                            </li>
                         </ul>
+                    </li>
+                    <li class="menu-item @if (request()->segment(2) === 'contact') active @endif">
+                        <a href="{{ route('admin.contact') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bi bi-chat-left-dots-fill"></i>
+                            <div data-i18n="Basic">Kontak</div>
+                        </a>
+                    </li>
+                    <li class="menu-item @if (request()->segment(2) === 'client') active @endif">
+                        <a href="{{ route('admin.client') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bi bi-people"></i>
+                            <div data-i18n="Basic">Klien</div>
+                        </a>
                     </li>
                     <!-- Components -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>

@@ -21,10 +21,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>Nomor Telepon</th>
-                                <th>Pesan</th>
+                                <th>Judul</th>
+                                <th>Thumbnail</th>
+                                <th>Deskripsi</th>
                                 <th>Tanggal dibuat</th>
                                 <th>Aksi</th>
                             </tr>
@@ -33,10 +32,10 @@
                             @foreach ($article as $index => $item)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->email }}</td>
-                                    <td>{{ $item->telp }}</td>
-                                    <td>{{ $item->description }}</td>
+                                    <td>{!! substr($item->title, 0, 50) . '...' !!}</td>
+                                    <td><img src="{{ asset('images') . '/' . $item->thumbnail }}" class="img-fluid"
+                                            alt="thumbnail" style="width: 100px; height: 70px"></td>
+                                    <td>{!! substr($item->content, 0, 50) . '...' !!}</td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>
                                         <div class="d-inline-block"><a href="javascript:;"

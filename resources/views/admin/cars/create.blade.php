@@ -15,24 +15,29 @@
                             <h5 class="card-header">Tambah data mobil</h5>
 
                             <div class="card-body demo-vertical-spacing demo-only-element">
+                                <label for="name" class="form-label">Nama</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="name" placeholder="Nama"
-                                        aria-describedby="basic-addon11" />
+                                    <input type="text" id="name" class="form-control" name="name"
+                                        placeholder="Nama" aria-describedby="basic-addon11" />
                                 </div>
+                                <label for="name" class="form-label">Harga (Opsional) / hr</label>
                                 <div class="input-group input-group-merge">
                                     <span class="input-group-text">Rp</span>
-                                    <input type="number" name="price" class="form-control" placeholder="100"
+                                    <input type="number" name="price" class="form-control" placeholder="Harga (Opsional)"
                                         aria-label="Amount (to the nearest dollar)" />
                                     <span class="input-group-text">/Hari</span>
                                 </div>
+                                <label for="name" class="form-label">Kategori</label>
                                 <div class="input-group">
                                     <select class="form-select" name="category_id" id="inputGroupSelect01">
                                         <option selected disabled>Kategori...</option>
                                         @foreach ($category as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}" style="text-transform: capitalize">
+                                                {{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+                                <label for="name" class="form-label">Gambar</label>
                                 <div class="input-group">
                                     <input type="file" name="image" class="form-control" id="image" />
                                 </div>
@@ -42,8 +47,7 @@
                                 </div>
                                 <button type="button" class="btn btn-primary add-feature">Tambah</button>
                                 <div class="wrapper">
-
-
+                                    <label for="name" class="form-label">Fitur</label>
                                     <div class="row original">
                                         <div class="col-4">
                                             <div class="input-group mb-3">
@@ -167,7 +171,11 @@
 
             $(document).on('click', '.remove-feature', function() {
                 if (counterFeature < 2) {
-                    alert("Anda tidak boleh menghapus semuanya");
+                    Swal.fire(
+                        'Error',
+                        'Anda tidak boleh menghapus semuanya',
+                        'error',
+                    );
                     return;
                 }
                 $(this).parent().parent().remove();
