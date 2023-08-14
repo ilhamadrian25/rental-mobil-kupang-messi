@@ -26,7 +26,7 @@ class ClientController extends Controller
                 'name' => 'required|max:50',
                 'image' => 'required',
                 'message' => 'required|max:500',
-                'position' => 'required|max:50',
+                'position' => 'max:50',
             ],
             [
                 'name.required' => 'Nama tidak boleh kosong',
@@ -34,8 +34,7 @@ class ClientController extends Controller
                 'image.required' => 'Gambar tidak boleh kosong',
                 'message.required' => 'Pesan tidak boleh kosong',
                 'message.max' => 'Pesan tidak boleh melebihi 500 karakter',
-                'position.required' => 'Posisi tidak boleh kosong',
-                'position.max' => 'Posisi tidak boleh melebihi 50 karakter',
+                'position.max' => 'Pelanggan tidak boleh melebihi 50 karakter',
             ],
         );
 

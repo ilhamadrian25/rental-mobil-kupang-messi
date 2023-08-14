@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/theme-default.css') }}"
         class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('admin/assets/css/demo.css') }}" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
@@ -131,14 +131,14 @@
                             <div data-i18n="Cars">Mobil</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item @if (request()->segment(2) === 'cars') active @endif">
+                            <li class="menu-item @if (request()->segment(2) === 'cars' && request()->segment(3) === '') active @endif">
                                 <a href="{{ route('admin.cars') }}" class="menu-link">
-                                    <div data-i18n="Account">Semua mobil</div>
+                                    <div data-i18n="all cars">Semua mobil</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="{{ route('admin.cars.create') }}" class="menu-link">
-                                    <div data-i18n="Account">Tambah mobil</div>
+                            <li class="menu-item {{ request()->segment(3) === 'create' ? 'active' : '' }}">
+                                <a href="{{ route('admin.car.create') }}" class="menu-link">
+                                    <div data-i18n="add car">Tambah data mobil</div>
                                 </a>
                             </li>
                             <li class="menu-item @if (request()->segment(2) === 'category-cars') active @endif">
@@ -298,18 +298,6 @@
                             , made with ❤️ by
                             <a href="https://themeselection.com" target="_blank"
                                 class="footer-link fw-bolder">ThemeSelection</a>
-                        </div>
-                        <div>
-                            <a href="https://themeselection.com/license/" class="footer-link me-4"
-                                target="_blank">License</a>
-                            <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
-                                Themes</a>
-
-                            <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                                target="_blank" class="footer-link me-4">Documentation</a>
-
-                            <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                                target="_blank" class="footer-link me-4">Support</a>
                         </div>
                     </div>
                 </footer>

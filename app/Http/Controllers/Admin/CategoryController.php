@@ -65,16 +65,11 @@ class CategoryController extends Controller
     {
         $category = CategoryCarsModel::where('id', $request->id)->first();
 
-        // return response()->json([
-        //     'messgae' => $category,
-        // ]);
-
         $article = ArticleModel::where('category_id', $request->id)->first();
 
         if ($article) {
             return response()->json(
                 [
-                    'success' => false,
                     'message' => 'Kategori memiliki Artikel',
                 ],
                 400,
@@ -84,7 +79,6 @@ class CategoryController extends Controller
         if ($category->delete()) {
             return response()->json(
                 [
-                    'success' => true,
                     'message' => 'Data berhasil dihapus',
                 ],
                 200,
@@ -93,7 +87,6 @@ class CategoryController extends Controller
 
         return response()->json(
             [
-                'success' => false,
                 'message' => 'Data gagal dihapus',
             ],
             400,

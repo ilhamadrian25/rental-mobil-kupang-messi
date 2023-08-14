@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CategoryCarsModel;
+use App\Models\CarsModel;
 use Validator;
 
 class CategoryCarsController extends Controller
@@ -56,6 +57,47 @@ class CategoryCarsController extends Controller
                 'message' => 'Berhasil menambah data',
             ],
             200,
+        );
+    }
+
+    public function destroy(Request $request)
+    {
+        $id = $request->id;
+
+        $category = CategoryCarsModel::where('id', $id)->first();
+
+        if (!$category) {
+            return response()->json(
+                [
+                    'message' => 'Data tidak ditemukan',
+                ],
+                404,
+            );
+        }
+
+        if (CarsModel::where('category_cars_id', $category->id)->first()) {
+            return response()->json(
+                [
+                    'message' => 'Kategori masih memiliki mobil',
+                ],
+                400,
+            );
+        }
+
+        if ($category->delete()) {
+            return response()->json(
+                [
+                    'message' => 'Data berhasil dihapus',
+                ],
+                200,
+            );
+        }
+
+        return response()->json(
+            [
+                'message' => 'Data gagal dihapus',
+            ],
+            400,
         );
     }
 }

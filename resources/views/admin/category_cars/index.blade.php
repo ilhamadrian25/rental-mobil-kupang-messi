@@ -43,8 +43,11 @@
                                                 class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
                                                 data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></a>
                                             <ul class="dropdown-menu dropdown-menu-end m-0">
-                                                <li><a type="button" class="dropdown-item text-danger delete-category"
-                                                        data-id="{{ $item->id }}">Delete</a></li>
+                                                <li><a type="button" class="dropdown-item text-primary edit-category"
+                                                        data-id="{{ $item->id }}">Ubah</a>
+                                                    <a type="button" class="dropdown-item text-danger delete-category"
+                                                        data-id="{{ $item->id }}">Hapus</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </td>
@@ -175,7 +178,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.category.destroy') }}",
+                            url: "{{ route('admin.category_cars.destroy') }}",
                             method: "DELETE",
                             data: {
                                 "_token": "{{ csrf_token() }}",

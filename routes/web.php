@@ -77,12 +77,16 @@ Route::prefix('admin')->middleware('auth')->group(function() {
 
     // Cars
     Route::get('/cars', [AdminCar::class, 'index'])->name('admin.cars');
-    Route::get('/cars/create', [AdminCar::class, 'create'])->name('admin.cars.create');
-    Route::post('/cars', [AdminCar::class,'store'])->name('admin.cars.store');
+    Route::get('/cars/edit/{id}', [AdminCar::class, 'edit'])->name('admin.car.edit');
+    Route::get('/cars/create', [AdminCar::class, 'create'])->name('admin.car.create');
+    Route::post('/car', [AdminCar::class, 'update'])->name('admin.car.update');
+    Route::delete('/cars', [AdminCar::class, 'destroy'])->name('admin.car.destroy');
+    Route::post('/cars', [AdminCar::class,'store'])->name('admin.car.store');
 
     // Categories
     Route::get('/category-cars', [AdminCategoryCars::class, 'index'])->name('admin.category_cars');
     Route::post('/category-cars', [AdminCategoryCars::class, 'store'])->name('admin.category_cars.store');
+    Route::delete('/category-cars', [AdminCategoryCars::class, 'destroy'])->name('admin.category_cars.destroy');
 
     // Contact
     Route::get('/contact', [AdminContact::class, 'index'])->name('admin.contact');

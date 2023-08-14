@@ -12,7 +12,7 @@
                     <!-- Basic -->
                     <div class="col-md-12">
                         <div class="card mb-4">
-                            <h5 class="card-header">Tambah mobil</h5>
+                            <h5 class="card-header">Tambah data mobil</h5>
 
                             <div class="card-body demo-vertical-spacing demo-only-element">
                                 <div class="input-group">
@@ -23,7 +23,7 @@
                                     <span class="input-group-text">Rp</span>
                                     <input type="number" name="price" class="form-control" placeholder="100"
                                         aria-label="Amount (to the nearest dollar)" />
-                                    <span class="input-group-text">.00</span>
+                                    <span class="input-group-text">/Hari</span>
                                 </div>
                                 <div class="input-group">
                                     <select class="form-select" name="category_id" id="inputGroupSelect01">
@@ -40,6 +40,45 @@
                                     <img id="imagePreview" src="#" alt="Preview" class="img-thumbnail"
                                         style="max-width: 300px; display: none;">
                                 </div>
+                                <button type="button" class="btn btn-primary add-feature">Tambah</button>
+                                <div class="wrapper">
+
+
+                                    <div class="row original">
+                                        <div class="col-4">
+                                            <div class="input-group mb-3">
+                                                <label class="input-group-text" for="inputGroupSelect01"><i
+                                                        class="label-icon bi bi-speedometer"></i></label>
+                                                <select name="fitur[icon][]" class="form-select feature-icon"
+                                                    id="inputGroupSelect01">
+                                                    <option selected>Tambah fitur...</option>
+                                                    @php
+                                                        $options = [
+                                                            'bi bi-speedometer' => 'Speedometer',
+                                                            'bi bi-people' => 'User',
+                                                            'bi bi-fuel-pump' => 'Bahan bakar',
+                                                            'bi bi-gear' => 'Gear',
+                                                        ];
+                                                    @endphp
+
+                                                    @foreach ($options as $value => $label)
+                                                        <option value="{{ $value }}">
+                                                            {{ $label }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="text" name="fitur[label][]" id="" class="form-control">
+                                        </div>
+                                        <div class="col-2">
+                                            <button type="button" class="btn btn-danger remove-feature"><i
+                                                    class="bi bi-x"></i></button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -50,6 +89,7 @@
             </form>
         </div>
         <!-- / Content -->
+
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -76,7 +116,7 @@
                     event.preventDefault();
                     var formData = new FormData(this);
                     $.ajax({
-                        url: "{{ route('admin.cars.store') }}",
+                        url: "{{ route('admin.car.store') }}",
                         method: "POST",
                         data: formData,
                         contentType: false,
@@ -110,6 +150,28 @@
                         }
                     });
                 })
+            });
+
+
+            var counterFeature = 1;
+
+            $(document).on('change', '.feature-icon', function() {
+                $(this).parent().find('i').attr('class', $(this).val());
+            });
+
+            $('.add-feature').on('click', function() {
+                let copyElement = $('.original:first').clone();
+                $('.wrapper').append(copyElement);
+                counterFeature++;
+            });
+
+            $(document).on('click', '.remove-feature', function() {
+                if (counterFeature < 2) {
+                    alert("Anda tidak boleh menghapus semuanya");
+                    return;
+                }
+                $(this).parent().parent().remove();
+                counterFeature--;
             });
         </script>
     @endsection

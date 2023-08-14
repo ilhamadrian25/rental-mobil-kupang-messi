@@ -35,12 +35,12 @@
                             @foreach ($client as $index => $item)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td style="text-transform: capitalize">{{ $item->name }}</td>
                                     <td><img src="{{ asset('images') . '/' . $item->image }}" width="100" height="100"
                                             alt="Profile" class="img-fluid" srcset=""></td>
-                                    <td>{{ $item->message }}</td>
-                                    <td>{{ $item->position }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td style="text-transform: capitalize">{{ $item->message }}</td>
+                                    <td style="text-transform: capitalize">{{ $item->position }}</td>
+                                    <td>{{ date('d F Y', strtotime($item->created_at)) }}</td>
                                     <td>
                                         <div class="d-inline-block"><a href="javascript:;"
                                                 class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
@@ -93,7 +93,7 @@
                         <div class="mb-3">
                             <label for="position" class="form-label">Pelanggan</label>
                             <input type="text" name="position" class="form-control" id="position"
-                                placeholder="Pelanggan" aria-describedby="defaultFormControlHelp" />
+                                placeholder="Pelanggan (Opsional)" aria-describedby="defaultFormControlHelp" />
                         </div>
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>
