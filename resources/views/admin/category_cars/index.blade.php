@@ -118,7 +118,6 @@
                 slugInput.value = generatedSlug;
             });
 
-
             new DataTable('#listCategory');
 
             $('#formCategory').on('submit', function(e) {
