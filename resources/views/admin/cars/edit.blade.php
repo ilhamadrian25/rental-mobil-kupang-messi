@@ -4,7 +4,6 @@
     <!-- Content wrapper -->
     <div class="content-wrapper">
         <!-- Content -->
-
         <div class="container-xxl flex-grow-1 container-p-y">
             <form id="formCars">
                 <div class="row">
@@ -95,7 +94,6 @@
             </form>
         </div>
         <!-- / Content -->
-
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

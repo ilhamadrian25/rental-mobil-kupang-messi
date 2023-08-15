@@ -1,6 +1,7 @@
 @extends('admin.layout.app')
 
 @section('content')
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <!-- Content wrapper -->
     <div class="content-wrapper">
         <!-- Content -->
@@ -12,27 +13,44 @@
                     <!-- Basic -->
                     <div class="col-md-12">
                         <div class="card mb-4">
-                            <h5 class="card-header">Tambah data mobil</h5>
+                            <h5 class="card-header">Edit - {{ $article->title }}</h5>
 
                             <div class="card-body demo-vertical-spacing demo-only-element">
-                                <label for="name" class="form-label">Nama</label>
+                                <label for="title" class="form-label">Judul</label>
                                 <div class="input-group">
-                                    <input type="text" id="name" class="form-control" name="name"
-                                        placeholder="Nama" aria-describedby="basic-addon11" />
+                                    <input type="hidden" name="id" value="{{ $article->id }}">
+                                    <input type="text" id="title" class="form-control" name="title"
+                                        placeholder="Judul" value="{{ $article->title }}"
+                                        aria-describedby="basic-addon11" />
                                 </div>
-                                <label for="name" class="form-label">Harga (Opsional) / hr</label>
-                                <div class="input-group input-group-merge">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" name="price" class="form-control" value="0"
-                                        placeholder="Harga (Opsional)" aria-label="Amount (to the nearest dollar)" />
-                                    <span class="input-group-text">/Hari</span>
+                                <label for="slug" class="form-label">Slug (Jika dikosongkan akan digenerate
+                                    otomatis)</label>
+                                <div class="input-group">
+                                    <input type="text" id="slug" value="{{ $article->slug }}" class="form-control"
+                                        name="slug" placeholder="Slug" aria-describedby="basic-addon11" />
+                                </div>
+                                <div class="wrapper">
+                                    <label for="" class="form-label mb-0">Status</label>
+                                    <div class="form-check mt-3">
+                                        <input name="status" class="form-check-input" type="radio" value="publish"
+                                            id="defaultRadio1" {{ $article->status === 'publish' ? 'checked' : '' }} />
+                                        <label class="form-check-label" for="defaultRadio1"> Publish </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input name="status" class="form-check-input" type="radio"
+                                            {{ $article->status === 'draft' ? 'checked' : '' }} value="draft"
+                                            id="defaultRadio2" />
+                                        <label class="form-check-label" for="defaultRadio2"> Draft </label>
+                                    </div>
                                 </div>
                                 <label for="name" class="form-label">Kategori</label>
                                 <div class="input-group">
                                     <select class="form-select" name="category_id" id="inputGroupSelect01">
-                                        <option selected disabled>Kategori...</option>
+                                        <option disabled>Kategori...</option>
                                         @foreach ($category as $item)
-                                            <option value="{{ $item->id }}" style="text-transform: capitalize">
+                                            <option value="{{ $item->id }}"
+                                                @if ($article->category_id === $item->id) selected @endif
+                                                style="text-transform: capitalize">
                                                 {{ $item->name }}</option>
                                         @endforeach
                                     </select>
@@ -42,46 +60,10 @@
                                     <input type="file" name="image" class="form-control" id="image" />
                                 </div>
                                 <div class="form-group d-flex justify-content-center">
-                                    <img id="imagePreview" src="#" alt="Preview" class="img-thumbnail"
-                                        style="max-width: 300px; display: none;">
+                                    <img id="imagePreview" src="{{ asset('images') . '/' . $article->thumbnail }}"
+                                        alt="Preview" class="img-thumbnail" style="max-width: 300px;">
                                 </div>
-                                <button type="button" class="btn btn-primary add-feature">Tambah</button>
-                                <div class="wrapper">
-                                    <label for="name" class="form-label">Fitur</label>
-                                    <div class="row original">
-                                        <div class="col-4">
-                                            <div class="input-group mb-3">
-                                                <label class="input-group-text" for="inputGroupSelect01"><i
-                                                        class="label-icon bi bi-speedometer"></i></label>
-                                                <select name="fitur[icon][]" class="form-select feature-icon"
-                                                    id="inputGroupSelect01">
-                                                    <option selected>Tambah fitur...</option>
-                                                    @php
-                                                        $options = [
-                                                            'bi bi-speedometer' => 'Speedometer',
-                                                            'bi bi-people' => 'User',
-                                                            'bi bi-fuel-pump' => 'Bahan bakar',
-                                                            'bi bi-gear' => 'Gear',
-                                                        ];
-                                                    @endphp
-
-                                                    @foreach ($options as $value => $label)
-                                                        <option value="{{ $value }}">
-                                                            {{ $label }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <input type="text" name="fitur[label][]" id="" class="form-control">
-                                        </div>
-                                        <div class="col-2">
-                                            <button type="button" class="btn btn-danger remove-feature"><i
-                                                    class="bi bi-x"></i></button>
-                                        </div>
-                                    </div>
-
-
+                                <div id="editor" name="content" class="form-control">{{ $article->content }}
                                 </div>
                             </div>
                         </div>
@@ -94,10 +76,34 @@
         </div>
         <!-- / Content -->
 
+        <!-- Include the Quill library -->
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
+        <!-- Initialize Quill editor -->
+        <script>
+            var quill = new Quill('#editor', {
+                theme: 'snow'
+            });
+        </script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
+            $('#slug').on('input', function() {
+                var title = $(this).val();
+                var slug = slugify(title);
+
+                $('#slug').val(slug);
+            });
+            $('#title').on('input', function() {
+                var title = $(this).val();
+                var slug = slugify(title);
+
+                $('#slug').val(slug);
+            });
+
+            function slugify(text) {
+                return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+            }
             $(document).ready(function() {
                 function readURL(input) {
                     if (input.files && input.files[0]) {
@@ -119,24 +125,27 @@
                 $('#formCars').on('submit', function(event) {
                     event.preventDefault();
                     var formData = new FormData(this);
+                    var data = document.getElementById('editor').textContent;
+                    console.log(data);
+
+                    formData.append('content', data);
                     $.ajax({
-                        url: "{{ route('admin.car.store') }}",
+                        url: "{{ route('admin.article.update') }}",
                         method: "POST",
                         data: formData,
                         contentType: false,
                         cache: false,
                         processData: false,
-                        success: function(data) {
-                            console.log(data);
+                        success: function(response) {
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Berhasil',
-                                text: 'Data berhasil ditambahkan'
+                                text: response.message
                             }).then(function() {
                                 $('#formCars')[0].reset();
                                 $('#imagePreview').attr('src', '');
-                                window.location.href = data.redirect;
-                            })
+                                window.location.href = response.redirect
+                            });
                         },
                         error: function(response) {
 

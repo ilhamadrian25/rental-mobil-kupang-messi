@@ -15,15 +15,17 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
+            <a type="button" href="{{ route('admin.article.create') }}" class="btn btn-primary">Buat Artikel</a>
             <div class="row py-5">
                 <div class="col-12 table-responsive">
-                    <table id="listContact" class="table table-striped" style="width:100%">
+                    <table id="listArticle" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Judul</th>
                                 <th>Thumbnail</th>
                                 <th>Deskripsi</th>
+                                <th>Status</th>
                                 <th>Tanggal dibuat</th>
                                 <th>Aksi</th>
                             </tr>
@@ -36,16 +38,22 @@
                                     <td><img src="{{ asset('images') . '/' . $item->thumbnail }}" class="img-fluid"
                                             alt="thumbnail" style="width: 100px; height: 70px"></td>
                                     <td>{!! substr($item->content, 0, 50) . '...' !!}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{!! $item->status === 'publish'
+                                        ? '<span class="badge bg-success">Publish</span>'
+                                        : '<span class="badge bg-warning">Draft</span>' !!}
+                                    </td>
+                                    <td>{{ date('d F Y', strtotime($item->created_at)) }}</td>
                                     <td>
                                         <div class="d-inline-block"><a href="javascript:;"
                                                 class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
                                                 data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></a>
                                             <ul class="dropdown-menu dropdown-menu-end m-0">
-                                                <li><a type="button" class="dropdown-item">Details</a></li>
+                                                <li><a href="{{ route('admin.article.edit', $item->slug) }}" type="button"
+                                                        class="dropdown-item">Edit</a></li>
+                                                <li><a type="button" class="dropdown-item">Lihat</a></li>
                                                 <div class="dropdown-divider"></div>
-                                                <li><a type="button"
-                                                        class="dropdown-item text-danger delete-contact">Delete</a></li>
+                                                <li><a type="button" data-id="{{ $item->id }}"
+                                                        class="dropdown-item text-danger delete-article">Hapus</a></li>
                                             </ul>
                                         </div>
                                     </td>
@@ -68,9 +76,9 @@
     {{-- Custom Script --}}
     <script>
         $(document).ready(function() {
-            new DataTable('#listContact');
+            new DataTable('#listArticle');
 
-            $('.delete-contact').on('click', function(e) {
+            $('.delete-article').on('click', function(e) {
                 e.preventDefault();
                 const id = $(this).data('id');
 
@@ -82,7 +90,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.contact.destroy') }}",
+                            url: "{{ route('admin.article.destroy') }}",
                             method: "DELETE",
                             data: {
                                 "_token": "{{ csrf_token() }}",
@@ -97,11 +105,11 @@
                                     location.reload();
                                 });
                             },
-                            error: function(data) {
+                            error: function(response) {
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Gagal',
-                                    text: 'Data gagal dihapus',
+                                    text: response.responseJSON.message,
                                 })
                             }
                         });

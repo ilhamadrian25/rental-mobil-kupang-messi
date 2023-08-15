@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $data = [
-            'category' => CategoryModel::all(),
+            'category' => CategoryModel::withCount('article')->get(),
         ];
 
         return view('admin.category.index', $data);
@@ -35,10 +35,26 @@ class CategoryController extends Controller
             );
         }
 
-        $category = new CategoryCarsModel();
+        $category = new CategoryModel();
 
         $category->name = $request->name;
-        $category->slug = strtolower(trim(preg_replace('/[^a-zA-Z0-9-]+/', '-', $request->slug), '-'));
+
+        if (!$request->slug) {
+            $category->slug = strtolower(trim(preg_replace('/[^a-zA-Z0-9-]+/', '-', $request->name), '-'));
+        } else {
+            $category->slug = $request->slug;
+        }
+
+        $checkSlug = CategoryModel::where('slug', $category->slug);
+
+        if ($checkSlug) {
+            return response()->json(
+                [
+                    'message' => 'Slug telah digunakan',
+                ],
+                400,
+            );
+        }
 
         $category->save();
 
@@ -63,7 +79,7 @@ class CategoryController extends Controller
 
     public function destroy(Request $request)
     {
-        $category = CategoryCarsModel::where('id', $request->id)->first();
+        $category = CategoryModel::where('id', $request->id)->first();
 
         $article = ArticleModel::where('category_id', $request->id)->first();
 
@@ -79,7 +95,7 @@ class CategoryController extends Controller
         if ($category->delete()) {
             return response()->json(
                 [
-                    'message' => 'Data berhasil dihapus',
+                    'message' => 'Kategori berhasil dihapus',
                 ],
                 200,
             );
@@ -87,7 +103,7 @@ class CategoryController extends Controller
 
         return response()->json(
             [
-                'message' => 'Data gagal dihapus',
+                'message' => 'Kategori gagal dihapus',
             ],
             400,
         );

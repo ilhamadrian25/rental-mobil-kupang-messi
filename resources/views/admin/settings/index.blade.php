@@ -24,26 +24,19 @@
                         </li>
                         <li class="nav-item">
                             <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
-                                data-bs-target="#navs-pills-top-messages" aria-controls="navs-pills-top-messages"
-                                aria-selected="false">
-                                Messages
+                                data-bs-target="#contact" aria-controls="navs-pills-top-messages" aria-selected="false">
+                                Kontak
                             </button>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
-                            <p>
-                                Icing pastry pudding oat cake. Lemon drops cotton candy caramels cake caramels sesame
-                                snaps
-                                powder. Bear claw candy topping.
-                            </p>
-                            <p class="mb-0">
-                                Tootsie roll fruitcake cookie. Dessert topping pie. Jujubes wafer carrot cake jelly.
-                                Bonbon
-                                jelly-o jelly-o ice cream jelly beans candy canes cake bonbon. Cookie jelly beans
-                                marshmallow
-                                jujubes sweet.
-                            </p>
+                            <div class="form-group">
+                                <label for="title" class="form-label">Nama website</label>
+                                <input type="text" id="title" placeholder="Nama website" name="title"
+                                    class="form-control">
+                            </div>
+                            <textarea name="" id="" class="form-control"></textarea>
                         </div>
                         <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
                             <p>
@@ -58,12 +51,22 @@
                                 cotton candy liquorice caramels.
                             </p>
                         </div>
-                        <div class="tab-pane fade" id="navs-pills-top-messages" role="tabpanel">
-                            <p>
-                                Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon
-                                gummies
-                                cupcake gummi bears cake chocolate.
-                            </p>
+                        <div class="tab-pane fade" id="contact" role="tabpanel">
+                            <div>
+                                <label for="defaultFormControlInput" class="form-label">Alamat</label>
+                                <input type="text" class="form-control" id="defaultFormControlInput"
+                                    placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
+                            </div>
+                            <div>
+                                <label for="defaultFormControlInput" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="defaultFormControlInput"
+                                    placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
+                            </div>
+                            <div>
+                                <label for="defaultFormControlInput" class="form-label">Telepon</label>
+                                <input type="text" class="form-control" id="defaultFormControlInput"
+                                    placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
+                            </div>
                             <p class="mb-0">
                                 Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake.
                                 Sweet
