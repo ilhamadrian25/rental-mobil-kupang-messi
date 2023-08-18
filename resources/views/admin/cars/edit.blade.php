@@ -21,9 +21,10 @@
                                 </div>
                                 <div class="input-group input-group-merge">
                                     <span class="input-group-text">Rp</span>
-                                    <input name="price" class="form-control" id="rupiah"
-                                        value="{{ number_format($car->price, 0, ',', '.') }}" step="0.01"
-                                        placeholder="Opsional" aria-label="Amount (to the nearest dollar)" />
+                                    <input type="number" name="price" class="form-control" value="0"
+                                        placeholder="Harga (Opsional)" value="{{ number_format($car->price, 0, ',', '.') }}"
+                                        aria-label="Amount (to the nearest dollar)" />
+                                    <span class="input-group-text">/Hari</span>
                                 </div>
                                 <div class="input-group">
                                     <select class="form-select" name="category_id" id="inputGroupSelect01">
@@ -84,12 +85,12 @@
                                         </div>
                                     @endforeach
                                 </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Tambah</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
             </form>
         </div>
@@ -186,8 +187,9 @@
                     );
                     return;
                 }
-                $(this).parent().parent().remove();
-                counterFeature--;
+
+                console.log($(this).remove());
+                // counterFeature--;
             });
 
             /* Tanpa Rupiah */

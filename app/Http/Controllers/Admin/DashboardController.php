@@ -8,6 +8,7 @@ use App\Models\CarsModel;
 use App\Models\CategoryCarsModel;
 use App\Models\ArticleModel;
 use App\Models\CategoryModel;
+use App\Models\SettingModel;
 
 class DashboardController extends Controller
 {
@@ -18,6 +19,8 @@ class DashboardController extends Controller
             'category_cars_count' => CategoryCarsModel::all()->count(),
             'article_count' => ArticleModel::all()->count(),
             'article_category_count' => CategoryModel::all()->count(),
+            'settings' => SettingModel::first(),
+            'page' => 'Dashboard',
         ];
 
         return view('admin.dashboard.index', $data);

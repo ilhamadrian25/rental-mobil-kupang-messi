@@ -46,18 +46,8 @@
                                 <div class="card-body">
                                     <div class="card-title d-flex align-items-start justify-content-between">
                                         <div class="avatar flex-shrink-0">
-                                            <i class="bi bi-car-front-fill"></i>
-                                        </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" id="cardOpt4" data-bs-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                                <a class="dropdown-item" href="javascript:void(0);">View
-                                                    More</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                            </div>
+                                            <a href="{{ route('admin.article') }}"><i
+                                                    class="bi bi-journal-bookmark"></i></a>
                                         </div>
                                     </div>
                                     <span class="d-block mb-1">Artikel</span>
@@ -70,8 +60,8 @@
                                 <div class="card-body">
                                     <div class="card-title d-flex align-items-start justify-content-between">
                                         <div class="avatar flex-shrink-0">
-                                            <img src="{{ asset('admin/assets/img/icons/unicons/cc-primary.png') }}"
-                                                alt="Credit Card" class="rounded" />
+                                            <a href="{{ route('admin.category_cars') }}"><i
+                                                    class="bi bi-journal-album"></i></a>
                                         </div>
                                     </div>
                                     <span class="fw-semibold d-block mb-1">Kategori Artikel</span>

@@ -80,15 +80,13 @@
                                                     class="bi bi-x"></i></button>
                                         </div>
                                     </div>
-
-
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Tambah</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
             </form>
         </div>

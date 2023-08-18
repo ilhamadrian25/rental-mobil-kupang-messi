@@ -1,7 +1,11 @@
 @extends('admin.layout.app')
 
 @section('content')
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <!-- Content wrapper -->
     <div class="content-wrapper">
         <!-- Content -->
@@ -63,26 +67,32 @@
                                     <img id="imagePreview" src="{{ asset('images') . '/' . $article->thumbnail }}"
                                         alt="Preview" class="img-thumbnail" style="max-width: 300px;">
                                 </div>
-                                <div id="editor" name="content" class="form-control">{{ $article->content }}
+                                <textarea id="content" name="content" class="form-control">{{ $article->content }}</textarea>
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Ubah</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">Tambah</button>
-                </div>
             </form>
         </div>
         <!-- / Content -->
 
-        <!-- Include the Quill library -->
-        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
-        <!-- Initialize Quill editor -->
         <script>
-            var quill = new Quill('#editor', {
-                theme: 'snow'
+            $('#content').summernote({
+                placeholder: 'Hallo ',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
             });
         </script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -125,10 +135,6 @@
                 $('#formCars').on('submit', function(event) {
                     event.preventDefault();
                     var formData = new FormData(this);
-                    var data = document.getElementById('editor').textContent;
-                    console.log(data);
-
-                    formData.append('content', data);
                     $.ajax({
                         url: "{{ route('admin.article.update') }}",
                         method: "POST",

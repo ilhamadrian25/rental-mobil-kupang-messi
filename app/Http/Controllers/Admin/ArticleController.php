@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CategoryModel;
 use Illuminate\Http\Request;
 use App\Models\ArticleModel;
-use App\Models\CategoryModel;
+use App\Models\SettingModel;
 use Illuminate\Support\Str;
 use Auth;
 use Validator;
@@ -15,7 +16,9 @@ class ArticleController extends Controller
     public function index()
     {
         $data = [
-            'article' => ArticleModel::all(),
+            'article' => ArticleModel::orderByDesc('id')->get(),
+            'settings' => SettingModel::first(),
+            'page' => 'Semua Artikel',
         ];
 
         return view('admin.articles.index', $data);
@@ -25,6 +28,8 @@ class ArticleController extends Controller
     {
         $data = [
             'category' => CategoryModel::all(),
+            'settings' => SettingModel::first(),
+            'page' => 'Buat Artikel',
         ];
 
         return view('admin.articles.create', $data);
@@ -150,6 +155,8 @@ class ArticleController extends Controller
 
         $data = [
             'article' => $article,
+            'settings' => SettingModel::first(),
+            'page' => 'Edit - ' . $article->title,
             'category' => CategoryModel::all(),
         ];
 
@@ -202,12 +209,6 @@ class ArticleController extends Controller
 
         $article = ArticleModel::where('id', $request->id)->first();
 
-        // $checkSlug = ArticleModel::where('slug', $slug)->first();
-
-        // if ($checkSlug) {
-        //     $article->slug = $slug . '-' . rand();
-        // } else {
-        // }
         $article->slug = $slug;
 
         if ($request->image) {

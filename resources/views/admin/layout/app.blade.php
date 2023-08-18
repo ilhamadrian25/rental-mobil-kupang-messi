@@ -8,12 +8,12 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>{{ $page }} - {{ $settings->title }}</title>
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('admin/assets/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -57,8 +57,8 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
                     <a href="{{ route('admin.dashboard') }}" class="app-brand-link">
-                        <img src="{{ asset('logo/logo-rental-mobil-kupang-messi-rev.png') }}" class="img-fluid"
-                            alt="" srcset="">
+                        <img src="{{ asset('logo') . '/' . $settings->logo_admin }}" class="img-fluid" alt=""
+                            srcset="">
                     </a>
 
                     <a href="javascript:void(0);"
@@ -168,6 +168,12 @@
                             <div data-i18n="Settings">Pengaturan Umum</div>
                         </a>
                     </li>
+                    <li class="menu-item @if (request()->segment(2) === 'about') active @endif">
+                        <a href="{{ route('admin.about') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bi bi-chat-left-dots-fill"></i>
+                            <div data-i18n="Basic">Halaman About</div>
+                        </a>
+                    </li>
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -193,7 +199,7 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('admin/assets/img/avatars/1.png') }}" alt
+                                        <img src="{{ asset('images/Sample_User_Icon.png') }}" alt
                                             class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </a>
@@ -203,7 +209,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="{{ asset('admin/assets/img/avatars/1.png') }}" alt
+                                                        <img src="{{ asset('images/Sample_User_Icon.png') }}" alt
                                                             class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
@@ -235,13 +241,9 @@
                 <footer class="content-footer footer bg-footer-theme">
                     <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                         <div class="mb-2 mb-md-0">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script>
-                            , made with ❤️ by
-                            <a href="https://themeselection.com" target="_blank"
-                                class="footer-link fw-bolder">ThemeSelection</a>
+                            Copyright © {{ date('Y') }} {{ $settings->title }} Developed by <a
+                                href="https://inovindo.co.id" target="_blank"
+                                class="footer-link fw-bolder">INOVINDO</a>. All rights reserved.
                         </div>
                     </div>
                 </footer>

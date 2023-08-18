@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ClientModel;
+use App\Models\SettingModel;
 use Validator;
 
 class ClientController extends Controller
@@ -13,6 +14,8 @@ class ClientController extends Controller
     {
         $data = [
             'client' => ClientModel::orderByDesc('id')->get(),
+            'settings' => SettingModel::first(),
+            'page' => 'Semua klien',
         ];
 
         return view('admin.client.index', $data);

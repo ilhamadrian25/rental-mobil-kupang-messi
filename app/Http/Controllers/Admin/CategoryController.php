@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CategoryModel;
 use App\Models\ArticleModel;
+use App\Models\SettingModel;
 use Validator;
 
 class CategoryController extends Controller
@@ -14,6 +15,8 @@ class CategoryController extends Controller
     {
         $data = [
             'category' => CategoryModel::withCount('article')->get(),
+            'settings' => SettingModel::first(),
+            'page' => 'Semua kategori artikel',
         ];
 
         return view('admin.category.index', $data);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CategoryCarsModel;
+use App\Models\SettingModel;
 use Illuminate\Http\Request;
 use App\Models\CarsModel;
 use Validator;
@@ -14,6 +15,8 @@ class CarController extends Controller
     {
         $data = [
             'car' => CarsModel::with('category')->get(),
+            'settings' => SettingModel::first(),
+            'page' => 'Semua Mobil',
         ];
 
         return view('admin.cars.index', $data);
@@ -47,6 +50,8 @@ class CarController extends Controller
     {
         $data = [
             'category' => CategoryCarsModel::all(),
+            'settings' => SettingModel::first(),
+            'page' => 'Tambah data mobil',
         ];
 
         return view('admin.cars.create', $data);
@@ -122,6 +127,8 @@ class CarController extends Controller
 
         $data = [
             'category' => CategoryCarsModel::all(),
+            'settings' => SettingModel::first(),
+            'page' => 'Edit ' . $car->name,
             'car' => $car,
         ];
 

@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\ArticleController as Article;
 use App\Http\Controllers\Frontend\CarController as Car;
 
 // Admin Controller
+use App\Http\Controllers\Admin\AboutController as AdminAbout;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\CarController as AdminCar;
 use App\Http\Controllers\Admin\ArticleController as AdminArticle;
@@ -108,6 +109,10 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::post('/category', [AdminCategory::class,'store'])->name('admin.category.store');
     Route::delete('/category', [AdminCategory::class, 'destroy'])->name('admin.category.destroy');
 
+    // About
+    Route::get('/about', [AdminAbout::class, 'index'])->name('admin.about');
+    Route::post('/about', [AdminAbout::class, 'update'])->name('admin.about.update');
+
     // Gallery
     Route::get('/gallery', [AdminGallery::class, 'index'])->name('admin.gallery');
     Route::post('/gallery', [AdminGallery::class, 'store'])->name('admin.gallery.store');
@@ -115,6 +120,7 @@ Route::prefix('admin')->middleware('auth')->group(function() {
 
     // Settings
     Route::get('/settings', [AdminSettings::class, 'index'])->name('admin.settings');
-    Route::put('/settings', [AdminSocialMedia::class, 'update'])->name('admin.social.update');
+    Route::patch('/settings', [AdminSettings::class, 'update'])->name('admin.setting.update');
+    Route::post('/settings', [AdminSettings::class, 'update'])->name('admin.setting.post');
 });
 

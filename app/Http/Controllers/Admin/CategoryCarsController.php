@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CategoryCarsModel;
 use App\Models\CarsModel;
+use App\Models\SettingModel;
 use Validator;
 
 class CategoryCarsController extends Controller
@@ -14,6 +15,8 @@ class CategoryCarsController extends Controller
     {
         $data = [
             'category' => CategoryCarsModel::withCount('cars')->get(),
+            'settings' => SettingModel::first(),
+            'page' => 'Semua kategori mobil',
         ];
 
         return view('admin.category_cars.index', $data);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\GalleryModel;
+use App\Models\SettingModel;
 use Validator;
 
 class GalleryController extends Controller
@@ -16,12 +17,16 @@ class GalleryController extends Controller
         if ($type === 'image') {
             $data = [
                 'image' => GalleryModel::where('type', 'image')->get(),
+                'settings' => SettingModel::first(),
+                'page' => 'Semua Foto',
             ];
 
             return view('admin.image.index', $data);
         } elseif ($type === 'video') {
             $data = [
                 'video' => GalleryModel::where('type', 'video')->get(),
+                'settings' => SettingModel::first(),
+                'page' => 'Semua Video',
             ];
 
             return view('admin.video.index', $data);
