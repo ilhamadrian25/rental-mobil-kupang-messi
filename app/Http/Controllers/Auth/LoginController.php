@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\SettingModel;
 use Auth;
 
 class LoginController extends Controller
@@ -14,7 +15,12 @@ class LoginController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        return view('auth.login');
+        $data = [
+            'page' => 'Login',
+            'settings' => SettingModel::first(),
+        ];
+
+        return view('auth.login', $data);
     }
 
     public function store(Request $request)
