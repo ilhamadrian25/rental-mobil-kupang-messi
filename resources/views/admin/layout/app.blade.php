@@ -81,53 +81,63 @@
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">master Data</span>
                     </li>
-                    <li
-                        class="menu-item  {{ request()->is('admin/cars') || request()->is('admin/cars/create') || request()->is('admin/category-cars') ? 'active open' : '' }}">
-                        <a href="" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bi bi-car-front-fill"></i>
-                            <div data-i18n="Cars">Mobil</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ request()->is('admin/cars') ? 'active' : '' }}">
-                                <a href="{{ route('admin.cars') }}" class="menu-link">
-                                    <div data-i18n="all cars">Semua mobil</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ request()->is('admin/cars/create') ? 'active' : '' }}">
-                                <a href="{{ route('admin.car.create') }}" class="menu-link">
-                                    <div data-i18n="add car">Tambah data mobil</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ request()->is('admin/category-cars') ? 'active' : '' }}">
-                                <a href="{{ route('admin.category_cars') }}" class="menu-link">
-                                    <div data-i18n="Notifications">Kategori mobil</div>
-                                </a>
-                            </li>
-                        </ul>
+                    @if (isset($car))
+                        <li
+                            class="menu-item  {{ request()->is('admin/cars') || request()->is('admin/cars/create') || request()->is('admin/cars/edit/' . $car->id) || request()->is('admin/category-cars') ? 'active open' : '' }}">
+                        @else
+                        <li
+                            class="menu-item  {{ request()->is('admin/cars') || request()->is('admin/cars/create') || request()->is('admin/category-cars') ? 'active open' : '' }}">
+                    @endif
+                    <a href="" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bi bi-car-front-fill"></i>
+                        <div data-i18n="Cars">Mobil</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item {{ request()->is('admin/cars') ? 'active' : '' }}">
+                            <a href="{{ route('admin.cars') }}" class="menu-link">
+                                <div data-i18n="all cars">Semua mobil</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ request()->is('admin/cars/create') ? 'active' : '' }}">
+                            <a href="{{ route('admin.car.create') }}" class="menu-link">
+                                <div data-i18n="add car">Tambah data mobil</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ request()->is('admin/category-cars') ? 'active' : '' }}">
+                            <a href="{{ route('admin.category_cars') }}" class="menu-link">
+                                <div data-i18n="Notifications">Kategori mobil</div>
+                            </a>
+                        </li>
+                    </ul>
                     </li>
-                    <li
-                        class="menu-item {{ request()->is('admin/category') || request()->is('admin/article/create') || request()->segment(3) === 'edit' || request()->is('admin/article') ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bi bi-newspaper"></i>
-                            <div data-i18n="article">Artikel</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ request()->is('admin/article') ? 'active' : '' }}">
-                                <a href="{{ route('admin.article') }}" class="menu-link">
-                                    <div data-i18n="Article">Semua artikel</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ request()->is('admin/article/create') ? 'active' : '' }}">
-                                <a href="{{ route('admin.article.create') }}" class="menu-link">
-                                    <div data-i18n="Create article">Buat artikel</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ request()->is('admin/category') ? 'active' : '' }}">
-                                <a href="{{ route('admin.category') }}" class="menu-link">
-                                    <div data-i18n="Basic">Semua kategori</div>
-                                </a>
-                            </li>
-                        </ul>
+                    @if (isset($article->slug))
+                        <li
+                            class="menu-item {{ request()->is('admin/category') || request()->is('admin/article/create') || request()->is('admin/article/edit/' . $article->slug) || request()->is('admin/article') ? 'active open' : '' }}">
+                        @else
+                        <li
+                            class="menu-item {{ request()->is('admin/category') || request()->is('admin/article/create') || request()->is('admin/article') ? 'active open' : '' }}">
+                    @endif
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bi bi-newspaper"></i>
+                        <div data-i18n="article">Artikel</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item {{ request()->is('admin/article') ? 'active' : '' }}">
+                            <a href="{{ route('admin.article') }}" class="menu-link">
+                                <div data-i18n="Article">Semua artikel</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ request()->is('admin/article/create') ? 'active' : '' }}">
+                            <a href="{{ route('admin.article.create') }}" class="menu-link">
+                                <div data-i18n="Create article">Buat artikel</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ request()->is('admin/category') ? 'active' : '' }}">
+                            <a href="{{ route('admin.category') }}" class="menu-link">
+                                <div data-i18n="Basic">Semua kategori</div>
+                            </a>
+                        </li>
+                    </ul>
                     </li>
                     <li
                         class="menu-item {{ request()->fullUrlIs('*type=video*') || request()->fullUrlIs('*type=image*') ? 'active open' : '' }}">
