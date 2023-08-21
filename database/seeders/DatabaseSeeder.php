@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AboutSeeder::class,
             SocialSeeder::class,
-            // BannerSeeder::class,
+            BannerSeeder::class,
             AddressSeeder::class,
-            // SettingSeeder::class,
+            SettingSeeder::class,
         ]);
     }
 }
