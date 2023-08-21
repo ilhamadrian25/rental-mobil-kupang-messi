@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 // Auth Controller
 use App\Http\Controllers\Auth\LoginController as AuthLogin;
 
-
 // Frontend Controller
 use App\Http\Controllers\Frontend\ContactController as Contact;
 use App\Http\Controllers\Frontend\AboutController as About;
@@ -14,6 +13,7 @@ use App\Http\Controllers\Frontend\ServicesController as Services;
 use App\Http\Controllers\Frontend\PriceController as Price;
 use App\Http\Controllers\Frontend\ArticleController as Article;
 use App\Http\Controllers\Frontend\CarController as Car;
+use App\Http\Controllers\Frontend\GalleryController as Gallery;
 
 // Admin Controller
 use App\Http\Controllers\Admin\AboutController as AdminAbout;
@@ -49,6 +49,7 @@ Route::get('/logout', [AuthLogin::class, 'destroy'])->name('logout');
 // Home
 Route::get('/', [Home::class, 'index'])->name('home');
 
+
 // About
 Route::get('/about', [About::class, 'index'])->name('about');
 
@@ -58,8 +59,11 @@ Route::get('/services', [Services::class, 'index'])->name('services');
 // Prices
 Route::get('/price', [Price::class, 'index'])->name('price');
 
+// Gallery
+Route::get('/gallery', [Gallery::class, 'index'])->name('gallery');
+
 // Contacts
-Route::get('/contact', [Contact::class, 'index'])->name('contact.index');
+Route::get('/contact', [Contact::class, 'index'])->name('contact');
 Route::post('/contact', [Contact::class,'store'])->name('contact.store');
 
 // Cars

@@ -48,9 +48,9 @@ class CategoryController extends Controller
             $category->slug = $request->slug;
         }
 
-        $checkSlug = CategoryModel::where('slug', $category->slug);
+        $checkSlug = CategoryModel::where('slug', $category->slug)->first();
 
-        if ($checkSlug) {
+        if ($checkSlug !== null) {
             return response()->json(
                 [
                     'message' => 'Slug telah digunakan',

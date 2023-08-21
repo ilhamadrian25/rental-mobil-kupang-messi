@@ -1,11 +1,11 @@
 @extends('frontend/layout/app')
 
 @push('title')
-    <title>Kontak - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Kontak - {{ $settings->title }}</title>
 @endpush
 
 @section('content')
-    <section class="hero-wrap hero-wrap-2 js-fullheight"
+    {{-- <section class="hero-wrap hero-wrap-2 js-fullheight"
         style="background-image: url('{{ asset('assets/images/bg_3.jpg') }}');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section class="ftco-section contact-section">
         <div class="container">
@@ -76,11 +76,14 @@
 
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-md-12">
-                    <div id="map" class="bg-white"></div>
-                </div>
-            </div>
+            {{-- {{ $address->map }} --}}
+            {{-- <div class="row justify-content-center">
+                <iframe class="embed-responsive-item"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3926.9755599605583!2d123.584749!3d-10.18264!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c569b631bd76741%3A0x94f6093584d434b3!2sJl.%20Klp.%2C%20Air%20Nona%2C%20Kec.%20Kota%20Raja%2C%20Kota%20Kupang%2C%20Nusa%20Tenggara%20Tim.!5e0!3m2!1sid!2sid!4v1691215348454!5m2!1sid!2sid"
+                    width="600" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div> --}}
         </div>
     </section>
 @endsection

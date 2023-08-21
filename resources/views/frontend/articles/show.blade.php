@@ -1,8 +1,13 @@
 @extends('frontend/layout/app')
 
+@push('title')
+    <title>{{ $article->title }} - {{ $settings->title }}</title>
+@endpush
+
 @section('content')
     <section class="hero-wrap hero-wrap-2 js-fullheight"
-        style="background-image: url('{{ asset('assets/images/bg_3.jpg') }}');" data-stellar-background-ratio="0.5">
+        style="background-image: url('{{ asset('images') . '/' . $article->thumbnail }}');"
+        data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
             <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('title');
             $table->string('thumbnail');
+            $table->enum('status', ['publish', 'draft']);
             $table->string('slug')->unique();
             $table->text('content');
             $table->timestamps();

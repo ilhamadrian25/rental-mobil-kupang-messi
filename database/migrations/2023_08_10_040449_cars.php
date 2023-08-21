@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('image')->unique();
             $table->integer('price');
+            $table->text('features');
             $table->timestamps();
 
             $table->foreign('category_cars_id')->references('id')->on('category_cars');

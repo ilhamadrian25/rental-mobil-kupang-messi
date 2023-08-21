@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AddressModel;
 use App\Models\SocialMediaModel;
-// use App\Models\CarModel;
+use App\Models\SettingModel;
+use App\Models\CarsModel;
 
 class CarController extends Controller
 {
@@ -15,7 +16,8 @@ class CarController extends Controller
         $data = [
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
-            // 'cars' => CarModel::all(),
+            'cars' => CarsModel::latest()->paginate(12),
+            'settings' => SettingModel::first(),
         ];
 
         return view('frontend.cars.index', $data);

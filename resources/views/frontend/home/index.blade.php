@@ -1,5 +1,9 @@
 @extends('frontend/layout/app')
 
+@push('title')
+    <title>Beranda - {{ $settings->title }}</title>
+@endpush
+
 @section('content')
     <!-- Slider main container -->
     <div class="swiper">
@@ -132,20 +136,14 @@
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center"
-                    style="background-image: url(images/about.jpg);">
+                    style="background-image: url({{ asset('images') . '/' . $about->image }});">
                 </div>
                 <div class="col-md-6 wrap-about ftco-animate">
                     <div class="heading-section heading-section-white pl-md-5">
-                        <span class="subheading">About us</span>
-                        <h2 class="mb-4">Welcome to Carbook</h2>
+                        <span class="subheading">Tentang kami</span>
+                        <h2 class="mb-4">Selamat datang</h2>
 
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It
-                            is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                        <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it
-                            would have been rewritten a thousand times and everything that was left from its origin would be
-                            the word "and" and the Little Blind Text should turn around and return to its own, safe country.
-                            A small river named Duden flows by their place and supplies it with the necessary regelialia. It
-                            is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                        <p>{!! Str::limit($about->description, 1200) !!}</p>
                         <p><a href="{{ route('about') }}" class="btn btn-primary py-3 px-4">Lihat lebih lengkap</a></p>
                     </div>
                 </div>
@@ -170,43 +168,29 @@
                             <div class="item">
                                 <div class="car-wrap rounded ftco-animate">
                                     <div class="img rounded d-flex align-items-end"
-                                        style="background-image: url({{ asset('images/car-1.jpg') }});">
+                                        style="background-image: url({{ asset('images') . '/' . $item->image }});">
                                     </div>
                                     <div class="text">
-                                        <h2 class="mb-2 text-center"><a href="#">Mercedes Grand Sedan</a></h2>
-                                        <div class="d-flex justify-content-center mb-3">
-                                            <span class="cat">Bisa buka kunci</span>
-                                            {{-- <p class="price ml-auto">$500 <span>/day</span></p> --}}
-                                        </div>
+                                        <h2 class="mb-2 text-center"><a
+                                                href="https://api.whatsapp.com/send?phone={{ $settings->whatsapp }}&text=Apakah+mobil+{{ $item->name }}+tersedia?">{{ $item->name }}</a>
+                                        </h2>
+                                        {{-- <div class="d-flex justify-content-center mb-3"> --}}
+                                        {{-- <span class="cat">Bisa buka kunci</span> --}}
+                                        {{-- <p class="price ml-auto">$500 <span>/day</span></p> --}}
+                                        {{-- </div> --}}
                                         <p class="d-flex justify-content-center mb-0">
-                                            <a href="#" class="btn btn-primary py-2 mr-1">Sewa Sekarang</a>
+                                            <a href="https://api.whatsapp.com/send?phone={{ $settings->whatsapp }}&text=Apakah+mobil+{{ $item->name }}+tersedia?"
+                                                class="btn btn-primary py-2 mr-1">Sewa Sekarang</a>
                                         </p>
                                         @php
-                                            $features = [
-                                                [
-                                                    'icon' => 'bi bi-speedometer',
-                                                    'label' => '1998 cc',
-                                                ],
-                                                [
-                                                    'icon' => 'bi bi-fuel-pump',
-                                                    'label' => '65 Liter',
-                                                ],
-                                                [
-                                                    'icon' => 'bi bi-people',
-                                                    'label' => '7 Kursi',
-                                                ],
-                                                [
-                                                    'icon' => 'bi bi-gear',
-                                                    'label' => 'Manual',
-                                                ],
-                                            ];
+                                            $features = json_decode($item->features);
                                         @endphp
                                         <div class="mt-3 mb-0 border p-2">
                                             <div class="row text-dark">
                                                 @foreach ($features as $feature)
                                                     <div class="col-6">
-                                                        <i class="{{ $feature['icon'] }} mr-1"></i>
-                                                        <span>{{ $feature['label'] }}</span>
+                                                        <i class="{{ $feature->icon }} mr-1"></i>
+                                                        <span>{{ $feature->label }}</span>
                                                     </div>
                                                 @endforeach
                                             </div>
@@ -224,55 +208,81 @@
         </div>
     </section>
 
-    <section class="ftco-section">
+    <section class="ftco-section" style="background: rgba(187, 208, 251, 1);">
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7 text-center heading-section ftco-animate">
-                    <span class="subheading">Services</span>
-                    <h2 class="mb-3">Our Latest Services</h2>
+                    <span class="subheading">Mengapa Memilih Kami?</span>
+                    <h2 class="mb-3">{{ $settings->title }}</h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4 col-4">
                     <div class="services services-2 w-100 text-center">
                         <div class="icon d-flex align-items-center justify-content-center"><span
-                                class="flaticon-wedding-car"></span></div>
+                                class="bi bi-currency-dollar"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">Wedding Ceremony</h3>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.
+                            <h3 class="heading mb-2">1</h3>
+                            <p>HARGA TERJANGKAU
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4 col-4">
                     <div class="services services-2 w-100 text-center">
                         <div class="icon d-flex align-items-center justify-content-center"><span
-                                class="flaticon-transportation"></span></div>
+                                class="bi bi-car-front"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">City Transfer</h3>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.
+                            <h3 class="heading mb-2">2</h3>
+                            <p>ARMADA LENGKAP
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4 col-4">
                     <div class="services services-2 w-100 text-center">
                         <div class="icon d-flex align-items-center justify-content-center"><span
-                                class="flaticon-car"></span></div>
+                                class="bi bi-person"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">Airport Transfer</h3>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.
+                            <h3 class="heading mb-2">3</h3>
+                            <p>DRIVER PROFESIONAL
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <img src="{{ asset('assets/images/keungulan-sewa-mobil-kupang-murah.png') }}" alt=""
+                        srcset="">
+                </div>
+                <div class="col-md-4 col-4">
+                    <div class="services services-2 w-100 text-center">
+                        <div class="icon d-flex align-items-center justify-content-center"><span class="bi bi-key"></span>
+                        </div>
+                        <div class="text w-100">
+                            <h3 class="heading mb-2">4</h3>
+                            <p>BISA LEPAS KUNCI
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-4">
                     <div class="services services-2 w-100 text-center">
                         <div class="icon d-flex align-items-center justify-content-center"><span
-                                class="flaticon-transportation"></span></div>
+                                class="bi bi-trophy"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">Whole City Tour</h3>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.
+                            <h3 class="heading mb-2">5</h3>
+                            <p>PELAYANAN TERBAIK
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-4">
+                    <div class="services services-2 w-100 text-center">
+                        <div class="icon d-flex align-items-center justify-content-center"><span
+                                class="bi bi-watch"></span></div>
+                        <div class="text w-100">
+                            <h3 class="heading mb-2">6</h3>
+                            <p>TEPAT WAKTU
                             </p>
                         </div>
                     </div>
@@ -281,13 +291,19 @@
         </div>
     </section>
 
-    <section class="ftco-section ftco-intro" style="background-image: url({{ asset('images/bg_3.jpg') }});">
+    <br>
+    <br>
+    <br>
+
+    <section class="ftco-section ftco-intro"
+        style="background-image: url({{ asset('images') . '/' . $about->image2 }});">
         <div class="overlay"></div>
         <div class="container">
             <div class="row justify-content-end">
                 <div class="col-md-6 heading-section heading-section-white ftco-animate">
                     <h2 class="mb-3">Ada Pertanyaan Lain, Silakan Hubungi Kami</h2>
-                    <a href="#" class="btn btn-primary btn-lg">
+                    <a href="https://api.whatsapp.com/send?phone={{ $settings->whatsapp }}&text=Hallo..."
+                        class="btn btn-primary btn-lg">
                         <i class="bi bi-whatsapp"></i>
                         Whatsapp
                     </a>
@@ -302,69 +318,23 @@
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7 text-center heading-section ftco-animate">
                     <span class="subheading">Testimonial</span>
-                    <h2 class="mb-3">Happy Clients</h2>
+                    <h2 class="mb-3">Apa yang orang katakan tentang kami</h2>
                 </div>
             </div>
             <div class="row ftco-animate">
                 <div class="col-md-12">
                     <div class="carousel-testimony owl-carousel ftco-owl">
+                        @foreach ($clients as $item)
+                        @endforeach
                         <div class="item">
                             <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2" style="background-image: url(images/person_1.jpg)">
+                                <div class="user-img mb-2"
+                                    style="background-image: url({{ asset('images') . '/' . $item->image }})">
                                 </div>
                                 <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">Marketing Manager</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2" style="background-image: url(images/person_2.jpg)">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">Interface Designer</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2" style="background-image: url(images/person_3.jpg)">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">UI Designer</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2" style="background-image: url(images/person_1.jpg)">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">Web Developer</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2" style="background-image: url(images/person_1.jpg)">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">System Analyst</span>
+                                    <p class="mb-4">{{ $item->message }}</p>
+                                    <p class="name">{{ $item->name }}</p>
+                                    <span class="position">{{ $item->position }}</span>
                                 </div>
                             </div>
                         </div>
@@ -384,17 +354,29 @@
             </div>
             <div class="row d-flex">
                 @foreach ($article as $item)
-                    <div class="col-md-4 d-flex ftco-animate">
-                        <div class="blog-entry justify-content-end">
-                            <a href="{{ route('article.show', $item->slug) }}" class="block-20"
-                                style="background-image: url('{{ asset('assets/images/image_1.jpg') }}');">
-                            </a>
-                            <div class="text pt-4">
-                                <h3 class="heading mt-2"><a
-                                        href="{{ route('article.show', $item->slug) }}">{{ $item->title }}</a>
-                                </h3>
-                                <p><a href="{{ route('article.show', $item->slug) }}" class="btn btn-primary">Baca
-                                        selengkapnya</a></p>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="col-md-12 px-0 text-center d-flex ftco-animate">
+                                <div class="blog-entry justify-content-end mb-md-5">
+                                    <a href="{{ route('article.show', $item->slug) }}" class="block-20 img"
+                                        style="background-image: url('{{ asset('images') . '/' . $item->thumbnail }}');">
+                                    </a>
+                                    <div class="text px-md-5 pt-4">
+                                        <h3 class="heading mt-2"><a
+                                                href="{{ route('article.show', $item->slug) }}">{{ $item->title }}</a>
+                                        </h3>
+                                        {!! Str::limit($item->content, 400) !!}
+                                        <br>
+                                        <div class="mt-5">
+
+                                            <p>
+                                                <a href="{{ route('article.show', $item->slug) }}"
+                                                    class="btn btn-primary">Lihat
+                                                    selengkapnya<span class="icon-long-arrow-right"></span></a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

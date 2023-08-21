@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\CategoryModel;
 use App\Models\AddressModel;
 use App\Models\SocialMediaModel;
+use App\Models\SettingModel;
 
 class ServicesController extends Controller
 {
@@ -15,6 +16,7 @@ class ServicesController extends Controller
         $data = [
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
+            'settings' => SettingModel::first(),
         ];
 
         return view('frontend.services.index', $data);

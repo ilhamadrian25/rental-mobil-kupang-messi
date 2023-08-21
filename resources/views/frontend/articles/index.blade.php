@@ -1,7 +1,11 @@
 @extends('frontend/layout/app')
 
+@push('title')
+    <title>Artikel - {{ $settings->title }}</title>
+@endpush
+
 @section('content')
-    <section class="hero-wrap hero-wrap-2 js-fullheight"
+    {{-- <section class="hero-wrap hero-wrap-2 js-fullheight"
         style="background-image: url('{{ asset('assets/images/bg_3.jpg') }}');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -14,24 +18,36 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section class="ftco-section">
         <div class="container">
-            <div class="row d-flex justify-content-center">
+            <div class="row">
                 @foreach ($article as $item)
-                    <div class="col-md-12 text-center d-flex ftco-animate">
-                        <div class="blog-entry justify-content-end mb-md-5">
-                            <a href="{{ route('article.show', $item->slug) }}" class="block-20 img"
-                                style="background-image: url('{{ asset('assets/images/image_1.jpg') }}');">
-                            </a>
-                            <div class="text px-md-5 pt-4">
-                                <h3 class="heading mt-2"><a href="#">{{ $item->title }}</a>
-                                </h3>
-                                <p>{!! Str::limit($item->content, 200) !!}
-                                </p>
-                                <p><a href="{{ route('article.show', $item->slug) }}" class="btn btn-primary">Lihat
-                                        selengkapnya<span class="icon-long-arrow-right"></span></a></p>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="col-md-12 px-0 text-center d-flex ftco-animate">
+                                <div class="blog-entry justify-content-end mb-md-5">
+                                    <a href="{{ route('article.show', $item->slug) }}" class="block-20 img"
+                                        style="background-image: url('{{ asset('images') . '/' . $item->thumbnail }}');">
+                                    </a>
+                                    <div class="text px-md-5 pt-4">
+                                        <h3 class="heading mt-2"><a
+                                                href="{{ route('article.show', $item->slug) }}">{{ $item->title }}</a>
+                                        </h3>
+                                        <p>{!! Str::limit($item->content, 400) !!}
+                                        </p>
+                                        <br>
+                                        <div class="mt-5">
+
+                                            <p>
+                                                <a href="{{ route('article.show', $item->slug) }}"
+                                                    class="btn btn-primary">Lihat
+                                                    selengkapnya<span class="icon-long-arrow-right"></span></a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

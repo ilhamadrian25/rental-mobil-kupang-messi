@@ -37,6 +37,9 @@
                                     <td>{!! substr($item->title, 0, 50) . '...' !!}</td>
                                     <td><img src="{{ asset('images') . '/' . $item->thumbnail }}" class="img-fluid"
                                             alt="thumbnail" style="width: 100px; height: 70px"></td>
+                                    @php
+                                        substr($item->content, 0, 50) . '...';
+                                    @endphp
                                     <td>{!! substr($item->content, 0, 50) . '...' !!}</td>
                                     <td>{!! $item->status === 'publish'
                                         ? '<span class="badge bg-success">Publish</span>'

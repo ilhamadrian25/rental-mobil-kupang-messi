@@ -8,6 +8,9 @@ use App\Models\SocialMediaModel;
 use App\Models\AddressModel;
 use App\Models\ArticleModel;
 use App\Models\CarsModel;
+use App\Models\AboutModel;
+use App\Models\SettingModel;
+use App\Models\ClientModel;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -17,9 +20,12 @@ class HomeController extends Controller
         $data = [
             'banners' => DB::table('banner')->get(),
             'cars' => CarsModel::limit(3)->latest()->get(),
+            'clients' => ClientModel::all(),
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
+            'about' => AboutModel::first(),
             'article' => ArticleModel::limit(3)->get(),
+            'settings' => SettingModel::first(),
         ];
 
         return view('frontend.home.index', $data);
