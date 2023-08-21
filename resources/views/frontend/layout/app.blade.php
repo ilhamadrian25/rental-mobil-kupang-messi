@@ -22,6 +22,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.timepicker.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('assets/css/flaticon.css') }}">
@@ -49,16 +50,16 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item @if (!request()->segment(1)) active @endif"><a href="{{ route('home') }}"
                             class="nav-link">Beranda</a></li>
-                    <li class="nav-item @if (request()->segment(1) === 'services') active @endif"><a
-                            href="{{ route('services') }}" class="nav-link">Layanan</a></li>
+                    {{-- <li class="nav-item @if (request()->segment(1) === 'services') active @endif"><a
+                            href="{{ route('services') }}" class="nav-link">Layanan</a></li> --}}
                     <li class="nav-item @if (request()->segment(1) === 'cars' || request()->segment(1) === 'car') active @endif"><a href="{{ route('cars') }}"
                             class="nav-link">Mobil</a></li>
-                    <li class="nav-item @if (request()->segment(1) === 'price') active @endif"><a href="{{ route('price') }}"
-                            class="nav-link">Harga</a></li>
+                    {{-- <li class="nav-item @if (request()->segment(1) === 'price') active @endif"><a href="{{ route('price') }}"
+                            class="nav-link">Harga</a></li> --}}
                     <li class="nav-item @if (request()->segment(1) === 'article') active @endif"><a
                             href="{{ route('article') }}" class="nav-link">Artikel</a></li>
-                    <li class="nav-item @if (request()->segment(1) === 'contact') active @endif"><a href="contact"
-                            class="nav-link">Kontak</a></li>
+                    <li class="nav-item @if (request()->segment(1) === 'contact') active @endif"><a
+                            href="{{ route('contact') }}" class="nav-link">Kontak</a></li>
                     <li class="nav-item @if (request()->segment(1) === 'about') active @endif"><a href="{{ route('about') }}"
                             class="nav-link">Tentang</a></li>
                 </ul>
@@ -75,9 +76,8 @@
             <div class="row mb-5">
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2"><a href="#" class="logo">Car<span>book</span></a></h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts.</p>
+                        <h2 class="ftco-heading-2"><a href="#" class="logo"><img src="{{ asset('logo') . '/' . $ }}" alt="" srcset=""></a></h2>
+                        <p>{{ $settings->about }}</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                             <li class="ftco-animate"><a href="{{ $social[0]->url }}"><span
                                         class="icon-facebook"></span></a></li>
@@ -96,9 +96,14 @@
                             <ul>
                                 <li><span class="icon icon-map-marker"></span><span
                                         class="text">{{ $address->address }}</span></li>
-                                <li><a href="#"><span class="icon icon-phone"></span><span
+                                <li><a href="tel:{{ $address->telp }}"><span class="icon icon-phone"></span><span
                                             class="text">{{ $address->telp }}</span></a></li>
-                                <li><a href="#"><span class="icon icon-envelope"></span><span
+                                <li><a
+                                        href="https://api.whatsapp.com/send?phone={{ $settings->whatsapp }}&text=Hallo..."><span
+                                            class="icon fa fa-whatsapp"></span><span
+                                            class="text">{{ $address->whatsapp }}</span></a></li>
+                                <li><a href="mailto:{{ $address->email }}"><span
+                                            class="icon icon-envelope"></span><span
                                             class="text">{{ $address->email }}</span></a></li>
                             </ul>
                         </div>
@@ -121,17 +126,15 @@
                         Copyright &copy;
                         <script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved | Nam Website <i class="icon-heart color-danger"
-                            aria-hidden="true"></i> Developed by <a href="https://inovindo.co.id"
-                            target="_blank">INOVINDO</a>
+                        </script> All rights reserved | {{ $settings->title }} <i
+                            class="icon-heart color-danger" aria-hidden="true"></i> Developed by <a
+                            href="https://inovindo.co.id" target="_blank">INOVINDO</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
             </div>
         </div>
     </footer>
-
-
 
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
@@ -142,6 +145,7 @@
         </svg></div>
 
 
+    <script src="https://use.fontawesome.com/1ef5390edc.js"></script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-migrate-3.0.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
