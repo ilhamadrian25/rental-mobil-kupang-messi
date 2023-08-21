@@ -5,10 +5,12 @@
     <div class="swiper">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
-            <!-- Slides -->
-            <div class="swiper-slide">
-                <img src="{{ asset('images/slider.jpg') }}" alt="slider" width="100%">
-            </div>
+            @foreach ($banners as $item)
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    <img src="{{ asset('images/slider.jpg') }}" alt="slider" width="100%">
+                </div>
+            @endforeach
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
@@ -164,53 +166,55 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="carousel-car owl-carousel">
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url({{ asset('images/car-1.jpg') }});">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-2 text-center"><a href="#">Mercedes Grand Sedan</a></h2>
-                                    <div class="d-flex justify-content-center mb-3">
-                                        <span class="cat">Bisa buka kunci</span>
-                                        {{-- <p class="price ml-auto">$500 <span>/day</span></p> --}}
+                        @foreach ($cars as $item)
+                            <div class="item">
+                                <div class="car-wrap rounded ftco-animate">
+                                    <div class="img rounded d-flex align-items-end"
+                                        style="background-image: url({{ asset('images/car-1.jpg') }});">
                                     </div>
-                                    <p class="d-flex justify-content-center mb-0">
-                                        <a href="#" class="btn btn-primary py-2 mr-1">Sewa Sekarang</a>
-                                    </p>
-                                    @php
-                                        $features = [
-                                            [
-                                                'icon' => 'bi bi-speedometer',
-                                                'label' => '1998 cc',
-                                            ],
-                                            [
-                                                'icon' => 'bi bi-fuel-pump',
-                                                'label' => '65 Liter',
-                                            ],
-                                            [
-                                                'icon' => 'bi bi-people',
-                                                'label' => '7 Kursi',
-                                            ],
-                                            [
-                                                'icon' => 'bi bi-gear',
-                                                'label' => 'Manual',
-                                            ],
-                                        ];
-                                    @endphp
-                                    <div class="mt-3 mb-0 border p-2">
-                                        <div class="row text-dark">
-                                            @foreach ($features as $feature)
-                                                <div class="col-6">
-                                                    <i class="{{ $feature['icon'] }} mr-1"></i>
-                                                    <span>{{ $feature['label'] }}</span>
-                                                </div>
-                                            @endforeach
+                                    <div class="text">
+                                        <h2 class="mb-2 text-center"><a href="#">Mercedes Grand Sedan</a></h2>
+                                        <div class="d-flex justify-content-center mb-3">
+                                            <span class="cat">Bisa buka kunci</span>
+                                            {{-- <p class="price ml-auto">$500 <span>/day</span></p> --}}
+                                        </div>
+                                        <p class="d-flex justify-content-center mb-0">
+                                            <a href="#" class="btn btn-primary py-2 mr-1">Sewa Sekarang</a>
+                                        </p>
+                                        @php
+                                            $features = [
+                                                [
+                                                    'icon' => 'bi bi-speedometer',
+                                                    'label' => '1998 cc',
+                                                ],
+                                                [
+                                                    'icon' => 'bi bi-fuel-pump',
+                                                    'label' => '65 Liter',
+                                                ],
+                                                [
+                                                    'icon' => 'bi bi-people',
+                                                    'label' => '7 Kursi',
+                                                ],
+                                                [
+                                                    'icon' => 'bi bi-gear',
+                                                    'label' => 'Manual',
+                                                ],
+                                            ];
+                                        @endphp
+                                        <div class="mt-3 mb-0 border p-2">
+                                            <div class="row text-dark">
+                                                @foreach ($features as $feature)
+                                                    <div class="col-6">
+                                                        <i class="{{ $feature['icon'] }} mr-1"></i>
+                                                        <span>{{ $feature['label'] }}</span>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                     <div class="text-center mt-2">
                         <a href="{{ route('cars') }}" type="button" class="btn btn-primary">Lihat Semua mobil</a>
