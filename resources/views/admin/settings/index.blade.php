@@ -32,6 +32,12 @@
                                 Sosial Media
                             </button>
                         </li>
+                        <li class="nav-item">
+                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                                data-bs-target="#meta" aria-controls="navs-pills-top-messages" aria-selected="false">
+                                Meta
+                            </button>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="website" role="tabpanel">
@@ -56,42 +62,66 @@
                         </div>
                         <div class="tab-pane fade" id="logo" role="tabpanel">
                             <form id="formLogo">
-                                <div class="mb-3">
-                                    <label for="image1" class="form-label">Logo</label>
-                                    <br>
-                                    <img id="previewImage1" src="{{ asset('logo') . '/' . $settings->logo }}"
-                                        alt="Pratinjau Logo" style="max-width: 200px;">
-                                    <br>
-                                    <input type="file" class="form-control" id="image1" name="logo"
-                                        style="display: none;">
-                                    <button type="button" class="btn btn-secondary" id="uploadImage1">Unggah</button>(.png,
-                                    .jpg, .jpeg, .gif, .svg)
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="mb-3">
+                                            <label for="image1" class="form-label">Logo</label>
+                                            <br>
+                                            <img id="previewImage1" src="{{ asset('logo') . '/' . $settings->logo }}"
+                                                alt="Pratinjau Logo" style="max-width: 200px;">
+                                            <br>
+                                            <input type="file" class="form-control" id="image1" name="logo"
+                                                style="display: none;">
+                                            <button type="button" class="btn btn-secondary"
+                                                id="uploadImage1">Unggah</button>(.png,
+                                            .jpg, .jpeg, .gif, .svg)
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="hidden" name="type" value="logo">
+                                        <div class="mb-3">
+                                            <label for="image2" class="form-label">Favicon</label>
+                                            <br>
+                                            <img id="previewImage2" src="{{ asset('logo') . '/' . $settings->favicon }}"
+                                                alt="Pratinjau Favicon" style="max-width: 200px;">
+                                            <br>
+                                            <input type="file" class="form-control" id="image2" name="favicon"
+                                                style="display: none;">
+                                            <button type="button" class="btn btn-secondary"
+                                                id="uploadImage2">Unggah</button>(.png,.icon)
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="mb-3">
+                                            <label for="image3" class="form-label">Logo Admin</label>
+                                            <br>
+                                            <img id="previewImage3"
+                                                src="{{ asset('logo') . '/' . $settings->logo_admin }}"
+                                                alt="Pratinjau Logo Admin" style="max-width: 200px;">
+                                            <br>
+                                            <input type="file" class="form-control" id="image3" name="logo_admin"
+                                                style="display: none;">
+                                            <button type="button" class="btn btn-secondary"
+                                                id="uploadImage3">Unggah</button>(.png,
+                                            .jpg, .jpeg, .gif, .svg)
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <div class="mb-3">
+                                            <label for="banner" class="form-label">Banner</label>
+                                            <br>
+                                            <img id="previewBanner" src="{{ asset('banner') . '/' . $banner->image }}"
+                                                alt="Pratinjau Logo Admin" style="max-width: 1000px;">
+                                            <br>
+                                            <input type="file" class="form-control" id="banner" name="banner"
+                                                style="display: none;">
+                                            <button type="button" class="btn btn-secondary"
+                                                id="uploadBanner">Unggah</button>(.png,
+                                            .jpg, .jpeg, .gif, .svg)
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Upload Semua</button>
                                 </div>
-                                <input type="hidden" name="type" value="logo">
-                                <div class="mb-3">
-                                    <label for="image2" class="form-label">Favicon</label>
-                                    <br>
-                                    <img id="previewImage2" src="{{ asset('logo') . '/' . $settings->favicon }}"
-                                        alt="Pratinjau Favicon" style="max-width: 200px;">
-                                    <br>
-                                    <input type="file" class="form-control" id="image2" name="favicon"
-                                        style="display: none;">
-                                    <button type="button" class="btn btn-secondary"
-                                        id="uploadImage2">Unggah</button>(.png,.icon)
-                                </div>
-                                <div class="mb-3">
-                                    <label for="image3" class="form-label">Logo Admin</label>
-                                    <br>
-                                    <img id="previewImage3" src="{{ asset('logo') . '/' . $settings->logo_admin }}"
-                                        alt="Pratinjau Logo Admin" style="max-width: 200px;">
-                                    <br>
-                                    <input type="file" class="form-control" id="image3" name="logo_admin"
-                                        style="display: none;">
-                                    <button type="button" class="btn btn-secondary"
-                                        id="uploadImage3">Unggah</button>(.png,
-                                    .jpg, .jpeg, .gif, .svg)
-                                </div>
-                                <button type="submit" class="btn btn-primary">Upload Semua</button>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="contact" role="tabpanel">
@@ -143,6 +173,27 @@
                                     <label for="instagram" class="form-label">Instagram</label>
                                     <input type="text" class="form-control" name="instagram" id="instagram"
                                         placeholder="Nomor Telepon" value="{{ $social[2]->url }}" />
+                                </div>
+                                <div class="d-flex justify-content-end mt-2">
+                                    <button type="submit" class="btn btn-primary">Ubah</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="meta" role="tabpanel">
+                            <form id="formMeta">
+                                @csrf
+                                <input type="hidden" name="type" value="meta">
+                                <div>
+                                    <label for="title" class="form-label">Title</label>
+                                    <textarea name="title" class="form-control" id="title" cols="20" rows="2">{{ $meta->title }}</textarea>
+                                </div>
+                                <div>
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea name="description" class="form-control" id="description" cols="20" rows="2">{{ $meta->description }}</textarea>
+                                </div>
+                                <div>
+                                    <label for="keywords" class="form-label">Keywords</label>
+                                    <textarea name="keywords" class="form-control" id="keywords" cols="20" rows="2">{{ $meta->keywords }}</textarea>
                                 </div>
                                 <div class="d-flex justify-content-end mt-2">
                                     <button type="submit" class="btn btn-primary">Ubah</button>
@@ -262,6 +313,44 @@
             });
 
             $('#formSocial').on('submit', function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: "{{ route('admin.setting.update') }}",
+                    method: "PATCH",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: response.message,
+                        });
+                    },
+                    error: function(response) {
+                        var message = '';
+                        var obj = response.responseJSON.message;
+
+                        if (typeof obj === 'object') {
+                            $.each(obj, function(key, value) {
+                                message += '<li>' + value + '</li>';
+                            });
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal',
+                                html: message,
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal',
+                                html: response.responseJSON.message,
+                            });
+                        }
+                    }
+                });
+            });
+
+            $('#formMeta').on('submit', function(e) {
                 e.preventDefault();
 
                 $.ajax({

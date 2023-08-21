@@ -60,7 +60,8 @@ Route::get('/services', [Services::class, 'index'])->name('services');
 Route::get('/price', [Price::class, 'index'])->name('price');
 
 // Gallery
-Route::get('/gallery', [Gallery::class, 'index'])->name('gallery');
+Route::get('/gallery/photo', [Gallery::class, 'photo'])->name('gallery.photo');
+Route::get('/gallery/video', [Gallery::class, 'video'])->name('gallery.video');
 
 // Contacts
 Route::get('/contact', [Contact::class, 'index'])->name('contact');

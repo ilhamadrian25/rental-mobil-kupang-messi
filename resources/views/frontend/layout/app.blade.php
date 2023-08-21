@@ -56,6 +56,15 @@
                             class="nav-link">Mobil</a></li>
                     {{-- <li class="nav-item @if (request()->segment(1) === 'price') active @endif"><a href="{{ route('price') }}"
                             class="nav-link">Harga</a></li> --}}
+                    <li class="nav-item {{ request()->segment(1) === 'article' ? 'active dropdown' : 'dropdown' }}">
+                        <a href="{{ route('article') }}"
+                            class="nav-link {{ request()->segment(1) === 'article' ? 'dropdown-toggle' : 'dropdown-toggle' }}">Galeri</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('gallery.photo') }}">Foto</a>
+                            <a class="dropdown-item" href="{{ route('gallery.video') }}">Video</a>
+                        </div>
+                    </li>
+
                     <li class="nav-item @if (request()->segment(1) === 'article') active @endif"><a
                             href="{{ route('article') }}" class="nav-link">Artikel</a></li>
                     <li class="nav-item @if (request()->segment(1) === 'contact') active @endif"><a
@@ -76,7 +85,9 @@
             <div class="row mb-5">
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2"><a href="#" class="logo"><img src="{{ asset('logo') . '/' . $ }}" alt="" srcset=""></a></h2>
+                        <h2 class="ftco-heading-2"><a href="#" class="logo"><img
+                                    src="{{ asset('logo') . '/' . $settings->logo }}" width="100" height="60"
+                                    alt="" srcset=""></a></h2>
                         <p>{{ $settings->about }}</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                             <li class="ftco-animate"><a href="{{ $social[0]->url }}"><span

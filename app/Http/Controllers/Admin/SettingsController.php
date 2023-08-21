@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SettingModel;
 use App\Models\AddressModel;
+use App\Models\MetaModel;
+use App\Models\BannerModel;
 use App\Models\SocialMediaModel;
 use Validator;
 
@@ -17,6 +19,8 @@ class SettingsController extends Controller
             'social' => SocialMediaModel::all(),
             'settings' => SettingModel::first(),
             'address' => AddressModel::first(),
+            'banner' => BannerModel::first(),
+            'meta' => MetaModel::first(),
             'page' => 'Pengaturan umum',
         ];
 
@@ -25,7 +29,6 @@ class SettingsController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request->all());
         $type = $request->type;
 
         if ($type === 'web') {
@@ -184,6 +187,7 @@ class SettingsController extends Controller
             }
 
             $setting = SettingModel::first();
+            $banner = BannerModel::first();
 
             if ($request->logo) {
                 $imageName = time() . '.' . $request->logo->extension();
@@ -206,6 +210,22 @@ class SettingsController extends Controller
                 $setting->logo_admin = $imageName;
             }
 
+            if ($request->banner) {
+                $imageName = time() . '.' . $request->banner->extension();
+                $request->banner->move(public_path('banner'), $imageName);
+
+                $banner->image = $imageName;
+            }
+
+            if ($banner->update()) {
+                return response()->json(
+                    [
+                        'message' => 'Banner berhasil diperbaharui',
+                    ],
+                    200,
+                );
+            }
+
             if ($setting->update()) {
                 return response()->json(
                     [
@@ -218,6 +238,51 @@ class SettingsController extends Controller
             return response()->json(
                 [
                     'message' => 'Tidak dapat memperbaharui Logo!',
+                ],
+                400,
+            );
+        } elseif ($type === 'meta') {
+            $validate = Validator::make(
+                $request->all(),
+                [
+                    'title' => 'required',
+                    'description' => 'required',
+                    'keywords' => 'required',
+                ],
+                [
+                    'title.required' => 'Title tidak boleh kosong!',
+                    'description.required' => 'Description tidak boleh kosong!',
+                    'keywords.required' => 'Keywords tidak boleh kosong!',
+                ],
+            );
+
+            if ($validate->fails()) {
+                return response()->json(
+                    [
+                        'message' => $validate->errors(),
+                    ],
+                    400,
+                );
+            }
+
+            $meta = MetaModel::first();
+
+            $meta->title = $request->title;
+            $meta->description = $request->description;
+            $meta->keywords = $request->keywords;
+
+            if ($meta->update()) {
+                return response()->json(
+                    [
+                        'message' => 'Meta berhasil diperbaharui',
+                    ],
+                    200,
+                );
+            }
+
+            return response()->json(
+                [
+                    'message' => 'Tidak dapat memperbaharui Banner',
                 ],
                 400,
             );
