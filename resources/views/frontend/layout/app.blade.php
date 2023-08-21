@@ -23,17 +23,23 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.timepicker.css') }}">
 
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('assets/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+
+    @stack('styles')
+
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-dark" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">Car<span>Book</span></a>
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img src="{{ asset('images/logo-rental-mobil-kupang-messi-rev.png') }}" alt="logo" width="120px">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
@@ -150,6 +156,7 @@
     <script src="{{ asset('assets/js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.timepicker.min.js') }}"></script>
     <script src="{{ asset('assets/js/scrollax.min.js') }}"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="{{ asset('assets/js/google-map.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>

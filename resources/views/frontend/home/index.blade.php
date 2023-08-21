@@ -1,7 +1,28 @@
 @extends('frontend/layout/app')
 
 @section('content')
-    <div class="hero-wrap ftco-degree-bg" style="background-image: url('{{ asset('assets/images/bg_1.jpg') }}');"
+    <!-- Slider main container -->
+    <div class="swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+                <img src="{{ asset('images/slider.jpg') }}" alt="slider" width="100%">
+            </div>
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- If we need scrollbar -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+
+    <!-- hidden -->
+    <div class="d-none hero-wrap ftco-degree-bg" style="background-image: url('{{ asset('assets/images/bg_1.jpg') }}');"
         data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -26,7 +47,8 @@
         </div>
     </div>
 
-    <section class="ftco-section ftco-no-pt bg-light">
+
+    <section class="d-none ftco-section ftco-no-pt bg-light">
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-md-12	featured-top">
@@ -101,94 +123,8 @@
             </div>
     </section>
 
+    <!-- hidden -->
 
-    <section class="ftco-section ftco-no-pt bg-light">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-                    <span class="subheading">Apa yang kita tawarkan</span>
-                    <h2 class="mb-2">Kendaraan Unggulan</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="carousel-car owl-carousel">
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url(images/car-1.jpg);">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-                                    <div class="d-flex mb-3">
-                                        <span class="cat">Cheverolet</span>
-                                        <p class="price ml-auto">$500 <span>/day</span></p>
-                                    </div>
-                                    <p class="d-flex mb-0 d-block"><a href="#"
-                                            class="btn btn-primary py-2 mr-1">Book now</a> <a href="#"
-                                            class="btn btn-secondary py-2 ml-1">Details</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url(images/car-2.jpg);">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-                                    <div class="d-flex mb-3">
-                                        <span class="cat">Cheverolet</span>
-                                        <p class="price ml-auto">$500 <span>/day</span></p>
-                                    </div>
-                                    <p class="d-flex mb-0 d-block"><a href="#"
-                                            class="btn btn-primary py-2 mr-1">Book now</a> <a href="#"
-                                            class="btn btn-secondary py-2 ml-1">Details</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url(images/car-3.jpg);">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-                                    <div class="d-flex mb-3">
-                                        <span class="cat">Cheverolet</span>
-                                        <p class="price ml-auto">$500 <span>/day</span></p>
-                                    </div>
-                                    <p class="d-flex mb-0 d-block"><a href="#"
-                                            class="btn btn-primary py-2 mr-1">Book now</a> <a href="#"
-                                            class="btn btn-secondary py-2 ml-1">Details</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url(images/car-4.jpg);">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-                                    <div class="d-flex mb-3">
-                                        <span class="cat">Cheverolet</span>
-                                        <p class="price ml-auto">$500 <span>/day</span></p>
-                                    </div>
-                                    <p class="d-flex mb-0 d-block"><a href="#"
-                                            class="btn btn-primary py-2 mr-1">Book now</a> <a href="#"
-                                            class="btn btn-secondary py-2 ml-1">Details</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center mt-2">
-                        <a href="{{ route('cars') }}" type="button" class="btn btn-primary">Lihat Semua mobil</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <section class="ftco-section ftco-about">
         <div class="container">
@@ -209,6 +145,75 @@
                             A small river named Duden flows by their place and supplies it with the necessary regelialia. It
                             is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
                         <p><a href="{{ route('about') }}" class="btn btn-primary py-3 px-4">Lihat lebih lengkap</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+                    <span class="subheading">Apa yang kita tawarkan</span>
+                    <h2 class="mb-2">Kendaraan Unggulan</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="carousel-car owl-carousel">
+                        <div class="item">
+                            <div class="car-wrap rounded ftco-animate">
+                                <div class="img rounded d-flex align-items-end"
+                                    style="background-image: url({{ asset('images/car-1.jpg') }});">
+                                </div>
+                                <div class="text">
+                                    <h2 class="mb-2 text-center"><a href="#">Mercedes Grand Sedan</a></h2>
+                                    <div class="d-flex justify-content-center mb-3">
+                                        <span class="cat">Bisa buka kunci</span>
+                                        {{-- <p class="price ml-auto">$500 <span>/day</span></p> --}}
+                                    </div>
+                                    <p class="d-flex justify-content-center mb-0">
+                                        <a href="#" class="btn btn-primary py-2 mr-1">Sewa Sekarang</a>
+                                    </p>
+                                    @php
+                                        $features = [
+                                            [
+                                                'icon' => 'bi bi-speedometer',
+                                                'label' => '1998 cc',
+                                            ],
+                                            [
+                                                'icon' => 'bi bi-fuel-pump',
+                                                'label' => '65 Liter',
+                                            ],
+                                            [
+                                                'icon' => 'bi bi-people',
+                                                'label' => '7 Kursi',
+                                            ],
+                                            [
+                                                'icon' => 'bi bi-gear',
+                                                'label' => 'Manual',
+                                            ],
+                                        ];
+                                    @endphp
+                                    <div class="mt-3 mb-0 border p-2">
+                                        <div class="row text-dark">
+                                            @foreach ($features as $feature)
+                                                <div class="col-6">
+                                                    <i class="{{ $feature['icon'] }} mr-1"></i>
+                                                    <span>{{ $feature['label'] }}</span>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-2">
+                        <a href="{{ route('cars') }}" type="button" class="btn btn-primary">Lihat Semua mobil</a>
                     </div>
                 </div>
             </div>
@@ -272,13 +277,16 @@
         </div>
     </section>
 
-    <section class="ftco-section ftco-intro" style="background-image: url(images/bg_3.jpg);">
+    <section class="ftco-section ftco-intro" style="background-image: url({{ asset('images/bg_3.jpg') }});">
         <div class="overlay"></div>
         <div class="container">
             <div class="row justify-content-end">
                 <div class="col-md-6 heading-section heading-section-white ftco-animate">
-                    <h2 class="mb-3">Do You Want To Earn With Us? So Don't Be Late.</h2>
-                    <a href="#" class="btn btn-primary btn-lg">Become A Driver</a>
+                    <h2 class="mb-3">Ada Pertanyaan Lain, Silakan Hubungi Kami</h2>
+                    <a href="#" class="btn btn-primary btn-lg">
+                        <i class="bi bi-whatsapp"></i>
+                        Whatsapp
+                    </a>
                 </div>
             </div>
         </div>
@@ -390,7 +398,7 @@
             </div>
         </div>
     </section>
-
+    {{--
     <section class="ftco-counter ftco-section img bg-light" id="section-counter">
         <div class="overlay"></div>
         <div class="container">
@@ -429,5 +437,39 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 @endsection
+
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+@endpush
+
+
+@push('script')
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <script>
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        });
+    </script>
+@endpush
