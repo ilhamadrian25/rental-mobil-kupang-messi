@@ -16,35 +16,33 @@
 
         <div class="container-xxl flex-grow-1 container-p-y">
             <button type="button"class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addClient">Tambah
-                Kategori</button>
+                Foto</button>
             <div class="row py-5">
                 <div class="col-12 table-responsive">
-                    <table id="listCategory" class="table table-striped" style="width:100%">
+                    <table id="listFoto" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nama</th>
-                                <th>Slug</th>
-                                <th>Jumlah artikel</th>
+                                <th>Foto</th>
                                 <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($category as $index => $item)
+                            @foreach ($image as $index => $item)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->slug }}</td>
-                                    <td>{{ $item->article_count }}</td>
+                                    <td><img src="{{ asset('images') . '/' . $item->image }}" alt="Foto" width="150"
+                                            height="180" class="img-fluid">
+                                    </td>
                                     <td>{{ date('d F Y', strtotime($item->created_at)) }}</td>
                                     <td>
                                         <div class="d-inline-block"><a href="javascript:;"
                                                 class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
                                                 data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></a>
                                             <ul class="dropdown-menu dropdown-menu-end m-0">
-                                                <li><a type="button" class="dropdown-item text-danger delete-category"
-                                                        data-id="{{ $item->id }}">Delete</a></li>
+                                                <li><a type="button" class="dropdown-item text-danger delete-image"
+                                                        data-id="{{ $item->id }}" data-type="image">Delete</a></li>
                                             </ul>
                                         </div>
                                     </td>
@@ -62,26 +60,22 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Kategori</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Foto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
-                <form id="formCategory">
+                <form id="formFoto">
 
                     <div class="modal-body">
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nama</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Nama"
-                                aria-describedby="defaultFormControlHelp" />
+                            <label for="imageInput" class="form-label">Pilih Gambar</label>
+                            <input type="file" class="form-control" name="image" id="image" accept="image/*">
                         </div>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Slug (jika kosong akan digenerate otomatis)</label>
-                            <input type="text" name="slug" class="form-control" id="slug" placeholder="Slug"
-                                aria-describedby="defaultFormControlHelp" />
-                            <br>
-                            <input type="text" class="form-control" id="slugOutput"
-                                aria-describedby="defaultFormControlHelp" disabled />
+                        <input type="hidden" name="type" value="image">
+                        <div class="mb-3 text-center">
+                            <img src="https://provengraphics.com/wp-content/uploads/2018/02/300x300.png" id="imagePreview"
+                                class="img-fluid" alt="Preview">
                         </div>
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>
@@ -100,38 +94,35 @@
     {{-- Custom Script --}}
     <script>
         $(document).ready(function() {
-            function generateSlug(title) {
-                return title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
-            }
+            new DataTable('#listFoto');
 
-            const titleInput = document.getElementById('slug');
-            const slugInput = document.getElementById('slugOutput');
+            const imageInput = document.getElementById('image');
+            const imagePreview = document.getElementById('imagePreview');
 
-            titleInput.addEventListener('input', function() {
-                const title = titleInput.value;
-                const generatedSlug = generateSlug(title);
-                slugInput.value = generatedSlug;
+            imageInput.addEventListener('change', function() {
+                const file = imageInput.files[0];
+                if (file) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                    };
+
+                    reader.readAsDataURL(file);
+                }
             });
 
-
-            new DataTable('#listCategory');
-
-            $('#formCategory').on('submit', function(e) {
+            $('#formFoto').on('submit', function(e) {
                 e.preventDefault();
 
+                const formData = new FormData($('#formFoto')[0]);
+
                 $.ajax({
-                    url: "{{ route('admin.category.store') }}",
+                    url: "{{ route('admin.gallery.store') }}",
                     method: "POST",
-                    data: $(this).serialize(),
-                    beforeSend: function() {
-                        Swal.fire({
-                            title: 'Menunggu',
-                            html: 'Memproses Data',
-                            onBeforeOpen: () => {
-                                Swal.showLoading()
-                            }
-                        })
-                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     success: function(response) {
                         Swal.fire({
                             icon: 'success',
@@ -142,19 +133,25 @@
                         });
                     },
                     error: function(response) {
+                        var message = '';
+                        var obj = response.responseJSON.message;
+                        $.each(obj, function(key, value) {
+                            message += '<li>' + value + '</li>';
+                        });
                         Swal.fire({
                             icon: 'error',
-                            title: 'Error',
-                            text: response.responseJSON.message,
+                            title: 'Gagal',
+                            html: message,
                         });
                     }
                 })
             })
 
-            $(document).on('click', '.delete-category', function(e) {
+            $(document).on('click', '.delete-image', function(e) {
                 e.preventDefault();
                 const id = $(this).data('id');
-                const row = $(this).closest('tr');
+                const type = $(this).data('type');
+                const row = $(this).closest('tr'); // Menyimpan referensi baris yang akan dihapus
 
                 Swal.fire({
                     title: 'Apakah anda yakin?',
@@ -166,11 +163,12 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.category.destroy') }}",
+                            url: "{{ route('admin.gallery.destroy') }}",
                             method: "DELETE",
                             data: {
                                 "_token": "{{ csrf_token() }}",
                                 id: id,
+                                type: type,
                             },
                             success: function(response) {
                                 Swal.fire({
@@ -182,16 +180,16 @@
                                         .remove();
                                 });
                             },
-                            error: function(response, xhr) {
+                            error: function(response) {
                                 Swal.fire({
-                                    icon: xhr,
-                                    title: 'Gagal',
+                                    icon: 'error',
+                                    title: 'Error',
                                     text: response.responseJSON.message,
                                 });
                             }
                         });
                     } else if (result.isDenied) {
-                        Swal.fire('Data tidak dihapus', '', 'info');
+                        Swal.fire('Foto tidak dihapus', '', 'info');
                     }
                 });
             });

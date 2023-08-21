@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->string('slug')->unique();
             $table->text('content');
-            $table->text('summary');
-            $table->text('keywords');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

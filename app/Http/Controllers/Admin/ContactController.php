@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ContactModel;
+use App\Models\SettingModel;
 
 class ContactController extends Controller
 {
     public function index()
     {
         $data = [
-            'contact'   =>  ContactModel::all()
+            'contact'   =>  ContactModel::all(),
+            'settings' => SettingModel::first(),
+            'page'  => 'Semua kontak pesan',
         ];
 
         return view('admin.contact.index', $data);

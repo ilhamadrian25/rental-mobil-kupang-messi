@@ -1,0 +1,2 @@
+php artisan db:seed --class=AboutSeeder
+php artisan db:seed --class=AddressSeeder

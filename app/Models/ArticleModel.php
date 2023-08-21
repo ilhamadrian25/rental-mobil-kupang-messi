@@ -12,7 +12,7 @@ class ArticleModel extends Model
 
     protected $table = 'article';
 
-    protected $fillable = ['id', 'title', 'content', 'image'];
+    protected $fillable = ['id', 'title', 'content', 'image', 'status'];
 
     protected $foreign = 'category_id';
 

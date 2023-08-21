@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CategoryModel;
 use App\Models\ArticleModel;
+use App\Models\SettingModel;
 use Validator;
 
 class CategoryController extends Controller
@@ -13,7 +14,9 @@ class CategoryController extends Controller
     public function index()
     {
         $data = [
-            'category' => CategoryModel::all(),
+            'category' => CategoryModel::withCount('article')->get(),
+            'settings' => SettingModel::first(),
+            'page' => 'Semua kategori artikel',
         ];
 
         return view('admin.category.index', $data);
@@ -38,7 +41,23 @@ class CategoryController extends Controller
         $category = new CategoryModel();
 
         $category->name = $request->name;
-        $category->slug = strtolower(trim(preg_replace('/[^a-zA-Z0-9-]+/', '-', $request->slug), '-'));
+
+        if (!$request->slug) {
+            $category->slug = strtolower(trim(preg_replace('/[^a-zA-Z0-9-]+/', '-', $request->name), '-'));
+        } else {
+            $category->slug = $request->slug;
+        }
+
+        $checkSlug = CategoryModel::where('slug', $category->slug);
+
+        if ($checkSlug) {
+            return response()->json(
+                [
+                    'message' => 'Slug telah digunakan',
+                ],
+                400,
+            );
+        }
 
         $category->save();
 
@@ -61,16 +80,15 @@ class CategoryController extends Controller
         );
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
-        $category = CategoryModel::find(request('id'));
+        $category = CategoryModel::where('id', $request->id)->first();
 
-        $article = ArticleModel::where('category_id', $category->id)->get();
+        $article = ArticleModel::where('category_id', $request->id)->first();
 
         if ($article) {
             return response()->json(
                 [
-                    'success' => false,
                     'message' => 'Kategori memiliki Artikel',
                 ],
                 400,
@@ -80,8 +98,7 @@ class CategoryController extends Controller
         if ($category->delete()) {
             return response()->json(
                 [
-                    'success' => true,
-                    'message' => 'Data berhasil dihapus',
+                    'message' => 'Kategori berhasil dihapus',
                 ],
                 200,
             );
@@ -89,8 +106,7 @@ class CategoryController extends Controller
 
         return response()->json(
             [
-                'success' => false,
-                'message' => 'Data gagal dihapus',
+                'message' => 'Kategori gagal dihapus',
             ],
             400,
         );

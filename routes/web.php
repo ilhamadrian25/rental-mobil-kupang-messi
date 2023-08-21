@@ -14,16 +14,15 @@ use App\Http\Controllers\Frontend\ServicesController as Services;
 use App\Http\Controllers\Frontend\PriceController as Price;
 use App\Http\Controllers\Frontend\ArticleController as Article;
 use App\Http\Controllers\Frontend\CarController as Car;
-// use App\Http\Controllers\Auth\RegisterController;
-// use App\Http\Controllers\Auth\ForgotPasswordController;
-// use App\Http\Controllers\Auth\ResetPasswordController;
-// use App\Http\Controllers\Auth\VerificationController;
 
 // Admin Controller
+use App\Http\Controllers\Admin\AboutController as AdminAbout;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\CarController as AdminCar;
+use App\Http\Controllers\Admin\ArticleController as AdminArticle;
 use App\Http\Controllers\Admin\CategoryCarsController as AdminCategoryCars;
 use App\Http\Controllers\Admin\ContactController as AdminContact;
+use App\http\Controllers\Admin\GalleryController as AdminGallery;
 use App\Http\Controllers\Admin\ClientController as AdminClient;
 use App\Http\Controllers\Admin\SettingsController as AdminSettings;
 use App\Http\Controllers\Admin\SocialMediaController as AdminSocialMedia;
@@ -77,10 +76,16 @@ Route::prefix('admin')->middleware('auth')->group(function() {
 
     // Cars
     Route::get('/cars', [AdminCar::class, 'index'])->name('admin.cars');
+    Route::get('/cars/edit/{id}', [AdminCar::class, 'edit'])->name('admin.car.edit');
+    Route::get('/cars/create', [AdminCar::class, 'create'])->name('admin.car.create');
+    Route::post('/car', [AdminCar::class, 'update'])->name('admin.car.update');
+    Route::delete('/cars', [AdminCar::class, 'destroy'])->name('admin.car.destroy');
+    Route::post('/cars', [AdminCar::class,'store'])->name('admin.car.store');
 
     // Categories
-    Route::get('/category-cars', [AdminCategoryCars::class, 'index'])->name('admin.category');
+    Route::get('/category-cars', [AdminCategoryCars::class, 'index'])->name('admin.category_cars');
     Route::post('/category-cars', [AdminCategoryCars::class, 'store'])->name('admin.category_cars.store');
+    Route::delete('/category-cars', [AdminCategoryCars::class, 'destroy'])->name('admin.category_cars.destroy');
 
     // Contact
     Route::get('/contact', [AdminContact::class, 'index'])->name('admin.contact');
@@ -91,13 +96,31 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::post('/client', [AdminClient::class, 'store'])->name('admin.client.store');
     Route::delete('/client', [AdminClient::class, 'destroy'])->name('admin.client.destroy');
 
+    // Article
+    Route::get('/article', [AdminArticle::class, 'index'])->name('admin.article');
+    Route::get('/article/create', [AdminArticle::class, 'create'])->name('admin.article.create');
+    Route::get('/article/edit/{slug}', [AdminArticle::class, 'edit'])->name('admin.article.edit');
+    Route::post('/article', [AdminArticle::class, 'store'])->name('admin.article.store');
+    Route::post('/articlee', [AdminArticle::class, 'update'])->name('admin.article.update');
+    Route::delete('/article', [AdminArticle::class, 'destroy'])->name('admin.article.destroy');
+
     // Category
     Route::get('/category', [AdminCategory::class, 'index'])->name('admin.category');
     Route::post('/category', [AdminCategory::class,'store'])->name('admin.category.store');
     Route::delete('/category', [AdminCategory::class, 'destroy'])->name('admin.category.destroy');
 
+    // About
+    Route::get('/about', [AdminAbout::class, 'index'])->name('admin.about');
+    Route::post('/about', [AdminAbout::class, 'update'])->name('admin.about.update');
+
+    // Gallery
+    Route::get('/gallery', [AdminGallery::class, 'index'])->name('admin.gallery');
+    Route::post('/gallery', [AdminGallery::class, 'store'])->name('admin.gallery.store');
+    Route::delete('/gallery', [AdminGallery::class, 'destroy'])->name('admin.gallery.destroy');
+
     // Settings
     Route::get('/settings', [AdminSettings::class, 'index'])->name('admin.settings');
-    Route::put('/settings', [AdminSocialMedia::class, 'update'])->name('admin.social.update');
+    Route::patch('/settings', [AdminSettings::class, 'update'])->name('admin.setting.update');
+    Route::post('/settings', [AdminSettings::class, 'update'])->name('admin.setting.post');
 });
 

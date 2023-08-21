@@ -34,17 +34,20 @@
                             @foreach ($category as $index => $item)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td style="text-transform: capitalize;">{{ $item->name }}</td>
                                     <td>{{ $item->slug }}</td>
                                     <td>{{ $item->cars_count }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ date('d F Y', strtotime($item->created_at)) }}</td>
                                     <td>
                                         <div class="d-inline-block"><a href="javascript:;"
                                                 class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
                                                 data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></a>
                                             <ul class="dropdown-menu dropdown-menu-end m-0">
-                                                <li><a type="button" class="dropdown-item text-danger delete-category"
-                                                        data-id="{{ $item->id }}">Delete</a></li>
+                                                <li><a type="button" class="dropdown-item text-primary edit-category"
+                                                        data-id="{{ $item->id }}">Ubah</a>
+                                                    <a type="button" class="dropdown-item text-danger delete-category"
+                                                        data-id="{{ $item->id }}">Hapus</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </td>
@@ -115,7 +118,6 @@
                 slugInput.value = generatedSlug;
             });
 
-
             new DataTable('#listCategory');
 
             $('#formCategory').on('submit', function(e) {
@@ -125,15 +127,6 @@
                     url: "{{ route('admin.category_cars.store') }}",
                     method: "POST",
                     data: $(this).serialize(),
-                    beforeSend: function() {
-                        Swal.fire({
-                            title: 'Menunggu',
-                            html: 'Memproses Data',
-                            onBeforeOpen: () => {
-                                Swal.showLoading()
-                            }
-                        })
-                    },
                     success: function(response) {
                         Swal.fire({
                             icon: 'success',
@@ -144,11 +137,24 @@
                         });
                     },
                     error: function(response) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil',
-                            text: response.message,
-                        });
+                        var text = '';
+                        if (typeof response.responseJSON.message === 'object') {
+                            $.each(response.responseJSON.message, function(key, value) {
+                                text += '<li>' + value + '</li>';
+                            });
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal',
+                                html: '<ul>' + text + '</ul>',
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal',
+                                html: response.responseJSON.message,
+                            });
+                        }
                     }
                 })
             })
@@ -168,7 +174,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.category.destroy') }}",
+                            url: "{{ route('admin.category_cars.destroy') }}",
                             method: "DELETE",
                             data: {
                                 "_token": "{{ csrf_token() }}",

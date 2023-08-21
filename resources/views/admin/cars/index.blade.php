@@ -15,8 +15,8 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-            <button type="button"class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addClient">Tambah
-                Kategori</button>
+            <a type="button" href="{{ route('admin.car.create') }}" class="btn btn-primary">Tambah
+                data mobil</a>
             <div class="row py-5">
                 <div class="col-12 table-responsive">
                     <table id="listCategory" class="table table-striped" style="width:100%">
@@ -24,8 +24,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nama</th>
-                                <th>Slug</th>
-                                <th>Slug</th>
+                                <th>Gambar</th>
+                                <th>Harga</th>
+                                <th>Kategori</th>
                                 <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
@@ -34,16 +35,23 @@
                             @foreach ($car as $index => $item)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->slug }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td style="text-transform: capitalize;">{{ $item->name }}</td>
+                                    <td><img src="{{ asset('images') . '/' . $item->image }}" width="100" height="70"
+                                            alt="" srcset="">
+                                    </td>
+                                    <td>{{ 'Rp ' . number_format($item->price, 0, ',', '.') }}</td>
+                                    <td style="text-transform: capitalize;">{{ $item->category->name }}</td>
+                                    <td>{{ date('d F Y', strtotime($item->created_at)) }}</td>
                                     <td>
                                         <div class="d-inline-block"><a href="javascript:;"
                                                 class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
                                                 data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></a>
                                             <ul class="dropdown-menu dropdown-menu-end m-0">
+                                                <li><a type="button" href="{{ route('admin.car.edit', $item->id) }}"
+                                                        class="dropdown-item text-primary"
+                                                        data-id="{{ $item->id }}">Ubah</a></li>
                                                 <li><a type="button" class="dropdown-item text-danger delete-category"
-                                                        data-id="{{ $item->id }}">Delete</a></li>
+                                                        data-id="{{ $item->id }}">Hapus</a></li>
                                             </ul>
                                         </div>
                                     </td>
@@ -52,39 +60,6 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Kategori</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    </button>
-                </div>
-                <form id="formCategory">
-
-                    <div class="modal-body">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nama</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Nama"
-                                aria-describedby="defaultFormControlHelp" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Slug (jika kosong akan digenerate otomatis)</label>
-                            <input type="text" name="slug" class="form-control" id="slug" placeholder="Slug"
-                                aria-describedby="defaultFormControlHelp" />
-                            <br>
-                            <input type="text" class="form-control" id="slugOutput"
-                                aria-describedby="defaultFormControlHelp" disabled />
-                        </div>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -117,40 +92,6 @@
 
             new DataTable('#listCategory');
 
-            $('#formCategory').on('submit', function(e) {
-                e.preventDefault();
-
-                $.ajax({
-                    url: "{{ route('admin.category.store') }}",
-                    method: "POST",
-                    data: $(this).serialize(),
-                    beforeSend: function() {
-                        Swal.fire({
-                            title: 'Menunggu',
-                            html: 'Memproses Data',
-                            onBeforeOpen: () => {
-                                Swal.showLoading()
-                            }
-                        })
-                    },
-                    success: function(response) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil',
-                            text: response.message,
-                        }).then(function() {
-                            location.reload();
-                        });
-                    },
-                    error: function(response) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil',
-                            text: response.message,
-                        });
-                    }
-                })
-            })
 
             $(document).on('click', '.delete-category', function(e) {
                 e.preventDefault();
@@ -167,7 +108,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.category.destroy') }}",
+                            url: "{{ route('admin.car.destroy') }}",
                             method: "DELETE",
                             data: {
                                 "_token": "{{ csrf_token() }}",
