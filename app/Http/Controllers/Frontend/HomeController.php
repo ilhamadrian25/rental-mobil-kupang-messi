@@ -10,6 +10,7 @@ use App\Models\ArticleModel;
 use App\Models\CarsModel;
 use App\Models\AboutModel;
 use App\Models\SettingModel;
+use App\Models\BannerModel;
 use App\Models\ClientModel;
 use Illuminate\Support\Facades\DB;
 
@@ -19,11 +20,14 @@ class HomeController extends Controller
     {
         $data = [
             'banners' => DB::table('banner')->get(),
-            'cars' => CarsModel::limit(3)->latest()->get(),
+            'cars' => CarsModel::limit(3)
+                ->latest()
+                ->get(),
             'clients' => ClientModel::all(),
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
             'about' => AboutModel::first(),
+            'banner' => BannerModel::first(),
             'article' => ArticleModel::limit(3)->get(),
             'settings' => SettingModel::first(),
         ];

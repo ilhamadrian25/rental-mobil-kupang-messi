@@ -16,7 +16,7 @@ class CarController extends Controller
         $data = [
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
-            'cars' => CarsModel::latest()->paginate(12),
+            'cars' => CarsModel::latest()->paginate(1),
             'settings' => SettingModel::first(),
         ];
 
