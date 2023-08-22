@@ -19,16 +19,15 @@ use App\Http\Controllers\Frontend\GalleryController as Gallery;
 use App\Http\Controllers\Admin\AboutController as AdminAbout;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\CarController as AdminCar;
+use App\Http\Controllers\Admin\ProfileController as AdminProfile;
 use App\Http\Controllers\Admin\ArticleController as AdminArticle;
 use App\Http\Controllers\Admin\CategoryCarsController as AdminCategoryCars;
 use App\Http\Controllers\Admin\ContactController as AdminContact;
-use App\http\Controllers\Admin\GalleryController as AdminGallery;
+use App\Http\Controllers\Admin\GalleryController as AdminGallery;
 use App\Http\Controllers\Admin\ClientController as AdminClient;
 use App\Http\Controllers\Admin\SettingsController as AdminSettings;
 use App\Http\Controllers\Admin\SocialMediaController as AdminSocialMedia;
 use App\Http\Controllers\Admin\CategoryController as AdminCategory;
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +77,9 @@ Route::get('/article/{slug}', [Article::class, 'show'])->name('article.show');
 // Admin
 Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('admin.dashboard');
+
+    Route::get('/profile', [AdminProfile::class, 'index'])->name('admin.profile');
+    Route::PATCH('/profile', [AdminProfile::class, 'update'])->name('admin.profile.update');
 
     // Cars
     Route::get('/cars', [AdminCar::class, 'index'])->name('admin.cars');

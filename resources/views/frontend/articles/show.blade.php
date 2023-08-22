@@ -32,14 +32,14 @@
                     </p>
                 </div> <!-- .col-md-8 -->
                 <div class="col-md-4 sidebar ftco-animate">
-                    <div class="sidebar-box">
+                    {{-- <div class="sidebar-box">
                         <form action="#" class="search-form">
                             <div class="form-group">
                                 <span class="icon icon-search"></span>
                                 <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                     <div class="sidebar-box ftco-animate">
                         <div class="categories">
                             <h3>Kategori</h3>

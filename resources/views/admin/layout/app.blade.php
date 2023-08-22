@@ -180,7 +180,7 @@
                     </li>
                     <li class="menu-item @if (request()->segment(2) === 'about') active @endif">
                         <a href="{{ route('admin.about') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bi bi-chat-left-dots-fill"></i>
+                            <i class="menu-icon tf-icons bi bi-file"></i>
                             <div data-i18n="Basic">Halaman About</div>
                         </a>
                     </li>
@@ -215,7 +215,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{ route('admin.profile') }}">
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
@@ -224,7 +224,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">Admin</span>
+                                                    <span class="fw-semibold d-block">{{ Auth::user()->name }}</span>
                                                     <small class="text-muted">Admin</small>
                                                 </div>
                                             </div>

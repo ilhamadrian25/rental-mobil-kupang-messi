@@ -17,7 +17,7 @@ class BannerSeeder extends Seeder
             'name' => 'Home',
             'heading' => 'Fast & Easy Way To Rent A Car',
             'description' => 'A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts.',
-            'image' => 'default.jpg',
+            'image' => 'slider.jpg',
         ]);
     }
 }
