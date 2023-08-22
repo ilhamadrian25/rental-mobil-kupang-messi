@@ -15,6 +15,11 @@ class CarsModel extends Model
 
     protected $hidden = ['created_at', 'updated_at'];
 
+    public function scopeSearch($query, $keyword = null)
+    {
+        $query->where('name', 'like', '%' . $keyword . '%');
+    }
+
     public function category()
     {
         return $this->belongsTo(CategoryCarsModel::class, 'category_cars_id');

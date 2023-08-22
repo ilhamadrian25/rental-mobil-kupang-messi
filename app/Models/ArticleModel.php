@@ -16,6 +16,11 @@ class ArticleModel extends Model
 
     protected $foreign = 'category_id';
 
+    public function scopeSearch($query, $keyword = null)
+    {
+        $query->where('title', 'like', '%' . $keyword . '%');
+    }
+
     public function category()
     {
         return $this->belongsTo(CategoryModel::class);

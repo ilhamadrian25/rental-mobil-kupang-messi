@@ -6,6 +6,14 @@
 @endpush
 
 @section('content')
+    <section>
+        <div class="container mt-0">
+            <div class="text-center">
+                <h1>Video</h1>
+            </div>
+        </div>
+    </section>
+
     <section class="ftco-section">
         <div class="container">
             <div class="row">

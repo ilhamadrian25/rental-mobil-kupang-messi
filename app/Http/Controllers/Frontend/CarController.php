@@ -12,13 +12,15 @@ use App\Models\CarsModel;
 
 class CarController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data = [
             'social' => SocialMediaModel::all(),
             'meta' => MetaModel::first(),
             'address' => AddressModel::first(),
-            'cars' => CarsModel::latest()->paginate(1),
+            'cars' => CarsModel::search($request->search)
+                ->latest()
+                ->paginate(1),
             'settings' => SettingModel::first(),
         ];
 

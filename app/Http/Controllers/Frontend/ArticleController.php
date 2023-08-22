@@ -13,12 +13,14 @@ use App\Models\ArticleModel;
 
 class ArticleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data = [
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
-            'article' => ArticleModel::latest()->paginate(12),
+            'article' => ArticleModel::search($request->search)
+                ->latest()
+                ->paginate(12),
             'settings' => SettingModel::first(),
             'meta' => MetaModel::first(),
         ];

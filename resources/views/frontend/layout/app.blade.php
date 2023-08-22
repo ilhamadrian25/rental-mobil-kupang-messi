@@ -80,6 +80,17 @@
                             href="{{ route('contact') }}" class="nav-link">Kontak</a></li>
                     <li class="nav-item @if (request()->segment(1) === 'about') active @endif"><a href="{{ route('about') }}"
                             class="nav-link">Tentang</a></li>
+                    <form action="{{ route('cars') }}" method="get">
+                        <div class="mt-2">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Cari mobil..."
+                                    aria-label="Search" name="search" aria-describedby="search-btn">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit" id="search-btn">Cari</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </ul>
             </div>
         </div>

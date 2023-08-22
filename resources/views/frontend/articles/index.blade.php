@@ -19,6 +19,13 @@
             </div>
         </div>
     </section> --}}
+    <section>
+        <div class="container mt-0">
+            <div class="text-center">
+                <h1>Artikel</h1>
+            </div>
+        </div>
+    </section>
 
     <section class="ftco-section">
         <div class="container">
@@ -35,7 +42,7 @@
                                         <h3 class="heading mt-2"><a
                                                 href="{{ route('article.show', $item->slug) }}">{{ $item->title }}</a>
                                         </h3>
-                                        <p>{!! Str::limit($item->content, 400) !!}
+                                        <p>{{ Str::limit(strip_tags($item->content, 400)) }}
                                         </p>
                                         <br>
                                         <div class="mt-5">

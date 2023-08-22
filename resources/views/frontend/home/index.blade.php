@@ -143,7 +143,7 @@
                         <span class="subheading">Tentang kami</span>
                         <h2 class="mb-4">Selamat datang</h2>
 
-                        <p>{!! Str::limit($about->description, 1200) !!}</p>
+                        <p>{!! Str::limit(strip_tags($about->description), 300) !!}</p>
                         <p><a href="{{ route('about') }}" class="btn btn-primary py-3 px-4">Lihat lebih lengkap</a></p>
                     </div>
                 </div>
@@ -349,11 +349,11 @@
                                     <a href="{{ route('article.show', $item->slug) }}" class="block-20 img"
                                         style="background-image: url('{{ asset('images') . '/' . $item->thumbnail }}');">
                                     </a>
-                                    <div class="text px-md-5 pt-4">
+                                    <div class="text pt-4">
                                         <h3 class="heading mt-2"><a
                                                 href="{{ route('article.show', $item->slug) }}">{{ $item->title }}</a>
                                         </h3>
-                                        {!! Str::limit($item->content, 400) !!}
+                                        {{ Str::limit(strip_tags($item->content, 400)) }}
                                         <br>
                                         <div class="mt-5">
 

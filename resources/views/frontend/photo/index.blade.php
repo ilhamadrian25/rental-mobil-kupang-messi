@@ -37,6 +37,13 @@
             });
         });
     </script>
+    <section>
+        <div class="container mt-0">
+            <div class="text-center">
+                <h1>Foto</h1>
+            </div>
+        </div>
+    </section>
     <section class="ftco-section">
         <div class="container">
             <div class="portfolio-item row">

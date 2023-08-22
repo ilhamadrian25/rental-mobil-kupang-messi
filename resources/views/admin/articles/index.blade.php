@@ -37,7 +37,7 @@
                                     <td>{!! substr($item->title, 0, 50) . '...' !!}</td>
                                     <td><img src="{{ asset('images') . '/' . $item->thumbnail }}" class="img-fluid"
                                             alt="thumbnail" style="width: 100px; height: 70px"></td>
-                                    <td>{{ Str::limit($item->content, 50) }}</td>
+                                    <td>{{ Str::limit(strip_tags($item->content), 50) }}</td>
                                     <td>{!! $item->status === 'publish'
                                         ? '<span class="badge bg-success">Publish</span>'
                                         : '<span class="badge bg-warning">Draft</span>' !!}

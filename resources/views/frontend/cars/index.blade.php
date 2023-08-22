@@ -5,20 +5,16 @@
 @endpush
 
 @section('content')
-    {{-- <section class="hero-wrap hero-wrap-2 js-fullheight"
-        style="background-image: url('{{ asset('assets/images/bg_3.jpg') }}');" data-stellar-background-ratio="0.5">
+    {{-- <section class="hero-wrap hero-wrap-2 js-fullheight" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
-        <div class="container">
-            <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
-                <div class="col-md-9 ftco-animate pb-5">
-                    <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">Beranda <i
-                                    class="ion-ios-arrow-forward"></i></a></span> <span>Mobil <i
-                                class="ion-ios-arrow-forward"></i></span></p>
-                    <h1 class="mb-3 bread">Choose Your Car</h1>
-                </div>
+    </section> --}}
+    <section>
+        <div class="container mt-0">
+            <div class="text-center">
+                <h1>Mobil</h1>
             </div>
         </div>
-    </section> --}}
+    </section>
 
     <section class="ftco-section bg-light">
         <div class="container">
@@ -28,7 +24,7 @@
                         <div class="item">
                             <div class="car-wrap rounded ftco-animate">
                                 <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url({{ asset('images/car-1.jpg') }});">
+                                    style="background-image: url({{ asset('images') . '/' . $item->image }});">
                                 </div>
                                 <div class="text">
                                     <h2 class="mb-2 text-center"><a href="#">{{ $item->name }}</a></h2>
