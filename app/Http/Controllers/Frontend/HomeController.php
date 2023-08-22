@@ -10,6 +10,7 @@ use App\Models\ArticleModel;
 use App\Models\CarsModel;
 use App\Models\AboutModel;
 use App\Models\SettingModel;
+use App\Models\MetaModel;
 use App\Models\BannerModel;
 use App\Models\ClientModel;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,7 @@ class HomeController extends Controller
                 ->latest()
                 ->get(),
             'clients' => ClientModel::all(),
+            'meta' => MetaModel::first(),
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
             'about' => AboutModel::first(),

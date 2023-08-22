@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SocialMediaModel;
 use App\Models\AddressModel;
+use App\Models\MetaModel;
 use App\Models\ContactModel;
 use App\Models\SettingModel;
 use Validator;
@@ -17,6 +18,7 @@ class ContactController extends Controller
         $data = [
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
+            'meta' => MetaModel::first(),
             'settings' => SettingModel::first(),
         ];
         return view('frontend.contact.index', $data);

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SettingModel;
 use App\Models\AddressModel;
+use App\Models\MetaModel;
 use App\Models\GalleryModel;
 use App\Models\SocialMediaModel;
 
@@ -29,6 +30,7 @@ class GalleryController extends Controller
             'address' => AddressModel::first(),
             'settings' => SettingModel::first(),
             'social' => SocialMediaModel::all(),
+            'meta' => MetaModel::first(),
             'photo' => GalleryModel::where('type', 'image')
                 ->latest()
                 ->paginate(12),
@@ -42,6 +44,7 @@ class GalleryController extends Controller
             'address' => AddressModel::first(),
             'settings' => SettingModel::first(),
             'social' => SocialMediaModel::all(),
+            'meta' => MetaModel::first(),
             'video' => GalleryModel::where('type', 'video')
                 ->latest()
                 ->paginate(12),

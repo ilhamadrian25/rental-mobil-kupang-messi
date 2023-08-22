@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\AddressModel;
 use App\Models\SocialMediaModel;
 use App\Models\CategoryModel;
+use App\Models\MetaModel;
 use App\Models\SettingModel;
 use App\Models\ArticleModel;
 
@@ -19,6 +20,7 @@ class ArticleController extends Controller
             'address' => AddressModel::first(),
             'article' => ArticleModel::latest()->paginate(12),
             'settings' => SettingModel::first(),
+            'meta' => MetaModel::first(),
         ];
 
         return view('frontend.articles.index', $data);
@@ -37,6 +39,7 @@ class ArticleController extends Controller
         $data = [
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
+            'meta' => MetaModel::first(),
             'article' => $show,
             'settings' => SettingModel::first(),
             'articles' => ArticleModel::limit(4)->get(),

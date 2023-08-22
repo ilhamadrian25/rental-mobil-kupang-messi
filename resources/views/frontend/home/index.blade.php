@@ -313,19 +313,19 @@
                 <div class="col-md-12">
                     <div class="carousel-testimony owl-carousel ftco-owl">
                         @foreach ($clients as $item)
-                        @endforeach
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2"
-                                    style="background-image: url({{ asset('images') . '/' . $item->image }})">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">{{ $item->message }}</p>
-                                    <p class="name">{{ $item->name }}</p>
-                                    <span class="position">{{ $item->position }}</span>
+                            <div class="item">
+                                <div class="testimony-wrap rounded text-center py-4 pb-5">
+                                    <div class="user-img mb-2"
+                                        style="background-image: url({{ asset('images') . '/' . $item->image }})">
+                                    </div>
+                                    <div class="text pt-4">
+                                        <p class="mb-4">{{ $item->message }}</p>
+                                        <p class="name">{{ $item->name }}</p>
+                                        <span class="position">{{ $item->position }}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

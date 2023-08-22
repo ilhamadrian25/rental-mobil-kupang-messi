@@ -8,6 +8,7 @@ use App\Models\SocialMediaModel;
 use App\Models\AboutModel;
 use App\Models\AddressModel;
 use App\Models\ClientModel;
+use App\Models\MetaModel;
 use App\Models\SettingModel;
 
 class AboutController extends Controller
@@ -18,6 +19,7 @@ class AboutController extends Controller
             'social'        =>      SocialMediaModel::all(),
             'address'       =>      AddressModel::first(),
             'client'        =>      ClientModel::all(),
+            'meta'=>    MetaModel::first(),
             'about'         => AboutModel::first(),
             'settings' => SettingModel::first(),
         ];

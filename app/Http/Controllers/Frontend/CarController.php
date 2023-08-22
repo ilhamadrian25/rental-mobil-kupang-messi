@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\AddressModel;
 use App\Models\SocialMediaModel;
 use App\Models\SettingModel;
+use App\Models\MetaModel;
 use App\Models\CarsModel;
 
 class CarController extends Controller
@@ -15,6 +16,7 @@ class CarController extends Controller
     {
         $data = [
             'social' => SocialMediaModel::all(),
+            'meta' => MetaModel::first(),
             'address' => AddressModel::first(),
             'cars' => CarsModel::latest()->paginate(1),
             'settings' => SettingModel::first(),
@@ -27,6 +29,7 @@ class CarController extends Controller
     {
         $data = [
             'social' => SocialMediaModel::all(),
+            'meta' => MetaModel::first(),
             'address' => AddressModel::first(),
             // 'cars' => CarModel::all(),
         ];
