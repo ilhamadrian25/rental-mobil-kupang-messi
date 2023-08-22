@@ -56,6 +56,8 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item @if (!request()->segment(1)) active @endif"><a href="{{ route('home') }}"
                             class="nav-link">Beranda</a></li>
+                    <li class="nav-item @if (request()->segment(1) === 'about') active @endif"><a href="{{ route('about') }}"
+                            class="nav-link">Tentang</a></li>
                     {{-- <li class="nav-item @if (request()->segment(1) === 'services') active @endif"><a
                             href="{{ route('services') }}" class="nav-link">Layanan</a></li> --}}
                     <li class="nav-item @if (request()->segment(1) === 'cars' || request()->segment(1) === 'car') active @endif"><a href="{{ route('cars') }}"
@@ -78,8 +80,7 @@
                             href="{{ route('article') }}" class="nav-link">Artikel</a></li>
                     <li class="nav-item @if (request()->segment(1) === 'contact') active @endif"><a
                             href="{{ route('contact') }}" class="nav-link">Kontak</a></li>
-                    <li class="nav-item @if (request()->segment(1) === 'about') active @endif"><a href="{{ route('about') }}"
-                            class="nav-link">Tentang</a></li>
+
                     {{-- <form action="{{ route('cars') }}" method="get">
                         <div class="mt-2">
                             <div class="input-group mb-3">
