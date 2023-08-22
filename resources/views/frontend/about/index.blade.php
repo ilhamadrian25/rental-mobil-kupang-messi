@@ -32,7 +32,7 @@
                         <h2 class="mb-4">{{ $settings->title }}</h2>
 
                         <p>{!! $about->description !!}</p>
-                        <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
+                        <p><a href="{{ route('cars') }}" class="btn btn-primary py-3 px-4">Cari Mobil...</a></p>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
             <div class="row justify-content-end">
                 <div class="col-md-6 heading-section heading-section-white ftco-animate">
                     <h2 class="mb-3">Ada Pertanyaan Lain, Silakan Hubungi Kami</h2>
-                    <a href="https://api.whatsapp.com/send?phone={{ $settings->whatsapp }}&text=Hallo..."
+                    <a href="https://api.whatsapp.com/send?phone={{ $address->whatsapp }}&text=Hallo..."
                         class="btn btn-primary btn-lg">Hubungi kami lewat Whatsapp</a>
                 </div>
             </div>

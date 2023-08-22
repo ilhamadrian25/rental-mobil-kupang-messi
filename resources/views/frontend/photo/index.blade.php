@@ -1,51 +1,58 @@
 @extends('frontend/layout/app')
 
+@push('title')
+    <title>Foto - {{ $settings->title }}</title>
+@endpush
+
 @section('content')
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> --}}
-    <style>
-        /* Custom styling for the photo grid */
-        .photo-grid .photo-item {
-            margin-bottom: 20px;
-            cursor: pointer;
-        }
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
 
-        .photo-item img {
-            max-width: 100%;
-            height: auto;
-            transition: transform 0.3s ease-in-out;
-        }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
 
-        .photo-item img:hover {
-            transform: scale(1.05);
-        }
+    <script>
+        // $('.portfolio-item').isotope({
+        //  	itemSelector: '.item',
+        //  	layoutMode: 'fitRows'
+        //  });
+        $('.portfolio-menu ul li').click(function() {
+            $('.portfolio-menu ul li').removeClass('active');
+            $(this).addClass('active');
 
-        /* Custom styling for the modal */
-        .modal-content {
-            background-color: transparent;
-            border: none;
-        }
-
-        .modal-dialog {
-            max-width: 80vw;
-        }
-
-        .modal-content img {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
+            var selector = $(this).attr('data-filter');
+            $('.portfolio-item').isotope({
+                filter: selector
+            });
+            return false;
+        });
+        $(document).ready(function() {
+            var popup_btn = $('.popup-btn');
+            popup_btn.magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
+            });
+        });
+    </script>
     <section class="ftco-section">
-        <div class="container mt-4">
-            <div class="row photo-grid">
+        <div class="container">
+            <div class="portfolio-item row">
                 @foreach ($photo as $item)
-                    <div class="col-md-3 photo-item" data-bs-toggle="modal" data-bs-target="#previewModal"
-                        data-image="{{ asset('images') . '/' . $item->image }}">
-                        <img src="{{ asset('images') . '/' . $item->image }}" alt="Photo 1">
+                    <div class="item selfie col-lg-3 col-md-4 col-6 col-sm mt-2">
+                        <a href="{{ asset('images') . '/' . $item->image }}" class="fancylight popup-btn"
+                            data-fancybox-group="light">
+                            <img class="img-fluid" src="{{ asset('images') . '/' . $item->image }}" alt="">
+                        </a>
                     </div>
                 @endforeach
             </div>
         </div>
+    </section>
 
+    <section class="container mb-5">
         @if ($photo->lastPage() > 1)
             <div class="row mt-5">
                 <div class="col text-center">
@@ -94,33 +101,5 @@
                 </div>
             </div>
         @endif
-
-        <!-- Preview Modal -->
-        <div class="modal fade mt-6" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <img src="" alt="Preview" id="previewImage" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            const photoItems = document.querySelectorAll('.photo-item');
-            const previewImage = document.getElementById('previewImage');
-
-            photoItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    const imagePath = item.getAttribute('data-image');
-                    previewImage.setAttribute('src', imagePath);
-                });
-            });
-        </script>
     </section>
 @endsection

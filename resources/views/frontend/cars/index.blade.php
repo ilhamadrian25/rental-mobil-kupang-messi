@@ -37,7 +37,7 @@
                                     {{-- <p class="price ml-auto">$500 <span>/day</span></p> --}}
                                     {{-- </div> --}}
                                     <p class="d-flex justify-content-center mb-0">
-                                        <a href="https://api.whatsapp.com/send?phone={{ $settings->whatsapp }}&text=Apakah+mobil+{{ $item->name }}+tersedia?"
+                                        <a href="https://api.whatsapp.com/send?phone={{ $address->whatsapp }}&text=Apakah+mobil+{{ $item->name }}+tersedia?"
                                             target="_blank" class="btn btn-primary py-2 mr-1">Sewa Sekarang</a>
                                     </p>
                                     @php

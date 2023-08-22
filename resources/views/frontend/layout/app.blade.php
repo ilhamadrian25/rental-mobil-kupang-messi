@@ -56,12 +56,15 @@
                             class="nav-link">Mobil</a></li>
                     {{-- <li class="nav-item @if (request()->segment(1) === 'price') active @endif"><a href="{{ route('price') }}"
                             class="nav-link">Harga</a></li> --}}
-                    <li class="nav-item {{ request()->segment(1) === 'article' ? 'active dropdown' : 'dropdown' }}">
+                    <li
+                        class="nav-item {{ request()->is('gallery/video') || request()->is('gallery/photo') ? 'active dropdown' : 'dropdown' }}">
                         <a href="{{ route('article') }}"
-                            class="nav-link {{ request()->segment(1) === 'article' ? 'dropdown-toggle' : 'dropdown-toggle' }}">Galeri</a>
+                            class="nav-link {{ request()->is('gallery/video') || request()->is('gallery/photo') ? 'dropdown-toggle' : 'dropdown-toggle' }}">Galeri</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('gallery.photo') }}">Foto</a>
-                            <a class="dropdown-item" href="{{ route('gallery.video') }}">Video</a>
+                            <a class="dropdown-item {{ request()->is('gallery/photo') ? 'active' : '' }}"
+                                href="{{ route('gallery.photo') }}">Foto</a>
+                            <a class="dropdown-item {{ request()->is('gallery/video') ? 'active' : '' }}""
+                                href="{{ route('gallery.video') }}">Video</a>
                         </div>
                     </li>
 

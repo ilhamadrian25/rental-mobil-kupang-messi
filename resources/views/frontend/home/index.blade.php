@@ -222,9 +222,7 @@
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="bi bi-currency-dollar"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">1</h3>
-                            <p>HARGA TERJANGKAU
-                            </p>
+                            <h3 class="heading mb-2">HARGA TERJANGKAU</h3>
                         </div>
                     </div>
                 </div>
@@ -233,9 +231,7 @@
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="bi bi-car-front"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">2</h3>
-                            <p>ARMADA LENGKAP
-                            </p>
+                            <h3 class="heading mb-2">ARMADA LENGKAP</h3>
                         </div>
                     </div>
                 </div>
@@ -244,9 +240,7 @@
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="bi bi-person"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">3</h3>
-                            <p>DRIVER PROFESIONAL
-                            </p>
+                            <h3 class="heading mb-2">DRIVER PROFESIONAL</h3>
                         </div>
                     </div>
                 </div>
@@ -259,9 +253,7 @@
                         <div class="icon d-flex align-items-center justify-content-center"><span class="bi bi-key"></span>
                         </div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">4</h3>
-                            <p>BISA LEPAS KUNCI
-                            </p>
+                            <h3 class="heading mb-2">BISA LEPAS KUNCI</h3>
                         </div>
                     </div>
                 </div>
@@ -270,9 +262,7 @@
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="bi bi-trophy"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">5</h3>
-                            <p>PELAYANAN TERBAIK
-                            </p>
+                            <h3 class="heading mb-2">PELAYANAN TERBAIK</h3>
                         </div>
                     </div>
                 </div>
@@ -281,9 +271,7 @@
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="bi bi-watch"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">6</h3>
-                            <p>TEPAT WAKTU
-                            </p>
+                            <h3 class="heading mb-2">TEPAT WAKTU</h3>
                         </div>
                     </div>
                 </div>
@@ -302,7 +290,7 @@
             <div class="row justify-content-end">
                 <div class="col-md-6 heading-section heading-section-white ftco-animate">
                     <h2 class="mb-3">Ada Pertanyaan Lain, Silakan Hubungi Kami</h2>
-                    <a href="https://api.whatsapp.com/send?phone={{ $settings->whatsapp }}&text=Hallo..."
+                    <a href="https://api.whatsapp.com/send?phone={{ $address->whatsapp }}&text=Hallo..."
                         class="btn btn-primary btn-lg">
                         <i class="bi bi-whatsapp"></i>
                         Whatsapp

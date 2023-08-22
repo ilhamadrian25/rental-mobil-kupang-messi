@@ -16,9 +16,7 @@ class GalleryController extends Controller
         $type = $request->input('type');
 
         if ($type === 'photo') {
-
-        }elseif ($type === 'video') {
-            
+        } elseif ($type === 'video') {
             return view('frontend.video.index');
         }
 
@@ -27,12 +25,27 @@ class GalleryController extends Controller
 
     public function photo(Request $request)
     {
-            $data = [
-                'address' => AddressModel::first(),
-                'settings' => SettingModel::first(),
-                'social'    => SocialMediaModel::all(),
-                'photo' => GalleryModel::where('type', 'image')->latest()->paginate(12),
-            ];
-            return view('frontend.photo.index', $data);
+        $data = [
+            'address' => AddressModel::first(),
+            'settings' => SettingModel::first(),
+            'social' => SocialMediaModel::all(),
+            'photo' => GalleryModel::where('type', 'image')
+                ->latest()
+                ->paginate(12),
+        ];
+        return view('frontend.photo.index', $data);
+    }
+
+    public function video()
+    {
+        $data = [
+            'address' => AddressModel::first(),
+            'settings' => SettingModel::first(),
+            'social' => SocialMediaModel::all(),
+            'video' => GalleryModel::where('type', 'video')
+                ->latest()
+                ->paginate(12),
+        ];
+        return view('frontend.video.index', $data);
     }
 }

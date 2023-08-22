@@ -55,7 +55,7 @@
                         @foreach ($articles as $item)
                             <div class="block-21 mb-4 d-flex">
                                 <a class="blog-img mr-4"
-                                    style="background-image: url({{ asset('assets/images/image_1.jpg') }});"></a>
+                                    style="background-image: url({{ asset('images') . '/' . $item->thumbnail }});"></a>
                                 <div class="text">
                                     <h3 class="heading"><a
                                             href="{{ route('article.show', $item->slug) }}">{{ $item->title }}</a>
