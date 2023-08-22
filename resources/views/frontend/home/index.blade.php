@@ -12,7 +12,7 @@
             @foreach ($banners as $item)
                 <!-- Slides -->
                 <div class="swiper-slide">
-                    <img src="{{ asset('banner') . '/' . $banner->image }}" alt="slider" width="100%">
+                    <img src="{{ asset('images') . '/' . $item->image }}" alt="slider" width="100%">
                 </div>
             @endforeach
         </div>

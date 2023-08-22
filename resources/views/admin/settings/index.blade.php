@@ -106,20 +106,6 @@
                                             .jpg, .jpeg, .gif, .svg)
                                         </div>
                                     </div>
-                                    <div class="col-12 d-flex justify-content-center">
-                                        <div class="mb-3">
-                                            <label for="image4" class="form-label">Banner</label>
-                                            <br>
-                                            <img id="previewImage4" src="{{ asset('banner') . '/' . $banner->image }}"
-                                                alt="Pratinjau Logo Admin" style="max-width: 1000px;">
-                                            <br>
-                                            <input type="file" class="form-control" id="image4" name="banner"
-                                                style="display: none;">
-                                            <button type="button" class="btn btn-secondary"
-                                                id="uploadImage4">Unggah</button>(.png,
-                                            .jpg, .jpeg, .gif, .svg)
-                                        </div>
-                                    </div>
                                     <button type="submit" class="btn btn-primary">Upload Semua</button>
                                 </div>
                             </form>

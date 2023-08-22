@@ -158,6 +158,12 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="menu-item @if (request()->segment(2) === 'banner') active @endif">
+                        <a href="{{ route('admin.banner') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bi bi-image-fill"></i>
+                            <div data-i18n="Basic">Banner</div>
+                        </a>
+                    </li>
                     <li class="menu-item @if (request()->segment(2) === 'contact') active @endif">
                         <a href="{{ route('admin.contact') }}" class="menu-link">
                             <i class="menu-icon tf-icons bi bi-chat-left-dots-fill"></i>

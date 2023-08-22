@@ -17,6 +17,7 @@ use App\Http\Controllers\Frontend\GalleryController as Gallery;
 
 // Admin Controller
 use App\Http\Controllers\Admin\AboutController as AdminAbout;
+use App\Http\Controllers\Admin\BannerController as AdminBanner;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\CarController as AdminCar;
 use App\Http\Controllers\Admin\ProfileController as AdminProfile;
@@ -80,6 +81,11 @@ Route::prefix('admin')->middleware('auth')->group(function() {
 
     Route::get('/profile', [AdminProfile::class, 'index'])->name('admin.profile');
     Route::PATCH('/profile', [AdminProfile::class, 'update'])->name('admin.profile.update');
+
+    // Banner
+    Route::get('/banner', [AdminBanner::class, 'index'])->name('admin.banner');
+    Route::post('/banner', [AdminBanner::class, 'store'])->name('admin.banner.store');
+    Route::delete('/banner', [AdminBanner::class, 'destroy'])->name('admin.banner.destroy');
 
     // Cars
     Route::get('/cars', [AdminCar::class, 'index'])->name('admin.cars');

@@ -49,7 +49,7 @@ class CategoryCarsController extends Controller
         $category = new CategoryCarsModel();
         $category->slug = strtolower(trim(preg_replace('/[^a-zA-Z0-9-]+/', '-', $request->slug ?: $request->name), '-'));
 
-        if (empty(CategoryCarsModel::where('slug', $category->slug)->get())) {
+        if (!empty(CategoryCarsModel::where('slug', $category->slug)->get())) {
             return response()->json(
                 [
                     'message' => 'Slug telah digunakan, ganti dengan yang lain',
