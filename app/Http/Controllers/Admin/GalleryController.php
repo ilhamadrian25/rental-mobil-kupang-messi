@@ -16,7 +16,7 @@ class GalleryController extends Controller
 
         if ($type === 'image') {
             $data = [
-                'image' => GalleryModel::where('type', 'image')->get(),
+                'image' => GalleryModel::where('type', 'image')->latest(),
                 'settings' => SettingModel::first(),
                 'page' => 'Semua Foto',
             ];
@@ -24,7 +24,7 @@ class GalleryController extends Controller
             return view('admin.image.index', $data);
         } elseif ($type === 'video') {
             $data = [
-                'video' => GalleryModel::where('type', 'video')->get(),
+                'video' => GalleryModel::where('type', 'video')->latest(),
                 'settings' => SettingModel::first(),
                 'page' => 'Semua Video',
             ];

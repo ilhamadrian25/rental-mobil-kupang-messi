@@ -129,6 +129,11 @@
                                         placeholder="Nomor Telepon" value="{{ $address->telp }}" />
                                 </div>
                                 <div>
+                                    <label for="whatsapp" class="form-label">Whatsapp</label>
+                                    <input type="text" class="form-control" name="whatsapp" id="whatsapp"
+                                        placeholder="Nomor Telepon" value="{{ $address->whatsapp }}" />
+                                </div>
+                                <div>
                                     <label for="maps" class="form-label">Maps embed</label>
                                     <input type="text" class="form-control" name="maps" id="maps"
                                         placeholder="Nomor Telepon" value="{{ $address->maps }}" />

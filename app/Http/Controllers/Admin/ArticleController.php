@@ -72,18 +72,16 @@ class ArticleController extends Controller
         $validate = Validator::make(
             $request->all(),
             [
-                'title' => 'required|max:50',
-                'slug' => 'nullable|unique:article|max:50',
+                'title' => 'required',
+                'slug' => 'nullable|unique:article',
                 'category_id' => 'required',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif',
                 'content' => 'nullable',
             ],
             [
                 'title.required' => 'Judul tidak boleh kosong',
-                'title.max' => 'Judul tidak boleh melebihi 50 karakter',
 
                 'slug' => 'Slug telah digunakan',
-                'slug.max' => 'Slug tidak boleh melebihi 50 Karakter',
 
                 'category_id.required' => 'Kategori tidak boleh kosong!',
 

@@ -18,7 +18,8 @@ class ArticleController extends Controller
         $data = [
             'social' => SocialMediaModel::all(),
             'address' => AddressModel::first(),
-            'article' => ArticleModel::search($request->search)
+            'article' => ArticleModel::where('status', 'publish')
+                ->search($request->search)
                 ->latest()
                 ->paginate(12),
             'settings' => SettingModel::first(),

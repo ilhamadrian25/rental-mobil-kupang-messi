@@ -83,6 +83,7 @@ class SettingsController extends Controller
                     'address' => 'required|max:1000',
                     'email' => 'required|email',
                     'telp' => 'required',
+                    'whatsapp' => 'required',
                     'maps' => 'required',
                 ],
                 [
@@ -93,6 +94,8 @@ class SettingsController extends Controller
                     'email.email' => 'Alamat Email tidak valid',
 
                     'telp.required' => 'Nomor telepon tidak boleh kosong!',
+
+                    'whatsapp.required' => 'Nomor telepon tidak boleh kosong!',
 
                     'maps.required' => 'Maps tidak boleh kosong!',
                 ],
@@ -112,6 +115,7 @@ class SettingsController extends Controller
             $setting->address = $request->address;
             $setting->email = $request->email;
             $setting->telp = $request->telp;
+            $setting->whatsapp = $request->whatsapp;
             $setting->maps = $request->maps;
 
             if ($setting->update()) {

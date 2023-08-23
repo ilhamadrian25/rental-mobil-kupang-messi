@@ -62,14 +62,13 @@ class CarController extends Controller
         $validate = Validator::make(
             $request->all(),
             [
-                'name' => 'required|max:100',
+                'name' => 'required',
                 'category_id' => 'required|numeric',
                 'price' => 'required|numeric',
                 'image' => 'required|mimes:jpg,bmp,png',
             ],
             [
                 'name.required' => 'Nama tidak boleh kosong',
-                'name.max' => 'Nama tidak boleh lebih dari 100 Karakter',
                 'category_id.required' => 'Kategori tidak boleh kosong',
                 'category_id.numeric' => 'Kategori tidak valid',
                 'image.required' => 'Gambar tidak boleh kosong',

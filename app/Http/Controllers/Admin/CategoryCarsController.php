@@ -27,13 +27,11 @@ class CategoryCarsController extends Controller
         $validate = Validator::make(
             $request->all(),
             [
-                'name' => 'required|max:30',
-                'slug' => 'nullable|max:30|unique:category_cars',
+                'name' => 'required',
+                'slug' => 'nullable|unique:category_cars',
             ],
             [
                 'name.required' => 'Nama tidak boleh kosong',
-                'name.max' => 'Nama tidak boleh lebih dari 30 karakter',
-                'slug.max' => 'Slug tidak boleh lebih dari 30 karakter',
                 'slug.unique' => 'Slug telah digunakan',
             ],
         );

@@ -25,8 +25,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'required|max:50',
-            'slug' => 'nullable|max:50|unique:category',
+            'name' => 'required',
+            'slug' => 'nullable|unique:category',
         ]);
 
         if ($validate->fails()) {
