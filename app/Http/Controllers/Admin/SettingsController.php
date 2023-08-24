@@ -274,6 +274,8 @@ class SettingsController extends Controller
             $meta->title = $request->title;
             $meta->description = $request->description;
             $meta->keywords = $request->keywords;
+            $meta->head = $request->head;
+            $meta->body = $request->body;
 
             if ($meta->update()) {
                 return response()->json(

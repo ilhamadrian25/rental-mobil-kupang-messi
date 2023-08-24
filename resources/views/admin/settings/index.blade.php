@@ -186,6 +186,14 @@
                                     <label for="keywords" class="form-label">Keywords</label>
                                     <textarea name="keywords" class="form-control" id="keywords" cols="20" rows="2">{{ $meta->keywords }}</textarea>
                                 </div>
+                                <div>
+                                    <label for="head" class="form-label">Head</label>
+                                    <textarea name="head" class="form-control" id="head" cols="20" rows="2">{{ $meta->head }}</textarea>
+                                </div>
+                                <div>
+                                    <label for="body" class="form-label">Body</label>
+                                    <textarea name="body" class="form-control" id="body" cols="20" rows="2">{{ $meta->body }}</textarea>
+                                </div>
                                 <div class="d-flex justify-content-end mt-2">
                                     <button type="submit" class="btn btn-primary">Ubah</button>
                                 </div>

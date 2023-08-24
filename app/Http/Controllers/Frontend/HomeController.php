@@ -30,7 +30,10 @@ class HomeController extends Controller
             'address' => AddressModel::first(),
             'about' => AboutModel::first(),
             'banner' => BannerModel::first(),
-            'article' => ArticleModel::limit(3)->get(),
+            'article' => ArticleModel::where('status', 'publish')
+                ->limit(3)
+                ->latest()
+                ->get(),
             'settings' => SettingModel::first(),
         ];
 

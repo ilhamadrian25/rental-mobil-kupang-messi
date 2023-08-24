@@ -12,9 +12,11 @@ return new class extends Migration {
     {
         Schema::create('meta', function (Blueprint $table) {
             $table->id();
-            $table->text('title');
-            $table->text('description');
-            $table->text('keywords');
+            $table->text('title')->nullable();
+            $table->text('description')->nullable();
+            $table->text('keywords')->nullable();
+            $table->text('head')->nullable();
+            $table->text('body')->nullable();
             $table->timestamps();
         });
     }

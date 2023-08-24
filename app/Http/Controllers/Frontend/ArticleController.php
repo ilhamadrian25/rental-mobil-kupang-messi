@@ -45,7 +45,9 @@ class ArticleController extends Controller
             'meta' => MetaModel::first(),
             'article' => $show,
             'settings' => SettingModel::first(),
-            'articles' => ArticleModel::limit(4)->get(),
+            'articles' => ArticleModel::where('status', 'publish')
+                ->limit(4)
+                ->get(),
             'category' => CategoryModel::withCount('article')
                 ->limit(8)
                 ->get(),
