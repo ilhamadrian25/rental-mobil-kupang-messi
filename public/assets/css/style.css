@@ -11706,6 +11706,7 @@ h5,
 .ftco-about {
     position: relative;
     z-index: 0;
+    background-image: url("https://cdn.pixabay.com/photo/2023/05/24/21/26/car-8015903_1280.jpg");
 }
 .ftco-about:after {
     position: absolute;
