@@ -128,9 +128,7 @@
                 </div>
             </div>
     </section>
-
     <!-- hidden -->
-
 
     <section class="ftco-section ftco-about">
         <div class="container">
@@ -341,25 +339,26 @@
                 </div>
             </div>
             <div class="row d-flex">
-                {{-- @foreach ($article as $item) --}}
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry justify-content-end">
-                        <a href="blog-single.html" class="block-20"
-                            style="background-image: url('{{ asset('images/1692683812.jpg') }}');">
-                        </a>
-                        <div class="text pt-4">
-                            <div class="meta mb-3">
-                                <div><a href="#">Oct. 29, 2019</a></div>
-                                <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                @foreach ($article as $item)
+                    <div class="col-md-4 d-flex ftco-animate">
+                        <div class="blog-entry justify-content-end">
+                            <a href="{{ route('article.show', $item->slug) }}" class="block-20"
+                                style="background-image: url('{{ asset('images') . '/' . $item->thumbnail }}');">
+                            </a>
+                            <div class="text pt-4">
+                                <div class="meta mb-3">
+                                    <div><a href="#">{{ date('Y-m-d', strtotime($item->created_at)) }}</a>
+                                    </div>
+                                    <div><a>Admin</a></div>
+                                </div>
+                                <h3 class="heading mt-2"><a
+                                        href="{{ route('article.show', $item->slug) }}">{{ $item->title }}</a></h3>
+                                <p><a href="{{ route('article.show', $item->slug) }}" class="btn btn-primary">Lihat lebih
+                                        lengkap</a></p>
                             </div>
-                            <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business
-                                    Growth</a></h3>
-                            <p><a href="#" class="btn btn-primary">Read more</a></p>
                         </div>
                     </div>
-                </div>
-                {{-- <div class="col-md-4">
+                    {{-- <div class="col-md-4">
                         <div class="card">
                             <div class="col-md-12 px-0 text-center d-flex ftco-animate">
                                 <div class="blog-entry justify-content-end mb-md-5">
@@ -385,7 +384,7 @@
                             </div>
                         </div>
                     </div> --}}
-                {{-- @endforeach --}}
+                @endforeach
             </div>
         </div>
     </section>

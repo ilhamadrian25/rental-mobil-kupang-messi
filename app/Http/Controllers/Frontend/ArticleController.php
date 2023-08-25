@@ -33,7 +33,7 @@ class ArticleController extends Controller
     {
         $article = new ArticleModel();
 
-        $show = $article->where('slug', $slug)->first();
+        $show = $article->where('slug', $slug && 'status', 'publish')->first();
 
         if (!$show) {
             abort(404);
