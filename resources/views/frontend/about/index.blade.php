@@ -4,7 +4,7 @@
     <title>Tentang - {{ $settings->title }}</title>
     <style>
         .clip-me {
-            clip-path: polygon(0% 0%, 100% 0%, 100% 76%, 0% 96%);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 86%, 0% 100%);
         }
     </style>
 @endpush
@@ -26,7 +26,7 @@
         </div>
     </section>
 
-    <section class="ftco-section ftco-about">
+    {{-- <section class="ftco-section ftco-about">
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center"
@@ -43,7 +43,39 @@
                 </div>
             </div>
         </div>
+    </section> --}}
+    @php
+        $text = 'Ini adalah contoh teks yang akan dibagi menjadi dua bagian.';
+        $length = strlen($about->description); // Mendapatkan panjang teks
+        
+        $midpoint = floor($length / 2); // Menemukan titik tengah teks
+        
+        $part1 = substr($about->description, 0, $midpoint); // Mengambil bagian pertama
+        $part2 = substr($about->description, $midpoint);
+    @endphp
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    {!! $part1 !!}
+                </div>
+                <div class="col-12 col-lg-6 mb-3">
+                    <img src="{{ asset('images') . '/' . $about->image }}" alt="" width="500" height="400"
+                        srcset="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-6 mt-3">
+                    <img src="{{ asset('images') . '/' . $about->image }}" alt="" width="500" height="400"
+                        srcset="">
+                </div>
+                <div class="col-12 col-lg-6">
+                    {!! $part2 !!}
+                </div>
+            </div>
+        </div>
     </section>
+
 
     <section class="ftco-section ftco-intro" style="background-image: url({{ asset('images') . '/' . $about->image2 }});">
         <div class="overlay"></div>
